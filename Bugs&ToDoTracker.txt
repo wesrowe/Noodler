@@ -1,0 +1,96 @@
+BUGS:
+--when someone removes car from display, it would be nice to re-enable its item under remembered cars.
+	-> ready to do this, see ~line 609 in interaction.js
+
+CARBON 5 INSIGHTS:
+--Sinatra (ruby), heroku hosting
+--learn ruby with "Ruby the Hard Way"
+--tall stonery guy Hugo
+--python flask
+--on client --
+	mvc:
+	backbone.js
+	angular.js
+	mongodb -- key is it's document oriented db; schemaless; nosql
+	BSON binary json
+
+PRE-FEB2013
+
+-- models list -- sort implementation a little broken, changing your mind about make seems to cause problem (but it's recoverable).
+	-> UDPATE: it wouldn't sort hummer b/c price.baseMSRP == null.  SO test for null before sorting, and sort by name if price is null.
+-- Individualized Spread Adjusters -- You can't put the spread adjuster in a section unless it only applies to that section; otherwise the buttons move due to sections above.
+	- make spread_value an Array[], should be pretty straightforward to implement.
+	- would still want a centralized control panel.
+	- OR, Could do some parallax-style scroll math to keep scrolled view stable. Challenging.
+-- draggable car tiles at left, so person can put the most interesting ones together.
+-- draggable spread adjust -- couldn't get it to work, the absolute positioning at bottom just wasn't working.  But, I didn't try assigning the bottom: 10px attr with jQ *after* the section had been expanded.  Anyway...
+-- UI idea: offer a list of other trims related to one they have already loaded.  This would make it much easier to compare different Odysseys, for example.
+-- Axes don't know where they're supposed to be (.anchor_y holds pre-transformed value). It can work for now, but it's a long-term liability.
+	- maybe set max-height and set overflow to scroll?
+-- colors -- I added a wrap-around to getNextColor(), but not working.  I tested by shortening colors[] to 2 colors, and that breaks it.  Debugging isn't working how I want and I'm tired.  Quick/dirty solution: make colors long enough nobody will reach end.
+
+TO DO:
+-- seating capacity -- section "SEATING_CONFIGURATION" has an object for each row, I think, so if you add .value for each sub-object you get total.
+-- car key boxes
+	- can I insert a <br/> at first '('?  The line break is sooooo ugly when it just wraps!
+-- left-pointing triangle for closing picker
+-- taking care of first-time visitors:
+	- if person tries zooming with all sections collapsed, pop up little bubble says "expand a section to see changes."
+-- can generalize ChangeCarAttribute() fn, gets attribute to change and new value and applies it to all car data (dots and connectors).  Would use that to hide on collapse (instead of making hideshow() do it), as well as change color of a particular car later.
+
+TO GO LIVE:
+-- add edmunds credits to left side.
+
+
+
+GENERAL NOTES:
+-- transform can accept "scale" which goes s{x_scale},{y_scale},{x_scaleOrigin},{y_scaleOrigin}.  I believe you could scale everything in y by some tiny fraction to collapse upward (while fading out), including curves.  So that would be cool.
+-- for god's sake, get rid of non-array math!  (every index should start at 0)
+-- for god's sake, store dots and connectors at same place to simplify working with data logically!  cars[]!  (connectors are stored in cars, but dots are in axesAll.data[] ). UPDATE: I am now pushing 'NUTS' into the .connectors[] array, so connectors and dots are referenced by the same index in all of them.
+
+
+DONE
+-- reversing plot of "smaller is better" dimensions -- kind of amazing, it all works perfectly if I just put in the max and min backwards.  Shockingly simple.
+-- tooltip for data points should include value
+	- the dots.hover function should add a flag as parameter, "true" means include data.  
+	- showTooltip() would have a conditional bit when building the .html() string, where it would add <br /> and then axis.label + ": " + axis.data[cars_index].  Also conditional on if it's aggregate, that data value is meaningless -- so only pass in "true" if j > 0.
+	bug I fixed with .data() -- tooltip is displaying data and label for very last axis on screen, rather than one I think I'm passing in.  Scope problem? great stackoverflow article where I figured this out: http://stackoverflow.com/questions/3008920/jquery-hover-pass-variable-to-callback-function
+		- tried to bind Axis object to dot as .data( 'myAxis' );
+		- retrieve with this.data( 'myAxis' ).  Worked!
+-- addData is adding new dots all to first axis when expanded. Adjusting spread, or any other use of changeSpread(), returns them where they belong.  I think the cause is that I just changed the Axes to get created at spread=0, and there's something about how addData() works, it's grabbing the axesInit() value for anchor_y's instead of current value.  I remember doing something funky recently, when I was creating the changeSpread() function, I used anchor_y instead of startpoint_y or something...
+	- fixed by creating data dots at collapsed position and then transforming to expanded.
+-- default view should be collapsed -- non-aggregate axes default to hidden, behind the aggregate one.
+	- might be nice to set expand and collapse by boolean -- give user access to isCollapsed[]?  That is how customization could work in its simplest incarnation, for family cars the most relevant ones are expanded.  Same for sports cars, etc.  Initial state would be all-collapsed, and then checking a box would call a function like "updateExpanded" that compares the new state of the isCollapsed[] array and updates the sections to match the array.
+	- axes should be created at collapsed location, then be transformed from there. Expand() .shows data for the first time.  Transform occurs FROM margin_top VALUE.  So an empty transform string "" is what "collapse" will do. collapse uses empty transform string "", and animates opacity for all elements to zero.
+	- initialize isCollapsed[] to all true.
+	- axesInit() mods
+		- all get anchor_y they would get _if expanded_.  Mimics behavior of expand later, when we're storing where they last were seen.
+		- all (except aggregates) get opacity = 0
+	- WHAT I've done so far:
+		- I set anchor_y to margin_top for all axes inside Axis definition.
+		- papersInit() needs similar treatment.
+-- axes and labels need independent opacity controls inside hideshowAllInSection().  Right now, on expand they all get the .5 opacity I call "new_opacity", which is really intended for the connectors only.
+	- shitty overcomplicated way:  since my settings are objects, I can extract just the .opacity as a value, but first I will have to standardize the setting var names in raph_settings.js.  Note: I'm looping thru the collapse_elements_list, an object whose keys are numbers and values are such as "axisline_svg", each ending in _svg.  So if I call all the settings that same thing + _settings, that'll do the trick.
+	- The EASY way that WORKS: I already had a non-zero opacity number to work with inside function, so I just used Math.ceil() to drive it up to 1 for Axis svg elements and give color control back over to raph_settings.
+-- Deleting car -- I have added a data-carindex attribute to the left car displayblocks for hover and delete purposes, it stores the cars_index corresponding to cars[].
+	- How to delete a car:
+		- the system is, every car added gets a unique index, starting at zero.  When a car is removed by user, really they just don't want to see it anymore.  but that cars_index doesn't get returned to the pool.
+		- remove <section> identifying it
+		- return color to "pool"
+		- loop thru Axes (i,j) and replace all dots, data, and connectors with "NUTS"
+		- cars[ that entry ] = "NUTS"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

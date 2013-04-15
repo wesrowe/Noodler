@@ -1,0 +1,514 @@
+/* stylesheet for Wes's Car Viz Project */
+
+body {
+	position: relative;
+	color: #888;
+	width: 900px;
+	margin: 0 auto;
+	background-color: #000;
+	padding-top: 0px;
+	font-family: arial;
+	font-size: 12px;
+	text-align: center;
+}
+#page_content {
+	overflow: hidden;
+	min-height: 500px;
+}
+/* DEMO ANNOUNCEMENT */
+#demo_announcement {
+	display: none;
+	position: absolute;
+	top: 200px;
+	left: 230px;
+	text-align:center;
+	padding: 30px;
+	width: 300px;
+	background-color: #333;
+	color: #fff;
+	z-index: 10;
+}
+#demo_announcement h1 {
+	font-size: 30px;
+}
+#demo_announcement  .add_car_color { color: #66f; }
+#demo_x_flasher {
+	display: none;
+	position: absolute;
+	top: 270px;
+	left: 200px;
+	font-weight: bold;
+	font-size: 30px;
+	z-index: 12;
+	color: #fff;
+}
+
+/* top bar area */
+section#header {
+	background-color: #000;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+	width: 100%;
+	height: 150px;
+	text-align: left;
+}
+#main_logo {
+	margin-top: 30px;
+	margin-left: 30px;
+	float: left;
+}
+#fb_share {
+	position: absolute;
+	left: 50px;
+	top: 150px;
+	padding-top: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	color: #ccf;
+}
+	#fb_share :hover {
+		color: #fff;
+	}
+
+#fb_share  img { vertical-align: middle; }
+#helpful_hints_container {
+	position: absolute;
+	left: 250px;
+	top: 0px;
+	width: 700px;
+	color: #fff;
+}
+#hints_btn {
+	position: absolute;
+	top: 0px;
+	left: 140px;
+	font-size: 16px;
+	letter-spacing: 3px;
+	font-weight: bold;
+	color: #aaa;
+	cursor: pointer;
+	background-color: #000;
+	margin: 0px;
+	padding: 5px 7px 5px 10px;
+	border: 2px solid #555;
+	border-top: none;
+	opacity: .9;
+}
+	
+	#hints_btn:hover { opacity: 1; }
+#hints {
+	position: absolute;
+	top: 30px;
+	left: 55px;
+	padding: 0px 10px;
+	background-color: #555;
+	display: none;
+	opacity: .9;
+	transition: opacity 300ms;
+	-moz-transition: opacity 300ms; /* Firefox 4 */
+	-webkit-transition: opacity 300ms; /* Safari and Chrome */
+	-o-transition: opacity 300ms; /* Opera */
+}
+	#hints:hover { opacity: 1; }
+	#hints li { 
+		color: #fff; 
+		margin-bottom: 3px;
+	}
+	.close_x { 
+		position: absolute;
+		top: 3px;
+		right: 100px;
+		opacity: .6;
+		cursor: pointer;
+	}
+	.close_x:hover { opacity: 1; }
+/* .top_controls li { 
+	display: inline; 
+	padding: 20px;
+} */
+#tooltip {
+	position: fixed;
+	border: 3px solid #aaf;
+	padding: 4px;
+	background-color: #fee;
+	opacity: 0.80;
+	color: #333
+}
+	.tt_carname  {
+		font-weight: bold;
+	}
+/* left side bar */
+#outside_left_mask {
+	position: absolute;
+	height: 500px;
+	top: 0px;
+	left: -500px;
+	width: 500px;
+	background-color: #000;
+	z-index: 12;
+}
+section#left_bar {
+	color: #fff;
+	width: 200px;
+	background-color: #000;
+	position: absolute; /* haven't found a way to implement fixed that doesn't infringe on other UX needs*/
+	left: 0px;
+	top: 190px;
+	/* padding-left: 5px; */
+}
+#remembered_cars_container li {
+	color: #ddd;
+}	
+#picker_expander_btn {
+	cursor: pointer;
+	color: #ff9;
+	font-size: 16px;
+	padding: 10px 30px 10px 10px;
+	font-weight: bold;
+	margin: 10px 10px 0px 50px;
+	text-align: right;
+	border-radius: 15px 15px 15px 15px; 
+	-moz-border-radius: 15px 15px 15px 15px; 
+	-webkit-border-radius: 15px 15px 15px 15px;
+	border: 5px solid #5555FF;
+	background: #222 url(images/right_arrow.png) right no-repeat;
+}
+#remembered_list_expander_btn {
+	cursor: pointer;
+	color: #ff9;
+	font-size: 16px;
+	padding: 10px 30px 10px 10px;
+	font-weight: bold;
+	margin: 10px 10px 0px 50px;
+	text-align: right;
+	border-radius: 15px 15px 15px 15px; 
+	-moz-border-radius: 15px 15px 15px 15px; 
+	-webkit-border-radius: 15px 15px 15px 15px;
+	border: 5px solid #5555FF;
+	background: #222 url(images/right_arrow.png) right no-repeat;
+	
+}
+	#remembered_list_expander_btn:hover,
+	#picker_expander_btn:hover {
+		background-color: #333;
+	}
+.car_picker {
+	border-bottom: solid 3px #000;
+	margin: 5px 10px;
+	color: #000;
+	background-color: #aaa;
+	font-size: 12px;
+	font-weight: bold;
+}
+ul#dynamic_car_display {
+	list-style: none;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	min-height: 200px;
+}
+	.car_info_box {
+		position: relative;
+		padding: 5px;
+		margin: 5px;
+		border: 5px solid #000;
+		/* cursor: move; */ /* for draggable functionality later */
+		background-color: #000;
+		transition: background-color 300ms linear;
+		-moz-transition: background-color 300ms linear; /* Firefox 4 */
+		-webkit-transition: background-color 300ms linear; /* Safari and Chrome */
+		-o-transition: background-color 300ms linear; /* Opera */
+	}
+		.car_info_box:hover { background-color: #333; }
+	.car_info_box  h3 {
+		margin: 3px 4px;
+	}
+	.car_info_box p { margin: 0px; }
+	.car_info_box a {
+		padding: 3px;
+		margin: 0 0 3px 0px;
+		color: #ccc;
+		font-size: 12px;
+	}
+	.car_info_box  .delete_btn {
+		position: absolute;
+		top: 3px;
+		right: 3px;
+		cursor: pointer;
+		background-color: #333;
+	}
+img#edmunds_credit {
+	padding: 0px;
+	margin: 20px 0px 0px 0px;
+}
+.copyright {
+	color: #999;
+	font-style: italic;
+}
+/* MAIN GRAPHICS AREAS */
+#content_area {
+	position: absolute;
+	left: 205px;
+	top: 175px;
+}
+
+/* car picker slide-outs */
+.picker_title {
+	text-align: right;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 0px;
+	padding: 10px;
+	cursor: pointer;
+	transition: background-color 100ms;
+	-moz-transition: background-color 100ms; /* Firefox 4 */
+	-webkit-transition: background-color 100ms; /* Safari and Chrome */
+	-o-transition: background-color 100ms; /* Opera */
+}
+	.picker_title .picker_x {
+		display: none;
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		opacity: .2;
+	}
+	.picker_title .title_span { margin-right: 15px; }
+	/* .close_handle {
+		position: absolute;
+		left: 5px;
+		top: 0px;
+	} */
+	#dynamic_picker .picker_title .title_span { font-size: 18px; }
+/* CAR PICKER */
+#dynamic_picker {  /* picker slides out over main display */
+	background-color: #55f;
+	position: absolute;
+	top: 0px;
+	left: -350px;
+	padding: 0px;
+	z-index: 5;
+	/* border-radius: 0px 15px 15px 0px; 
+	-moz-border-radius: 0px 15px 15px 0px;
+	-webkit-border-radius: 0px 15px 15px 0px; */
+}
+	#dynamic_picker .picker_title:hover {
+		background-color: #6666ff;
+	}
+	#options_list {
+		width: 330px;
+		margin-left: 200px;
+		padding: 0px 10px;
+	}
+	#dynamic_picker select {
+		display: block;
+		width: 100%;
+	}
+/* REMEMBERED CARS FROM LOCAL STORAGE */
+/* #remembered_cars_mask {
+	display: none;
+	position: absolute;
+	top: 105px;
+	left: 0px;
+	z-index: 10;
+	overflow: hidden;
+	text-align: left;
+	
+} */
+#remembered_cars_container {
+	position: absolute;
+	left: -350px;
+	top: 35px;
+	background-color: #333;
+	width: 550px;
+	/* padding-left: 200px; */
+	z-index: 6;
+	text-align: left;
+}
+#remembered_cars_container .picker_title { margin-right: 0px; }
+#remembered_cars_container .picker_title:hover { background-color: #444; }
+#remembered_cars_container li {
+	position: relative;
+	list-style-type: none;
+	margin: 3px 5px;
+	padding: 5px 5px;
+	border-top: 1px solid #999;
+}
+	.add_remembered_car_btn {
+		font-size: .8em;
+		position: absolute;
+		top: 0px;
+		right: 0px;
+	}
+	#remembered_cars_container h3 { 
+		margin: 5px;
+		color: #fff; 
+		padding-top: 10px;
+	}
+	ul#remembered_cars_list {
+		padding-left: 0px;
+		margin-left: 200px;
+		margin-top: 0px;
+	}
+	.car_name_rem {
+		font-weight: bold;
+		color: #fff;
+	}
+	.trim_level_rem {
+		color: #ccc;
+	}
+#lower_left_bar { /* lays over pickers when they're retracted  */
+	position: absolute;
+	top: 72px;
+	width: 100%;
+	background-color: #000;
+	z-index: 10;
+}
+.picker_close_arrows {
+	position: absolute;
+	top: 4px;
+	left: 0px;
+	width: 200px;
+	height: 25px;
+	background: url(images/left-arrow-sprite.png) left center repeat;
+	opacity: .2;
+}	
+/* Loading gif */
+.loading_mask {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin-left: 200px;
+	width: 350px;
+	height: 100%;
+	opacity: .5;
+	background: #aaa url(images/loading.gif) center center no-repeat;
+}
+/* spread-adjust controls */
+.spread_adjust_container {
+	margin-top: 10px;
+	display: none;
+	position: absolute;
+	left: 450px;
+	bottom: 0px; 
+	border: 2px solid #888;
+	border-bottom: none;
+	padding: 0px 5px 0px 5px;
+	color: #ccc;
+	border-radius: 8px 8px 0px 0px; 
+	-moz-border-radius: 8px 8px 0px 0px; 
+	-webkit-border-radius: 8px 8px 0px 0px; 
+	opacity: .6;
+}
+	.spreader_text  {
+		font-size: 12px;
+	}
+	.spread_adjust_container img { 
+		position: relative;
+		top: 3px;
+		cursor: pointer;
+		height: 12px;
+		width: 12px;
+	}
+	.spread_adjust_container .bigger {
+		-moz-transform: scaleY(-1);
+		-o-transform: scaleY(-1);
+		-webkit-transform: scaleY(-1);
+		transform: scaleY(-1);
+		filter: FlipV;
+		-ms-filter: "FlipV";
+	}
+	.spread_adjust_container:hover { opacity: 1; }
+	
+/* Papers */
+#main_paper_container { 
+	width: 710px;
+	border-top: solid 5px #333;
+}
+div.paper {
+	width: 750px;
+	float: left;
+	padding-left: 100px; /* makes space for button_area */
+	background-color: #000;
+	margin-bottom: 5px;
+}
+section.section_container {
+	clear: both;
+	position: relative;
+	border-bottom: solid 5px #333;
+	min-height: 48px;
+}
+.live  div.spread_handle {
+	display: none;
+	/* position: absolute; 
+	bottom: 0px;
+	left: 20px;*/
+	color: #ff0000;
+	float: left;
+	text-align: left;
+}
+.clear { clear: both; }
+div.button_area {
+	padding-left: 10px;
+	position: absolute;
+	font-size: 25px;
+	font-family: arial, helvetica, sansserif;
+	font-weight: bold;
+	left: 0px;
+	top: 0px;
+	width: 250px;
+	height: 150px; /* adding room for ads */
+	/* border: solid 1px #333; */
+	color: #000;
+	text-align: left;
+}
+	.button_area button {
+		font-size: 12px;
+		margin: 5px 15px 5px 25px;
+	}
+	.button_area p {
+		padding: 10px 0px;
+		margin: 0 0;
+		color: #fff;
+	}
+	span.expand_indicator {
+		/* font-size: .8em;
+		background-color: #333;
+		padding: 0px 3px;
+		border-radius: 5px; 
+		-moz-border-radius: 5px; 
+		-webkit-border-radius: 5px;
+		border: 2px solid #555; */
+		color: #999;
+	}
+		.expander:hover {
+			cursor: pointer;
+		}
+/* FOOTER */
+img#edmunds_credit {
+	padding: 0px;
+	margin: 20px 0px 0px 0px;
+}
+.copyright {
+	color: #999;
+	font-style: italic;
+}
+#privacy_policy {
+	margin: 50px 50px 50px 50px;
+	font-size: 11px;
+	color: #999;
+	opacity: .3;
+	transition: opacity 300ms linear 100ms;
+	-moz-transition: opacity 300ms linear 100ms; /* Firefox 4 */
+	-webkit-transition: opacity 300ms linear 100ms; /* Safari and Chrome */
+	-o-transition: opacity 300ms linear 100ms; /* Opera */
+}
+	#pp_bright_text	{ color: #fff; }
+	#privacy_policy:hover {
+		opacity: 1;
+		cursor: default;
+	}
+		
+
+
