@@ -257,7 +257,7 @@ img#edmunds_credit {
 .picker_title {
 	text-align: right;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 18px;
 	margin-top: 0px;
 	padding: 10px;
 	cursor: pointer;
@@ -279,7 +279,7 @@ img#edmunds_credit {
 		left: 5px;
 		top: 0px;
 	} */
-	#dynamic_picker .picker_title .title_span { font-size: 18px; }
+	
 /* CAR PICKER */
 #dynamic_picker {  /* picker slides out over main display */
 	background-color: #55f;
@@ -303,6 +303,7 @@ img#edmunds_credit {
 	#dynamic_picker select {
 		display: block;
 		width: 100%;
+		font-size: 18px;
 	}
 /* REMEMBERED CARS FROM LOCAL STORAGE */
 /* #remembered_cars_mask {

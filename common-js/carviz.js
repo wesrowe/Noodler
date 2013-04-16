@@ -103,15 +103,15 @@ var units_text_settings =
 var dot_common_settings = 
 	{
 		'opacity': 1,
-		'stroke': 'none'
+		'stroke': '#fff',
+		'stroke-width': 0
 	}
 var dot_common_opacity_setting = 1; //
 
 /* INTERACTION SETTINGS */
 var dot_highlight_attrs = 
 	{
-		'stroke': '#fff',
-		'stroke-width': 2
+		'stroke-width': 3
 	}
 var connector_highlight_settings = 
 	{

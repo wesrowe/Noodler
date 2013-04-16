@@ -740,12 +740,6 @@ $(document).ready( function() {
 		 */
 	
 	
-	
-	
-	
-	
-	
-	
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
@@ -839,4 +833,13 @@ function loadDemoCar( demoStyleObject )
 	addCarToUI( newcar_index, newCar.styleObject.name );
 
 }
-	
+function loadPageSpecificDemo()
+{
+	for ( var i = 0; i < demo_array.length; i++ ) {
+		loadDemoCar( demo_array[ i ].styleHolder[0] ); // demo_array[] defined in page-specific js
+	}
+}
+// confirm user wants to close comparison
+$(window).bind('beforeunload', function(){
+  return 'Are you done with your comparison?  If you do leave, the cars you added will be waiting for easy reload under "My Cars" (on the left console).';
+});

@@ -7549,18 +7549,14 @@ var odyssey_styles = {
 	]
 }
 
-function loadPageSpecificDemo()
-{
-	loadDemoCar( odyssey_styles.styleHolder[0] );
-			
-	loadDemoCar( sienna_styles.styleHolder[0] );
-	
-	loadDemoCar( quest_styles.styleHolder[0] );
-	
-	loadDemoCar( mazda5_styles.styleHolder[0] );
-	
-	loadDemoCar( grandcaravan_styles.styleHolder[0] );
-}
+demo_array = [
+	grandcaravan_styles,
+	mazda5_styles,
+	quest_styles,
+	sienna_styles,
+	odyssey_styles
+]
+
 
 
 
