@@ -173,7 +173,7 @@ section#left_bar {
 	-moz-border-radius: 15px 15px 15px 15px; 
 	-webkit-border-radius: 15px 15px 15px 15px;
 	border: 5px solid #5555FF;
-	background: #222 url(images/right_arrow.png) right no-repeat;
+	background: #222 url(../images/right_arrow.png) right no-repeat;
 }
 #remembered_list_expander_btn {
 	cursor: pointer;
@@ -187,7 +187,7 @@ section#left_bar {
 	-moz-border-radius: 15px 15px 15px 15px; 
 	-webkit-border-radius: 15px 15px 15px 15px;
 	border: 5px solid #5555FF;
-	background: #222 url(images/right_arrow.png) right no-repeat;
+	background: #222 url(../images/right_arrow.png) right no-repeat;
 	
 }
 	#remembered_list_expander_btn:hover,
@@ -370,7 +370,7 @@ img#edmunds_credit {
 	left: 0px;
 	width: 200px;
 	height: 25px;
-	background: url(images/left-arrow-sprite.png) left center repeat;
+	background: url(../images/left-arrow-sprite.png) left center repeat;
 	opacity: .2;
 }	
 /* Loading gif */
@@ -383,7 +383,7 @@ img#edmunds_credit {
 	width: 350px;
 	height: 100%;
 	opacity: .5;
-	background: #aaa url(images/loading.gif) center center no-repeat;
+	background: #aaa url(../images/loading.gif) center center no-repeat;
 }
 /* spread-adjust controls */
 .spread_adjust_container {

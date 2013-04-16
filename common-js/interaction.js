@@ -31,7 +31,7 @@ $(document).ready( function() {
 	next_ls_key = 1;
 		// BUGGY CODE -- this method would eventually break, as it leaves gaps behind, eventually user's LS keys would reach 100 (or any number) and it would stop finding newly stored cars.  BETTER: cruise LS keys looking for gaps, and find next open spot when incrementing (order not a big deal, I'm planning to sort alphabetically anyway).
 	
-	function loadDemoCar( demoStyleObject ) 
+	/* function loadDemoCar( demoStyleObject ) 
 	{
 		var newCar = {};
 		newCar['styleObject'] = demoStyleObject;
@@ -43,11 +43,11 @@ $(document).ready( function() {
 		// call addCarData(car_object, car_counter_index) to display data
 		addCarData( cars[ newcar_index ].styleObject, newcar_index );
 		// Add car to UI
-		addCarToUI( newcar_index, /* remembered_car_obj.trimName */ newCar.styleObject.name );
+		addCarToUI( newcar_index, newCar.styleObject.name );
 	
 	}
-		
-	function loadLocalStorageCars() 
+	 */	
+	function loadLocalStorageCars() // & set storage_empty
 	{
 		var storage_empty = true;
 		for ( var i = 1; i < 100; i++ ){
@@ -143,16 +143,19 @@ $(document).ready( function() {
 			}, 1000); 
 			// show hints to new users
 			setTimeout( function() { $( '#hints_btn' ).click(); }, 7000 ); 
-			// CALL loadDemoCar for DEMO
-				loadDemoCar( odyssey_styles.styleHolder[0] );
-				
-				loadDemoCar( sienna_styles.styleHolder[0] );
-				
-				loadDemoCar( quest_styles.styleHolder[0] );
-				
-				loadDemoCar( mazda5_styles.styleHolder[0] );
-				
-				loadDemoCar( grandcaravan_styles.styleHolder[0] );
+			
+			// load demo (function defined in page-specific js
+			loadPageSpecificDemo();
+			
+			/* loadDemoCar( odyssey_styles.styleHolder[0] );
+			
+			loadDemoCar( sienna_styles.styleHolder[0] );
+			
+			loadDemoCar( quest_styles.styleHolder[0] );
+			
+			loadDemoCar( mazda5_styles.styleHolder[0] );
+			
+			loadDemoCar( grandcaravan_styles.styleHolder[0] ); */
 		
 		} else { // default if they've been here before
 			// display local storage cars
@@ -638,81 +641,6 @@ $(document).ready( function() {
 			$( '#section0_toggle' ).click();
 		}
 	});
-	function addCarToUI( newcar_index, trim_name )
-	{
-		/* var newCar = {};
-		newCar['styleObject'] = new_style_object[ chosen_trim_index ];
-		newCar['color'] = getNextColor(); 
-		cars.push( newCar );
-		// call addCarData(car_object, car_counter_index)
-		var newcar_index = cars.length - 1; // what's array index of car just added
-		addCarData( cars[ newcar_index ].styleObject, newcar_index ); 
-		 */
-		// CLONE AND POPULATE CAR INFO BOX
-		var newCar = cars[ newcar_index ];
-		var new_section = $('#dynamic_car_display .template')
-			.clone()
-			.removeClass( 'template' )
-			.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
-			.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
-			.hover( 
-				function() {
-					highlightCar( newcar_index );
-					//$(this).css( 'backgroundColor', '#666666' );//moved to CSS
-				}, function() { 
-					unHighlightCar( newcar_index );
-					//$(this).css( 'backgroundColor', '#000000' );
-				}
-			);
-		// add car name and trim name
-		new_section.find( '.car_name' )
-			.html( newCar.styleObject.makeName + ' ' + newCar.styleObject.modelName + '<br/>' + newCar.styleObject.year );
-		new_section
-			.find( '.edmunds_link' )
-			.html( trim_name ); 
-		// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
-		var edmunds_url = 'http://www.edmunds.com/' + 
-			newCar.styleObject.makeNiceName +
-			'/' + newCar.styleObject.modelNiceName +
-			'/' + newCar.styleObject.year +
-			'/features-specs.html?style=' +
-			newCar.styleObject.id;
-		new_section.find( '.edmunds_link' )
-			.attr( 'href', edmunds_url );
-		// add click listener for REMOVE button
-		new_section.find( '.delete_btn' )
-			.click( function() {
-				// get style id for car being removed
-				
-				// loop thru remembered cars and if you find that styleid, re-enable its button.
-				
-				//console.log("remove car");
-				var cars_index_to_del = new_section.attr( 'data-carindex' );
-				removeCarData( cars_index_to_del ); // removes all Raph objects
-				// return its color to colors[]
-				colors.push( cars[ cars_index_to_del ].color );
-				// removes <section> from DOM
-				new_section.remove(); 
-		});
-		/* // DRAGGALBE SORTING
-		$(function() {
-			$( "#dynamic_car_display" ).sortable({
-				revert: true
-			});
-			$( "#dynamic_car_display" ).draggable({
-				connectToSortable: "#sortable",
-				helper: "clone",
-				revert: "invalid"
-			});
-			$( "ul, li" ).disableSelection();
-		});
-		 */
-		// append new section to DOM
-		new_section
-			.css( 'borderColor', newCar.color )
-			.appendTo( '#dynamic_car_display' )
-			.show();
-	}
 	/*
 	$( '.add_stored_car_btn' ).click( function() {
 		// retrieve style object from API by ID#
@@ -818,4 +746,97 @@ $(document).ready( function() {
 	
 	
 	
-});
+}); // end doc.ready()
+
+/* FUNCTIONS NEEDED FOR DEMO SCOPE */
+function addCarToUI( newcar_index, trim_name )
+{
+	/* var newCar = {};
+	newCar['styleObject'] = new_style_object[ chosen_trim_index ];
+	newCar['color'] = getNextColor(); 
+	cars.push( newCar );
+	// call addCarData(car_object, car_counter_index)
+	var newcar_index = cars.length - 1; // what's array index of car just added
+	addCarData( cars[ newcar_index ].styleObject, newcar_index ); 
+	 */
+	// CLONE AND POPULATE CAR INFO BOX
+	var newCar = cars[ newcar_index ];
+	var new_section = $('#dynamic_car_display .template')
+		.clone()
+		.removeClass( 'template' )
+		.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
+		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
+		.hover( 
+			function() {
+				highlightCar( newcar_index );
+				//$(this).css( 'backgroundColor', '#666666' );//moved to CSS
+			}, function() { 
+				unHighlightCar( newcar_index );
+				//$(this).css( 'backgroundColor', '#000000' );
+			}
+		);
+	// add car name and trim name
+	new_section.find( '.car_name' )
+		.html( newCar.styleObject.makeName + ' ' + newCar.styleObject.modelName + '<br/>' + newCar.styleObject.year );
+	new_section
+		.find( '.edmunds_link' )
+		.html( trim_name ); 
+	// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
+	var edmunds_url = 'http://www.edmunds.com/' + 
+		newCar.styleObject.makeNiceName +
+		'/' + newCar.styleObject.modelNiceName +
+		'/' + newCar.styleObject.year +
+		'/features-specs.html?style=' +
+		newCar.styleObject.id;
+	new_section.find( '.edmunds_link' )
+		.attr( 'href', edmunds_url );
+	// add click listener for REMOVE button
+	new_section.find( '.delete_btn' )
+		.click( function() {
+			// get style id for car being removed
+			
+			// loop thru remembered cars and if you find that styleid, re-enable its button.
+			
+			//console.log("remove car");
+			var cars_index_to_del = new_section.attr( 'data-carindex' );
+			removeCarData( cars_index_to_del ); // removes all Raph objects
+			// return its color to colors[]
+			colors.push( cars[ cars_index_to_del ].color );
+			// removes <section> from DOM
+			new_section.remove(); 
+	});
+	/* // DRAGGALBE SORTING
+	$(function() {
+		$( "#dynamic_car_display" ).sortable({
+			revert: true
+		});
+		$( "#dynamic_car_display" ).draggable({
+			connectToSortable: "#sortable",
+			helper: "clone",
+			revert: "invalid"
+		});
+		$( "ul, li" ).disableSelection();
+	});
+	 */
+	// append new section to DOM
+	new_section
+		.css( 'borderColor', newCar.color )
+		.appendTo( '#dynamic_car_display' )
+		.show();
+}
+function loadDemoCar( demoStyleObject ) 
+{
+	var newCar = {};
+	newCar['styleObject'] = demoStyleObject;
+	newCar['color'] = colors[next_color_index]; // see raph_settings
+	next_color_index++; // increment for next time a color is called for
+	//console.log( newCar );
+	cars.push( newCar );
+	var newcar_index = cars.length - 1;
+	// call addCarData(car_object, car_counter_index) to display data
+	addCarData( cars[ newcar_index ].styleObject, newcar_index );
+	// Add car to UI
+	addCarToUI( newcar_index, newCar.styleObject.name );
+
+}
+	

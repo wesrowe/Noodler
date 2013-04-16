@@ -1,30 +1,34 @@
-var mazda5_styles ={
+var odyssey_styles = {
 	"styleHolder": [
 		{
-			"id": 200441891,
-			"makeId": 200004100,
+			"id": 200433273,
+			"makeId": 200001444,
 			"year": 2013,
-			"makeName": "Mazda",
-			"makeNiceName": "mazda",
-			"modelId": "Mazda_MAZDA5",
-			"modelName": "MAZDA5",
-			"modelNiceName": "mazda5",
-			"modelYearId": 200441888,
-			"transmissionType": "MANUAL",
+			"makeName": "Honda",
+			"makeNiceName": "honda",
+			"modelId": "Honda_Odyssey",
+			"modelName": "Odyssey",
+			"modelNiceName": "odyssey",
+			"modelYearId": 200433235,
+			"transmissionType": "AUTOMATIC",
 			"engineCompressorType": "NA",
 			"engineFuelType": "regular unleaded",
-			"engineCylinder": 4,
-			"engineSize": 2.5,
+			"engineCylinder": 6,
+			"engineSize": 3.5,
 			"price": {
-				"baseMSRP": 19940,
-				"baseInvoice": 19073,
-				"deliveryCharges": 795,
-				"tmv": 19345,
+				"baseMSRP": 28675,
+				"baseInvoice": 26230,
+				"deliveryCharges": 830,
+				"tmv": 26717,
 				"usedTmvRetail": null,
 				"usedPrivateParty": null,
 				"usedTradeIn": null,
 				"estimateTmv": false,
 				"tmvRecommendedRating": null
+			},
+			"trim": {
+				"name": "LX",
+				"niceName": "lx"
 			},
 			"attributeGroups": {
 				"MAIN": {
@@ -34,12 +38,12 @@ var mazda5_styles ={
 						"USE_IN_LEADS_FORM": {
 							"id": 637,
 							"name": "USE_IN_LEADS_FORM",
-							"value": "Y"
+							"value": "N"
 						},
 						"NAME": {
 							"id": 1,
 							"name": "NAME",
-							"value": "Sport 4dr Minivan (2.5L 4cyl 6M)"
+							"value": "LX 4dr Minivan (3.5L 6cyl 5A)"
 						},
 						"USE_IN_NEW": {
 							"id": 10,
@@ -49,7 +53,7 @@ var mazda5_styles ={
 						"WORKFLOWSTATUS": {
 							"id": 9223372036854776000,
 							"name": "WORKFLOWSTATUS",
-							"value": "Published"
+							"value": "Completed"
 						},
 						"USE_IN_USED": {
 							"id": 11,
@@ -80,12 +84,22 @@ var mazda5_styles ={
 						"FRONT_AIR_CONDITIONING": {
 							"id": 84,
 							"name": "FRONT_AIR_CONDITIONING",
-							"value": "automatic climate control"
+							"value": "air conditioning"
 						},
 						"REAR_HEAT": {
 							"id": 88,
 							"name": "REAR_HEAT",
 							"value": "rear ventilation ducts with fan control"
+						},
+						"REAR_AIR_CONDITIONING": {
+							"id": 86,
+							"name": "REAR_AIR_CONDITIONING",
+							"value": "air conditioning"
+						},
+						"REAR_AIR_CONDITIONING_ZONES": {
+							"id": 87,
+							"name": "REAR_AIR_CONDITIONING_ZONES",
+							"value": "single"
 						},
 						"AIR_FILTRATION": {
 							"id": 81,
@@ -101,7 +115,7 @@ var mazda5_styles ={
 						"ED_STYLE_ID": {
 							"id": 4,
 							"name": "ED_STYLE_ID",
-							"value": "101276759"
+							"value": "101406729"
 						}
 					}
 				},
@@ -109,6 +123,16 @@ var mazda5_styles ={
 					"id": 11,
 					"name": "BRAKE_SYSTEM",
 					"attributes": {
+						"REAR_BRAKE_WIDTH": {
+							"id": 108,
+							"name": "REAR_BRAKE_WIDTH",
+							"value": "0.4"
+						},
+						"FRONT_BRAKE_WIDTH": {
+							"id": 105,
+							"name": "FRONT_BRAKE_WIDTH",
+							"value": "1.1"
+						},
 						"ELECTRONIC_BRAKEFORCE_DISTRIBUTION": {
 							"id": 102,
 							"name": "ELECTRONIC_BRAKEFORCE_DISTRIBUTION",
@@ -122,7 +146,7 @@ var mazda5_styles ={
 						"FRONT_BRAKE_DIAMETER": {
 							"id": 104,
 							"name": "FRONT_BRAKE_DIAMETER",
-							"value": "11.8"
+							"value": "12.6"
 						},
 						"FRONT_BRAKE_TYPE": {
 							"id": 106,
@@ -142,7 +166,7 @@ var mazda5_styles ={
 						"REAR_BRAKE_DIAMETER": {
 							"id": 107,
 							"name": "REAR_BRAKE_DIAMETER",
-							"value": "11.9"
+							"value": "13.1"
 						}
 					}
 				},
@@ -158,12 +182,12 @@ var mazda5_styles ={
 						"IIHS_FRONTAL_OFFSET_TEST_RESULTS": {
 							"id": 137,
 							"name": "IIHS_FRONTAL_OFFSET_TEST_RESULTS",
-							"value": "Not Tested"
+							"value": "Good"
 						},
 						"IIHS_ROOF_STRENGTH_TEST_RESULTS": {
 							"id": 140,
 							"name": "IIHS_ROOF_STRENGTH_TEST_RESULTS",
-							"value": "Not Tested"
+							"value": "Good"
 						},
 						"IIHS_REAR_CRASH_PROTECTION/HEAD_RESTRAINT_RATINGS": {
 							"id": 136,
@@ -173,7 +197,23 @@ var mazda5_styles ={
 						"IIHS_SIDE_IMPACT_TEST_RESULTS": {
 							"id": 141,
 							"name": "IIHS_SIDE_IMPACT_TEST_RESULTS",
-							"value": "Not Tested"
+							"value": "Good"
+						}
+					}
+				},
+				"MOBILE_CONNECTIVITY": {
+					"id": 31,
+					"name": "MOBILE_CONNECTIVITY",
+					"attributes": {
+						"PHONE": {
+							"id": 302,
+							"name": "PHONE",
+							"value": "pre-wired for phone"
+						},
+						"BLUETOOTH": {
+							"id": 639,
+							"name": "BLUETOOTH",
+							"value": "Bluetooth"
 						}
 					}
 				},
@@ -184,17 +224,12 @@ var mazda5_styles ={
 						"1ST_ROW_VANITY_MIRRORS": {
 							"id": 268,
 							"name": "1ST_ROW_VANITY_MIRRORS",
-							"value": "dual vanity mirrors"
+							"value": "dual illuminated vanity mirrors"
 						},
 						"PASSENGER_SIDE_MIRROR_ADJUSTMENT": {
 							"id": 263,
 							"name": "PASSENGER_SIDE_MIRROR_ADJUSTMENT",
 							"value": "power"
-						},
-						"TURN_SIGNAL_SIDE_MIRRORS": {
-							"id": 267,
-							"name": "TURN_SIGNAL_SIDE_MIRRORS",
-							"value": "turn signal in mirrors"
 						},
 						"DRIVER_SIDE_MIRROR_ADJUSTMENT": {
 							"id": 256,
@@ -217,15 +252,15 @@ var mazda5_styles ={
 							"name": "CRUISE_CONTROLS_ON_STEERING_WHEEL",
 							"value": "cruise controls"
 						},
-						"STEERING_WHEEL_TRIM": {
-							"id": 356,
-							"name": "STEERING_WHEEL_TRIM",
-							"value": "simulated alloy"
-						},
 						"AUDIO_CONTROLS_ON_STEERING_WHEEL": {
 							"id": 349,
 							"name": "AUDIO_CONTROLS_ON_STEERING_WHEEL",
 							"value": "audio controls"
+						},
+						"PHONE_CONTROLS_ON_STEERING_WHEEL": {
+							"id": 355,
+							"name": "PHONE_CONTROLS_ON_STEERING_WHEEL",
+							"value": "phone controls on steering wheel"
 						}
 					}
 				},
@@ -249,11 +284,6 @@ var mazda5_styles ={
 					"id": 25,
 					"name": "INSTRUMENTATION",
 					"attributes": {
-						"EXTERNAL_TEMPERATURE_GAUGE": {
-							"id": 224,
-							"name": "EXTERNAL_TEMPERATURE_GAUGE",
-							"value": "external temperature display"
-						},
 						"TIRE_PRESSURE_MONITORING_SYSTEM": {
 							"id": 227,
 							"name": "TIRE_PRESSURE_MONITORING_SYSTEM",
@@ -263,6 +293,11 @@ var mazda5_styles ={
 							"id": 455,
 							"name": "LOW_FUEL_LEVEL_INDICATOR",
 							"value": "low fuel level"
+						},
+						"TRIP_COMPUTER": {
+							"id": 229,
+							"name": "TRIP_COMPUTER",
+							"value": "trip computer"
 						},
 						"TACHOMETER": {
 							"id": 456,
@@ -283,12 +318,12 @@ var mazda5_styles ={
 						"FOLDING_2ND_ROW": {
 							"id": 53,
 							"name": "FOLDING_2ND_ROW",
-							"value": "one-piece folding"
+							"value": "split folding"
 						},
 						"2ND_ROW_SEAT_TYPE": {
 							"id": 45,
 							"name": "2ND_ROW_SEAT_TYPE",
-							"value": "captains chairs"
+							"value": "removable captains chairs"
 						},
 						"ADJUSTABLE_2ND_ROW_HEADRESTS": {
 							"id": 48,
@@ -299,6 +334,11 @@ var mazda5_styles ={
 							"id": 58,
 							"name": "NUMBER_OF_2ND_ROW_HEADRESTS",
 							"value": "2"
+						},
+						"RECLINING_2ND_ROW": {
+							"id": 60,
+							"name": "RECLINING_2ND_ROW",
+							"value": "reclining"
 						}
 					}
 				},
@@ -306,14 +346,14 @@ var mazda5_styles ={
 					"id": 34,
 					"name": "POWER_OUTLETS",
 					"attributes": {
+						"3RD_ROW_POWER_OUTLET": {
+							"id": 311,
+							"name": "3RD_ROW_POWER_OUTLET",
+							"value": "12V"
+						},
 						"1ST_ROW_POWER_OUTLET": {
 							"id": 313,
 							"name": "1ST_ROW_POWER_OUTLET",
-							"value": "12V"
-						},
-						"CARGO_AREA_POWER_OUTLET": {
-							"id": 312,
-							"name": "CARGO_AREA_POWER_OUTLET",
 							"value": "12V"
 						}
 					}
@@ -327,10 +367,10 @@ var mazda5_styles ={
 							"name": "SEATBELT_PRETENSIONERS",
 							"value": "front"
 						},
-						"SEATBELT_FORCE_LIMITERS": {
-							"id": 457,
-							"name": "SEATBELT_FORCE_LIMITERS",
-							"value": "front"
+						"2ND_ROW_CENTER_SEATBELT": {
+							"id": 319,
+							"name": "2ND_ROW_CENTER_SEATBELT",
+							"value": "3-point belt"
 						}
 					}
 				},
@@ -356,12 +396,12 @@ var mazda5_styles ={
 						"REAR_ARM_TYPE": {
 							"id": 389,
 							"name": "REAR_ARM_TYPE",
-							"value": "trailing links, lateral links"
+							"value": "trailing arms"
 						},
 						"REAR_SUSPENSION_TYPE": {
 							"id": 393,
 							"name": "REAR_SUSPENSION_TYPE",
-							"value": "multi-link"
+							"value": "double wishbone"
 						},
 						"FRONT_ARM_TYPE": {
 							"id": 382,
@@ -383,11 +423,6 @@ var mazda5_styles ={
 							"name": "FRONT_SPRING_TYPE",
 							"value": "coil springs"
 						},
-						"REAR_STABILIZER_BAR": {
-							"id": 391,
-							"name": "REAR_STABILIZER_BAR",
-							"value": "stabilizer bar"
-						},
 						"FRONT_SUSPENSION_TYPE": {
 							"id": 386,
 							"name": "FRONT_SUSPENSION_TYPE",
@@ -402,27 +437,27 @@ var mazda5_styles ={
 						"MSRP": {
 							"id": 38,
 							"name": "MSRP",
-							"value": "19940"
+							"value": "28675"
 						},
 						"DEALER_INVOICE": {
 							"id": 41,
 							"name": "DEALER_INVOICE",
-							"value": "19073"
+							"value": "26230"
 						},
 						"NEW_TMV_OFFER_PRICE_DISCOUNT": {
 							"id": 638,
 							"name": "NEW_TMV_OFFER_PRICE_DISCOUNT",
-							"value": ".0179267342166797"
+							"value": ".0222684858173166"
 						},
 						"DELIVERY_CHARGE": {
 							"id": 40,
 							"name": "DELIVERY_CHARGE",
-							"value": "795"
+							"value": "830"
 						},
 						"NEW_TMV": {
 							"id": 42,
 							"name": "NEW_TMV",
-							"value": "19345"
+							"value": "26717"
 						}
 					}
 				},
@@ -451,10 +486,20 @@ var mazda5_styles ={
 					"id": 12,
 					"name": "CARGO_DIMENSIONS",
 					"attributes": {
+						"CARGO_CAPACITY,_ALL_SEATS_IN_PLACE": {
+							"id": 120,
+							"name": "CARGO_CAPACITY,_ALL_SEATS_IN_PLACE",
+							"value": "38.4"
+						},
 						"CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED": {
 							"id": 121,
 							"name": "CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED",
-							"value": "44.4"
+							"value": "93.1"
+						},
+						"MAX_CARGO_CAPACITY": {
+							"id": 122,
+							"name": "MAX_CARGO_CAPACITY",
+							"value": "148.5"
 						}
 					}
 				},
@@ -478,80 +523,90 @@ var mazda5_styles ={
 					"id": -100,
 					"name": "NCI_STANDARD_FACET",
 					"attributes": {
-						"AUTOMATIC_CLIMATE_CONTROL": {
-							"id": 0,
-							"name": "AUTOMATIC_CLIMATE_CONTROL",
-							"value": "200441891"
-						},
 						"CD_MP3_PLAYBACK": {
 							"id": 0,
 							"name": "CD_MP3_PLAYBACK",
-							"value": "200441920"
+							"value": "200433298"
 						},
 						"SEAT_MATERIAL:_CLOTH": {
 							"id": 0,
 							"name": "SEAT_MATERIAL:_CLOTH",
-							"value": "200441891"
+							"value": "200433273"
 						},
 						"TIRE_PRESSURE_MONITORING": {
 							"id": 0,
 							"name": "TIRE_PRESSURE_MONITORING",
-							"value": "200441891"
+							"value": "200433273"
+						},
+						"1_SUBWOOFERS": {
+							"id": 0,
+							"name": "1_SUBWOOFERS",
+							"value": "200433298"
 						},
 						"SIDE_AIRBAGS:_DUAL_FRONT": {
 							"id": 0,
 							"name": "SIDE_AIRBAGS:_DUAL_FRONT",
-							"value": "200441891"
+							"value": "200433273"
 						},
 						"IN_DASH_CD:_SINGLE_CD_PLAYER": {
 							"id": 0,
 							"name": "IN_DASH_CD:_SINGLE_CD_PLAYER",
-							"value": "200441920"
+							"value": "200433298"
 						},
 						"CHILD_SEAT_ANCHORS": {
 							"id": 0,
 							"name": "CHILD_SEAT_ANCHORS",
-							"value": "200441891"
+							"value": "200433273"
 						},
 						"CRUISE_CONTROL": {
 							"id": 0,
 							"name": "CRUISE_CONTROL",
-							"value": "200441891"
+							"value": "200433273"
+						},
+						"3RD_ROW_SEATS:_40_60_SPLIT_BENCH": {
+							"id": 0,
+							"name": "3RD_ROW_SEATS:_40_60_SPLIT_BENCH",
+							"value": "200433273"
 						},
 						"AUXILIARY_MP3_AUDIO_INPUT": {
 							"id": 0,
 							"name": "AUXILIARY_MP3_AUDIO_INPUT",
-							"value": "200441920"
+							"value": "200433298"
+						},
+						"PRE_WIRED_FOR_PHONE": {
+							"id": 0,
+							"name": "PRE_WIRED_FOR_PHONE",
+							"value": "200433273"
 						},
 						"FOLDING_3RD_ROW:_MANUAL_FOLDING_SPLIT_BENCH": {
 							"id": 0,
 							"name": "FOLDING_3RD_ROW:_MANUAL_FOLDING_SPLIT_BENCH",
-							"value": "200441891"
-						},
-						"1ST_ROW_SEATS:_BUCKET": {
-							"id": 0,
-							"name": "1ST_ROW_SEATS:_BUCKET",
-							"value": "200441891"
+							"value": "200433273"
 						},
 						"USB_CONNECTION": {
 							"id": 0,
 							"name": "USB_CONNECTION",
-							"value": "200441920"
+							"value": "200433298"
+						},
+						"1ST_ROW_SEATS:_BUCKET": {
+							"id": 0,
+							"name": "1ST_ROW_SEATS:_BUCKET",
+							"value": "200433273"
+						},
+						"CARGO_TIE_DOWNS": {
+							"id": 0,
+							"name": "CARGO_TIE_DOWNS",
+							"value": "200433273"
 						},
 						"STABILITY_CONTROL": {
 							"id": 0,
 							"name": "STABILITY_CONTROL",
-							"value": "200441891"
+							"value": "200433273"
 						},
 						"TRACTION_CONTROL": {
 							"id": 0,
 							"name": "TRACTION_CONTROL",
-							"value": "200441891"
-						},
-						"3RD_ROW_SEATS:_50_50_SPLIT_BENCH": {
-							"id": 0,
-							"name": "3RD_ROW_SEATS:_50_50_SPLIT_BENCH",
-							"value": "200441891"
+							"value": "200433273"
 						}
 					}
 				},
@@ -577,7 +632,7 @@ var mazda5_styles ={
 						"TRIM_LEVEL": {
 							"id": 28,
 							"name": "TRIM_LEVEL",
-							"value": "Sport"
+							"value": "LX"
 						},
 						"FLEET": {
 							"id": 22,
@@ -592,12 +647,12 @@ var mazda5_styles ={
 						"VEHICLE_SIZE_CLASS": {
 							"id": 449,
 							"name": "VEHICLE_SIZE_CLASS",
-							"value": "Compact"
+							"value": "Large"
 						},
 						"LONG_NAME": {
 							"id": 0,
 							"name": "LONG_NAME",
-							"value": "2.5L 4-cyl. 6-speed Manual"
+							"value": "3.5L V6 5-speed Automatic"
 						},
 						"PRIMARY_BODY_TYPE": {
 							"id": 447,
@@ -607,12 +662,12 @@ var mazda5_styles ={
 						"STYLE_START_DATE": {
 							"id": 435,
 							"name": "STYLE_START_DATE",
-							"value": "02-Nov-2012"
+							"value": "22-Aug-2012"
 						},
 						"WHERE_BUILT": {
 							"id": 670,
 							"name": "WHERE_BUILT",
-							"value": "Japan"
+							"value": "United States"
 						},
 						"VEHICLE_STYLE": {
 							"id": 636,
@@ -627,17 +682,17 @@ var mazda5_styles ={
 						"STANDARD_VEHICLE_DESCRIPTION": {
 							"id": 441,
 							"name": "STANDARD_VEHICLE_DESCRIPTION",
-							"value": "Sport 4dr Minivan (2.5L 4cyl 6M)"
+							"value": "LX 4dr Minivan (3.5L 6cyl 5A)"
 						},
 						"MANUFACTURER_CODE": {
 							"id": 438,
 							"name": "MANUFACTURER_CODE",
-							"value": "MZ5 SP P"
+							"value": "RL5H2DEW"
 						},
 						"STYLE_LINK_CODE": {
 							"id": 442,
 							"name": "STYLE_LINK_CODE",
-							"value": "T060065"
+							"value": "T000736"
 						}
 					}
 				},
@@ -648,7 +703,7 @@ var mazda5_styles ={
 						"POWER_STEERING": {
 							"id": 348,
 							"name": "POWER_STEERING",
-							"value": "electric power steering"
+							"value": "speed-proportional power steering"
 						}
 					}
 				},
@@ -667,15 +722,15 @@ var mazda5_styles ={
 					"id": 42,
 					"name": "STORAGE",
 					"attributes": {
-						"1ST_ROW_CENTER_CONSOLE": {
-							"id": 361,
-							"name": "1ST_ROW_CENTER_CONSOLE",
-							"value": "front console with storage"
-						},
 						"UNDER_SEAT_STORAGE": {
 							"id": 371,
 							"name": "UNDER_SEAT_STORAGE",
 							"value": "under seat storage"
+						},
+						"CARGO_TIE_DOWNS": {
+							"id": 360,
+							"name": "CARGO_TIE_DOWNS",
+							"value": "cargo tie downs"
 						},
 						"CUPHOLDERS_LOCATION": {
 							"id": 363,
@@ -685,12 +740,22 @@ var mazda5_styles ={
 						"DOOR_POCKETS_LOCATION": {
 							"id": 364,
 							"name": "DOOR_POCKETS_LOCATION",
-							"value": "front"
+							"value": "front and rear"
 						},
 						"SEATBACK_STORAGE": {
 							"id": 368,
 							"name": "SEATBACK_STORAGE",
 							"value": "front seatback storage"
+						},
+						"CARGO_GROCERY_BAG_HOLDER": {
+							"id": 358,
+							"name": "CARGO_GROCERY_BAG_HOLDER",
+							"value": "grocery bag holder"
+						},
+						"OVERHEAD_CONSOLE": {
+							"id": 366,
+							"name": "OVERHEAD_CONSOLE",
+							"value": "overhead console with storage"
 						}
 					}
 				},
@@ -711,7 +776,7 @@ var mazda5_styles ={
 						"SIDE_DOOR_TYPE": {
 							"id": 154,
 							"name": "SIDE_DOOR_TYPE",
-							"value": "dual manual sliding side doors"
+							"value": "manual sliding side door"
 						}
 					}
 				},
@@ -722,37 +787,37 @@ var mazda5_styles ={
 						"OVERALL_WIDTH_WITHOUT_MIRRORS": {
 							"id": 189,
 							"name": "OVERALL_WIDTH_WITHOUT_MIRRORS",
-							"value": "68.9"
+							"value": "79.2"
 						},
 						"MINIMUM_GROUND_CLEARANCE": {
 							"id": 185,
 							"name": "MINIMUM_GROUND_CLEARANCE",
-							"value": "5.5"
+							"value": "4.5"
 						},
 						"OVERALL_LENGTH": {
 							"id": 188,
 							"name": "OVERALL_LENGTH",
-							"value": "180.5"
+							"value": "202.9"
 						},
 						"WHEELBASE": {
 							"id": 192,
 							"name": "WHEELBASE",
-							"value": "108.3"
+							"value": "118.1"
 						},
 						"OVERALL_HEIGHT": {
 							"id": 187,
 							"name": "OVERALL_HEIGHT",
-							"value": "63.6"
+							"value": "68.4"
 						},
 						"REAR_TRACK": {
 							"id": 191,
 							"name": "REAR_TRACK",
-							"value": "59.8"
+							"value": "68.2"
 						},
 						"FRONT_TRACK": {
 							"id": 184,
 							"name": "FRONT_TRACK",
-							"value": "60.2"
+							"value": "68.1"
 						}
 					}
 				},
@@ -760,15 +825,20 @@ var mazda5_styles ={
 					"id": 24,
 					"name": "FRONT_PASSENGER_SEAT",
 					"attributes": {
+						"HEIGHT_ADJUSTABLE_PASSENGER_SEAT": {
+							"id": 210,
+							"name": "HEIGHT_ADJUSTABLE_PASSENGER_SEAT",
+							"value": "height adjustable"
+						},
 						"NUMBER_OF_PASSENGER_SEAT_MANUAL_ADJUSTMENTS": {
 							"id": 212,
 							"name": "NUMBER_OF_PASSENGER_SEAT_MANUAL_ADJUSTMENTS",
 							"value": "4"
 						},
-						"ADJUSTABLE_PASSENGER_SEAT_HEADREST": {
-							"id": 204,
-							"name": "ADJUSTABLE_PASSENGER_SEAT_HEADREST",
-							"value": "height adjustable headrests"
+						"PASSENGER_SEAT_WHIPLASH_PROTECTION": {
+							"id": 208,
+							"name": "PASSENGER_SEAT_WHIPLASH_PROTECTION",
+							"value": "whiplash protection system"
 						}
 					}
 				},
@@ -785,6 +855,11 @@ var mazda5_styles ={
 							"id": 95,
 							"name": "PASSENGER_AIRBAG_DEACTIVATION",
 							"value": "occupant sensing deactivation"
+						},
+						"SIDE_CURTAIN_AIRBAG_ROLLOVER_SENSOR": {
+							"id": 98,
+							"name": "SIDE_CURTAIN_AIRBAG_ROLLOVER_SENSOR",
+							"value": "side-curtain airbag rollover sensor"
 						},
 						"SIDE_AIRBAGS": {
 							"id": 97,
@@ -803,6 +878,22 @@ var mazda5_styles ={
 						}
 					}
 				},
+				"EXTERIOR_LIGHTS": {
+					"id": 23,
+					"name": "EXTERIOR_LIGHTS",
+					"attributes": {
+						"HEADLIGHTS_AUTO_DELAY": {
+							"id": 199,
+							"name": "HEADLIGHTS_AUTO_DELAY",
+							"value": "auto delay off"
+						},
+						"DAYTIME_RUNNING_LIGHTS": {
+							"id": 196,
+							"name": "DAYTIME_RUNNING_LIGHTS",
+							"value": "daytime running lights"
+						}
+					}
+				},
 				"3RD_ROW_SEATS": {
 					"id": 6,
 					"name": "3RD_ROW_SEATS",
@@ -815,12 +906,12 @@ var mazda5_styles ={
 						"3RD_ROW_SEAT_TYPE": {
 							"id": 68,
 							"name": "3RD_ROW_SEAT_TYPE",
-							"value": "50-50 split bench"
+							"value": "40-60 split bench"
 						},
 						"NUMBER_OF_3RD_ROW_HEADRESTS": {
 							"id": 67,
 							"name": "NUMBER_OF_3RD_ROW_HEADRESTS",
-							"value": "2"
+							"value": "3"
 						}
 					}
 				},
@@ -841,7 +932,7 @@ var mazda5_styles ={
 						"3RD_ROW_SEATING_CAPACITY": {
 							"id": 322,
 							"name": "3RD_ROW_SEATING_CAPACITY",
-							"value": "2"
+							"value": "3"
 						}
 					}
 				},
@@ -849,30 +940,20 @@ var mazda5_styles ={
 					"id": 39,
 					"name": "SPECIFICATIONS",
 					"attributes": {
-						"GROSS_VEHICLE_WEIGHT": {
-							"id": 341,
-							"name": "GROSS_VEHICLE_WEIGHT",
-							"value": "4610"
-						},
 						"EPA_COMBINED_MPG": {
 							"id": 459,
 							"name": "EPA_COMBINED_MPG",
-							"value": "24"
+							"value": "21"
 						},
 						"EPA_CITY_MPG": {
 							"id": 461,
 							"name": "EPA_CITY_MPG",
-							"value": "21"
-						},
-						"PAYLOAD": {
-							"id": 344,
-							"name": "PAYLOAD",
-							"value": "1193"
+							"value": "18"
 						},
 						"CURB_WEIGHT": {
 							"id": 338,
 							"name": "CURB_WEIGHT",
-							"value": "3417"
+							"value": "4346"
 						},
 						"TURNING_DIAMETER": {
 							"id": 346,
@@ -882,17 +963,22 @@ var mazda5_styles ={
 						"FUEL_CAPACITY": {
 							"id": 340,
 							"name": "FUEL_CAPACITY",
-							"value": "15.9"
+							"value": "21.0"
 						},
 						"EPA_HIGHWAY_MPG": {
 							"id": 460,
 							"name": "EPA_HIGHWAY_MPG",
-							"value": "28"
+							"value": "27"
 						},
 						"TCO_CURB_WEIGHT": {
 							"id": 0,
 							"name": "TCO_CURB_WEIGHT",
-							"value": "3417"
+							"value": "4346"
+						},
+						"TOWING_CAPACITY": {
+							"id": 345,
+							"name": "TOWING_CAPACITY",
+							"value": "3500"
 						}
 					}
 				},
@@ -900,15 +986,20 @@ var mazda5_styles ={
 					"id": 20,
 					"name": "DRIVER_SEAT",
 					"attributes": {
-						"NUMBER_OF_DRIVER_SEAT_MANUAL_ADJUSTMENTS": {
-							"id": 171,
-							"name": "NUMBER_OF_DRIVER_SEAT_MANUAL_ADJUSTMENTS",
-							"value": "6"
-						},
 						"HEIGHT_ADJUSTABLE_DRIVER_SEAT": {
 							"id": 170,
 							"name": "HEIGHT_ADJUSTABLE_DRIVER_SEAT",
 							"value": "height adjustable"
+						},
+						"DRIVER_SEAT_WHIPLASH_PROTECTION": {
+							"id": 168,
+							"name": "DRIVER_SEAT_WHIPLASH_PROTECTION",
+							"value": "whiplash protection system"
+						},
+						"NUMBER_OF_DRIVER_SEAT_POWER_ADJUSTMENTS": {
+							"id": 174,
+							"name": "NUMBER_OF_DRIVER_SEAT_POWER_ADJUSTMENTS",
+							"value": "8"
 						},
 						"ADJUSTABLE_DRIVER_SEAT_HEADREST": {
 							"id": 162,
@@ -921,10 +1012,15 @@ var mazda5_styles ={
 					"id": 51,
 					"name": "WINDOWS",
 					"attributes": {
+						"PRIVACY_GLASS": {
+							"id": 428,
+							"name": "PRIVACY_GLASS",
+							"value": "privacy glass"
+						},
 						"ONE_TOUCH_WINDOWS": {
 							"id": 425,
 							"name": "ONE_TOUCH_WINDOWS",
-							"value": "1"
+							"value": "2"
 						},
 						"POWER_WINDOWS": {
 							"id": 427,
@@ -959,395 +1055,35 @@ var mazda5_styles ={
 						}
 					}
 				},
-				"NCI_OPTIONAL_FACET": {
-					"id": -101,
-					"name": "NCI_OPTIONAL_FACET",
+				"TRANSMISSION_FEATURES": {
+					"id": 47,
+					"name": "TRANSMISSION_FEATURES",
 					"attributes": {
-						"SIRIUS_XM": {
-							"id": 0,
-							"name": "SIRIUS_XM",
-							"value": "200441917"
+						"SHIFT_CONTROL_MECHANISM": {
+							"id": 402,
+							"name": "SHIFT_CONTROL_MECHANISM",
+							"value": "lever"
 						},
-						"CARGO_NET": {
-							"id": 0,
-							"name": "CARGO_NET",
-							"value": "200441907"
-						},
-						"DVD_PLAYER": {
-							"id": 0,
-							"name": "DVD_PLAYER",
-							"value": "200441908"
-						},
-						"VIDEO_MONITOR:_REAR": {
-							"id": 0,
-							"name": "VIDEO_MONITOR:_REAR",
-							"value": "200441908"
+						"TRANSMISSION_SHIFT_CONTROLS_LOCATION": {
+							"id": 404,
+							"name": "TRANSMISSION_SHIFT_CONTROLS_LOCATION",
+							"value": "dashboard"
 						}
 					}
 				},
-				"TMVU_FEATURE": {
-					"id": 200,
-					"name": "TMVU_FEATURE",
+				"MISC._EXTERIOR_FEATURES": {
+					"id": 29,
+					"name": "MISC._EXTERIOR_FEATURES",
 					"attributes": {
-						"TMVU_FEATURE_DESCRIPTION_3510000003": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3510000003",
-							"value": "Intermittent Windshield Wipers"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3510000002": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3510000002",
-							"value": "Intermittent Rear Window Wiper "
-						},
-						"TMVU_FEATURE_DESCRIPTION_2610000016": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2610000016",
-							"value": "Front Adjustable Headrests"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3010000004": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3010000004",
-							"value": "Rear Adjustable Headrests"
-						},
-						"TMVU_FEATURE_DESCRIPTION_4610000037": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_4610000037",
-							"value": "Auxiliary MP3 Audio Input"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3010000007": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3010000007",
-							"value": "Third Row Headrests"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000066": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000066",
-							"value": "Simulated Alloy Shift Knob Trim"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1310000023": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1310000023",
-							"value": "Rear Stabilizer Bar"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1310000022": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1310000022",
-							"value": "Front Stabilizer Bar"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000024": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000024",
-							"value": "Carpeted Floor Mats"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000025": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000025",
-							"value": "Front Floor Mats"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3510000007": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3510000007",
-							"value": "One-Touch Power Window(s)"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000023": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000023",
-							"value": "Cargo Area Light"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000016": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000016",
-							"value": "Front 12V Power Outlet"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000014": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000014",
-							"value": "Front Center Console with Storage"
-						},
-						"TMVU_FEATURE_DESCRIPTION_4610000089": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_4610000089",
-							"value": "Dual Manual Sliding Side Doors"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2710000002": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2710000002",
-							"value": "Folding Second Row Seat"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3610000001": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3610000001",
-							"value": "Remote Power Door Locks"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2610000005": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2610000005",
-							"value": "Height Adjustable Driver's Seat"
-						},
-						"TMVU_FEATURE_DESCRIPTION_102155": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_102155",
-							"value": "2.5L I4 DOHC 16V FI Engine"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2710000009": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2710000009",
-							"value": "Rear Captains Chairs"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3810000008": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3810000008",
-							"value": "Power Exterior Mirrors"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1910000004": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1910000004",
-							"value": "Rear Disc Brakes"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1310000015": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1310000015",
-							"value": "Multi-Link Rear Suspension"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1910000003": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1910000003",
-							"value": "Front Ventilated Disc Brakes"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1910000001": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1910000001",
-							"value": "Electronic Brakeforce Distribution"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1910000000": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1910000000",
-							"value": "Braking Assist"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2510000013": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2510000013",
-							"value": "Cloth Seating"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2710000010": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2710000010",
-							"value": "Rear Fan Control"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3410000002": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3410000002",
-							"value": "Automatic Climate Control"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3410000001": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3410000001",
-							"value": "Air Filtration"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000050": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000050",
-							"value": "Third Row Floor Mats"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2110000006": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2110000006",
-							"value": "Front, Rear and Third Row Head Airbags"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1030000007": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1030000007",
-							"value": "Variable Valve Timing"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2110000005": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2110000005",
-							"value": "Front Side Airbags"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2110000000": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2110000000",
-							"value": "Driver and Passenger Front Airbags"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2510000016": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2510000016",
-							"value": "Front Bucket Seats"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000037": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000037",
-							"value": "Tilt and Telescopic Steering Wheel"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000034": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000034",
-							"value": "Seatback Storage"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3810000011": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3810000011",
-							"value": "Exterior Mirror Mounted Turn Signals"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000032": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000032",
-							"value": "Remote Trunk Release"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2810000008": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2810000008",
-							"value": "Manual Split-Folding Third Row Seat"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3810000012": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3810000012",
-							"value": "Vanity Mirror(s)"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1710000002": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1710000002",
-							"value": "Interior Mounted Spare Tire"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1310000006": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1310000006",
-							"value": "Macpherson Strut Front Suspension"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000040": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000040",
-							"value": "Reading Lights"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3310000041": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3310000041",
-							"value": "Rear Floor Mats"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1020000003": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1020000003",
-							"value": "6-Speed Manual Transmission"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2410000001": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2410000001",
-							"value": "Engine Immobilizer"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1610000011": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1610000011",
-							"value": "Tire Pressure Monitoring System"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000008": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000008",
-							"value": "Cupholders"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000043": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000043",
-							"value": "Electric Power Steering"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000007": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000007",
-							"value": "Steering Wheel Cruise Controls"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3510000014": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3510000014",
-							"value": "Rear Defogger"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000009": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000009",
-							"value": "Door Pockets"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000004": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000004",
-							"value": "Cargo Area 12V Power Outlet"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000003": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000003",
-							"value": "Steering Wheel Audio Controls"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000006": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000006",
-							"value": "Cruise Control"
-						},
-						"TMVU_FEATURE_DESCRIPTION_4310000004": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_4310000004",
-							"value": "Liftgate Rear Door"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2210000002": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2210000002",
-							"value": "Child Seat Anchors"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2010000000": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2010000000",
-							"value": "4-Wheel ABS"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1010000530": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1010000530",
-							"value": "Regular Unleaded Fuel Required"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1501000059": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1501000059",
-							"value": "16 Inch Alloy Wheels"
-						},
-						"TMVU_FEATURE_DESCRIPTION_2210000000": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_2210000000",
-							"value": "Child Safety Locks"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1410000000": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1410000000",
-							"value": "Clock"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1810000002": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1810000002",
-							"value": "Traction Control"
-						},
-						"TMVU_FEATURE_DESCRIPTION_3210000040": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_3210000040",
-							"value": "Under Seat Storage"
-						},
-						"TMVU_FEATURE_DESCRIPTION_101001": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_101001",
-							"value": "AM/FM/CD/MP3 Audio System"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1810000001": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1810000001",
-							"value": "Stability Control"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1410000005": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1410000005",
-							"value": "Low Fuel Level Indicator"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1410000003": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1410000003",
-							"value": "External Temperature Display"
-						},
-						"TMVU_FEATURE_DESCRIPTION_1410000007": {
-							"id": 0,
-							"name": "TMVU_FEATURE_DESCRIPTION_1410000007",
-							"value": "Tachometer"
+						"REAR_SPOILER": {
+							"id": 276,
+							"name": "REAR_SPOILER",
+							"value": "rear spoiler"
+						},
+						"EXTERIOR_CAMERA": {
+							"id": 274,
+							"name": "EXTERIOR_CAMERA",
+							"value": "rear view camera"
 						}
 					}
 				},
@@ -1379,67 +1115,62 @@ var mazda5_styles ={
 						"2ND_ROW_LEG_ROOM": {
 							"id": 249,
 							"name": "2ND_ROW_LEG_ROOM",
-							"value": "39.4"
+							"value": "40.9"
 						},
 						"3RD_ROW_LEG_ROOM": {
 							"id": 232,
 							"name": "3RD_ROW_LEG_ROOM",
-							"value": "30.5"
-						},
-						"3RD_ROW_HIP_ROOM": {
-							"id": 231,
-							"name": "3RD_ROW_HIP_ROOM",
-							"value": "40.9"
-						},
-						"1ST_ROW_HIP_ROOM": {
-							"id": 244,
-							"name": "1ST_ROW_HIP_ROOM",
-							"value": "53.1"
-						},
-						"2ND_ROW_SHOULDER_ROOM": {
-							"id": 250,
-							"name": "2ND_ROW_SHOULDER_ROOM",
-							"value": "55.5"
-						},
-						"2ND_ROW_HIP_ROOM": {
-							"id": 248,
-							"name": "2ND_ROW_HIP_ROOM",
-							"value": "57.8"
-						},
-						"EPA_INTERIOR_VOLUME": {
-							"id": 242,
-							"name": "EPA_INTERIOR_VOLUME",
-							"value": "142.1"
+							"value": "42.4"
 						},
 						"3RD_ROW_SHOULDER_ROOM": {
 							"id": 233,
 							"name": "3RD_ROW_SHOULDER_ROOM",
-							"value": "49.3"
+							"value": "60.9"
+						},
+						"3RD_ROW_HIP_ROOM": {
+							"id": 231,
+							"name": "3RD_ROW_HIP_ROOM",
+							"value": "48.4"
+						},
+						"1ST_ROW_HIP_ROOM": {
+							"id": 244,
+							"name": "1ST_ROW_HIP_ROOM",
+							"value": "58.2"
 						},
 						"3RD_ROW_HEAD_ROOM": {
 							"id": 230,
 							"name": "3RD_ROW_HEAD_ROOM",
-							"value": "37.1"
+							"value": "38.0"
 						},
 						"1ST_ROW_HEAD_ROOM": {
 							"id": 243,
 							"name": "1ST_ROW_HEAD_ROOM",
-							"value": "40.7"
+							"value": "39.7"
 						},
 						"1ST_ROW_LEG_ROOM": {
 							"id": 245,
 							"name": "1ST_ROW_LEG_ROOM",
-							"value": "40.7"
+							"value": "40.9"
 						},
 						"2ND_ROW_HEAD_ROOM": {
 							"id": 247,
 							"name": "2ND_ROW_HEAD_ROOM",
-							"value": "39.4"
+							"value": "39.5"
+						},
+						"2ND_ROW_SHOULDER_ROOM": {
+							"id": 250,
+							"name": "2ND_ROW_SHOULDER_ROOM",
+							"value": "63.3"
+						},
+						"2ND_ROW_HIP_ROOM": {
+							"id": 248,
+							"name": "2ND_ROW_HIP_ROOM",
+							"value": "66.1"
 						},
 						"1ST_ROW_SHOULDER_ROOM": {
 							"id": 246,
 							"name": "1ST_ROW_SHOULDER_ROOM",
-							"value": "55.5"
+							"value": "64.4"
 						}
 					}
 				},
@@ -1471,7 +1202,7 @@ var mazda5_styles ={
 						"FINAL_DRIVE_RATIO": {
 							"id": 144,
 							"name": "FINAL_DRIVE_RATIO",
-							"value": "4.11"
+							"value": "4.31"
 						}
 					}
 				},
@@ -1489,11 +1220,6 @@ var mazda5_styles ={
 							"name": "1ST_ROW_FLOOR_MATS",
 							"value": "front floor mats"
 						},
-						"3RD_ROW_FLOOR_MATS": {
-							"id": 281,
-							"name": "3RD_ROW_FLOOR_MATS",
-							"value": "3rd row floor mats"
-						},
 						"2ND_ROW_FLOOR_MATS": {
 							"id": 295,
 							"name": "2ND_ROW_FLOOR_MATS",
@@ -1507,7 +1233,7 @@ var mazda5_styles ={
 						"READING_LIGHTS": {
 							"id": 294,
 							"name": "READING_LIGHTS",
-							"value": "front reading lights"
+							"value": "front and rear reading lights"
 						},
 						"FLOOR_MAT_MATERIAL": {
 							"id": 291,
@@ -1518,49 +1244,399 @@ var mazda5_styles ={
 				}
 			},
 			"configurableEquipment": [],
-			"regionRestrictions": {},
-			"typicallyEquippedSpecifications": [
-				{
-					"options": [
-						"200441909",
-						"200363193"
-					]
-				}
-			],
+			"regionRestrictions": {
+				"7816": [
+					{
+						"antecedent": {
+							"regionId": "7816",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7820": [
+					{
+						"antecedent": {
+							"regionId": "7820",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7823": [
+					{
+						"antecedent": {
+							"regionId": "7823",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7833": [
+					{
+						"antecedent": {
+							"regionId": "7833",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7834": [
+					{
+						"antecedent": {
+							"regionId": "7834",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7839": [
+					{
+						"antecedent": {
+							"regionId": "7839",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7849": [
+					{
+						"antecedent": {
+							"regionId": "7849",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7856": [
+					{
+						"antecedent": {
+							"regionId": "7856",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7877": [
+					{
+						"antecedent": {
+							"regionId": "7877",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7914": [
+					{
+						"antecedent": {
+							"regionId": "7914",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7915": [
+					{
+						"antecedent": {
+							"regionId": "7915",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7930": [
+					{
+						"antecedent": {
+							"regionId": "7930",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7931": [
+					{
+						"antecedent": {
+							"regionId": "7931",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7932": [
+					{
+						"antecedent": {
+							"regionId": "7932",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7933": [
+					{
+						"antecedent": {
+							"regionId": "7933",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7934": [
+					{
+						"antecedent": {
+							"regionId": "7934",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7936": [
+					{
+						"antecedent": {
+							"regionId": "7936",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7937": [
+					{
+						"antecedent": {
+							"regionId": "7937",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7938": [
+					{
+						"antecedent": {
+							"regionId": "7938",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7939": [
+					{
+						"antecedent": {
+							"regionId": "7939",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7962": [
+					{
+						"antecedent": {
+							"regionId": "7962",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"7982": [
+					{
+						"antecedent": {
+							"regionId": "7982",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8044": [
+					{
+						"antecedent": {
+							"regionId": "8044",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8072": [
+					{
+						"antecedent": {
+							"regionId": "8072",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8078": [
+					{
+						"antecedent": {
+							"regionId": "8078",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8090": [
+					{
+						"antecedent": {
+							"regionId": "8090",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8110": [
+					{
+						"antecedent": {
+							"regionId": "8110",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8139": [
+					{
+						"antecedent": {
+							"regionId": "8139",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				],
+				"8151": [
+					{
+						"antecedent": {
+							"regionId": "8151",
+							"type": "REGION"
+						},
+						"consequent": {
+							"type": "FEE"
+						},
+						"type": "REQUIRES"
+					}
+				]
+			},
+			"typicallyEquippedSpecifications": [],
 			"squishVins": [
 				{
-					"squishVin": "JM1CW2BLD0",
+					"squishVin": "5FNRL5H2DB",
 					"engineNames": [
-						"4INAG2.5"
+						"6NAG3.5"
 					],
-					"squishVinTransmissions": []
+					"squishVinTransmissions": [
+						{
+							"transmissionType": "AT",
+							"numberOfSpeeds": 5
+						}
+					]
 				}
 			],
 			"subModels": [
 				{
-					"id": 200442305,
+					"id": 200435573,
 					"identifier": "Minivan",
-					"name": "MAZDA5 Minivan",
+					"name": "Odyssey Minivan",
 					"ruleType": "body",
 					"styleIds": [
-						200441891,
-						200441890,
-						200441889,
-						200441892
+						200433271,
+						200433270,
+						200433269,
+						200433275,
+						200433274,
+						200433273,
+						200433272
 					],
 					"publicationStates": [
 						"NEW"
 					],
 					"submodelNewDefaultStyle": {
-						"link": "/api/vehicle/style/200441891"
+						"link": "/api/vehicle/style/200433273"
 					},
 					"submodelUsedDefaultStyle": {
-						"link": "/api/vehicle/style/200441890"
+						"link": "/api/vehicle/style/200433273"
 					}
 				}
 			],
-			"name": "Sport 4dr Minivan (2.5L 4cyl 6M)",
-			"niceName": "sport4drminivan25l4cyl6m",
+			"name": "LX 4dr Minivan (3.5L 6cyl 5A)",
+			"niceName": "lx4drminivan35l6cyl5a",
 			"publicationState": "NEW",
 			"makeShare": null
 		}
