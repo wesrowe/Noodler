@@ -73,7 +73,7 @@ $(document).ready( function() {
 					// the real action
 					var styleID_to_get = $(this).parent().attr( 'data-styleID' );
 					//console.log( styleID_to_get );
-					$.getJSON( 
+					$.getJSON(
 						'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 						styleID_to_get +
 						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
@@ -509,7 +509,7 @@ $(document).ready( function() {
 				'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
 			function ( styles ) {  // callback: populate trim_select
 				new_style_object = styles.styleHolder;
-				console.log( new_style_object );
+				//console.log( new_style_object );
 				// SORT trims using SO function, as I did with models -- test for baseMSRP listing, and then sort by it if it exists:
 				// test all style objects for msrp, not just [0].
 				var msrp_safe = true;
@@ -557,9 +557,9 @@ $(document).ready( function() {
 		newCar['color'] = getNextColor(); 
 		cars.push( newCar );
 		// call addCarData(car_object, car_counter_index)
-		var newcar_index = cars.length - 1; // what's array index of car just added
+		var newcar_index = cars.length - 1; // array index of car just added
 		addCarData( cars[ newcar_index ].styleObject, newcar_index );
-		// Add car to UI
+		// Add car to UI (key at left)
 		var trim_name = $( '#trim_select option:selected' ).html();
 		addCarToUI( newcar_index, trim_name );
 		//BEGIN REUSABLE CODE -- moved to addCarToUI
@@ -621,21 +621,14 @@ $(document).ready( function() {
 			.css( 'borderColor', newCar.color )
 			.appendTo( '#dynamic_car_display' )
 			.show(); */
-// END REUSABLE CODE		
+		// end reusable code		
 		// LOCAL STORAGE - add carName and trimName to car_to_storage, and store to local storage
-		var car_to_storage = {};
-		car_to_storage.carName = 
-			newCar.styleObject.makeName + ' ' + newCar.styleObject.modelName + ' ' + newCar.styleObject.year;
-		car_to_storage.trimName = $( '#trim_select option:selected' ).html();
-		car_to_storage.styleID = newCar.styleObject.id;
-		localStorage.setItem( next_ls_key, JSON.stringify( car_to_storage ) );
-		//console.log( JSON.parse( localStorage.getItem( next_ls_key ) ) );
-		next_ls_key++; // increment for next car added
+		saveCarToLocStorage( newcar_index );
 		
 		// PICKER RESET -- do this at end, so can capture info from pickers first
 		$( '#add_car_btn' ).attr( 'disabled', 'disabled' ); // 
 		pickerInit();
-		$( '#dynamic_picker .picker_title' ).click(); // closes the picker
+		$( '#dynamic_picker .picker_title' ).click(); // close the picker
 		// expand one section for beginners
 		if ( ( $( '.car_info_box.live' ).length == 1 ) && ( $( '.remembered_car.live' ).length == 0 ) ) {
 			$( '#section0_toggle' ).click();
@@ -658,91 +651,27 @@ $(document).ready( function() {
 	} 
 	*/
 	
-	function getNextColor() {
-		var next_color = colors[ next_color_index ]; // see raph_settings
-		next_color_index++; // increment for next time a color is called for
-		if ( next_color_index == colors.length ) { next_color_index = 0; } // wrap around to start of colors list
-		return next_color;
-	}
-	
-	
-	
-	
-/* ****** DEMO NOODLES ******* */
-	
-/* 	function loadDemoCar( demoStyleObject ) 
-	{
-		var newCar = {};
-		newCar['styleObject'] = demoStyleObject;
-		newCar['color'] = colors[next_color_index]; // see raph_settings
-		next_color_index++; // increment for next time a color is called for
-		//console.log( newCar );
-		cars.push( newCar );
-		var newcar_index = cars.length - 1;
-		// call addCarData(car_object, car_counter_index) to display data
-		addCarData( cars[ newcar_index ].styleObject, newcar_index );
-		// Add car to UI
-		addCarToUI( newcar_index, newCar.styleObject.name );
-	
-	}
-	// CALL loadDemoCar
-	loadDemoCar( odyssey_styles.styleHolder[0] );
-	
-	loadDemoCar( sienna_styles.styleHolder[0] );
-	
-	loadDemoCar( quest_styles.styleHolder[0] );
-	
-	loadDemoCar( mazda5_styles.styleHolder[0] );
-	
-	loadDemoCar( grandcaravan_styles.styleHolder[0] );
-	 */
-	
-	
-	/* var newCar0 = {};
-	var newcar_index = 0;
-	// FORESTER
-	newCar0['styleObject'] = forester_styles.styleHolder[0];
-	newCar0['color'] = colors[next_color_index]; // see raph_settings
-	next_color_index++; // increment for next time a color is called for
-	//console.log( newCar );
-	cars.push( newCar0 );
-	newcar_index = cars.length - 1;
-	// call addCarData(car_object, car_counter_index) to display data
-	addCarData( cars[ newcar_index ].styleObject, newcar_index );
-	// Add car to UI
-	addCarToUI( newcar_index, newCar0.styleObject.name );
-	
-	// ALTIMA
-	var newCar1 = {};
-	newCar1['styleObject'] = altima_styles.styleHolder[0];
-	newCar1['color'] = colors[next_color_index]; // see raph_settings
-	next_color_index++; // increment for next time a color is called for
-	//console.log( newCar1 );
-	cars.push( newCar1 );
-	newcar_index = cars.length - 1;
-	// call addCarData(car_object, car_counter_index) to display data
-	addCarData( cars[newcar_index].styleObject, newcar_index ); 
-	// Add car to UI
-	addCarToUI( newcar_index, 'Nissan Altima 2010' );
-	
-	// ACCORD
-	var newCar2 = {};
-	newCar2['styleObject'] = accord_styles.styleHolder[0];
-	newCar2['color'] = colors[next_color_index]; // see raph_settings
-	next_color_index++; // increment for next time a color is called for
-	//console.log( newCar );
-	cars.push( newCar2 );
-	newcar_index = cars.length - 1;
-	// call addCarData(car_object, car_counter_index)
-	addCarData( cars[newcar_index].styleObject, newcar_index ); 
-	// Add car to UI
-	addCarToUI( newcar_index, 'Honda Accord 2013' );
-		 */
-	
-	
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
+function saveCarToLocStorage( newcar_index )
+{
+	var newCar = cars[ newcar_index ];
+	var car_to_storage = {};
+	car_to_storage.carName = 
+		newCar.styleObject.makeName + ' ' + newCar.styleObject.modelName + ' ' + newCar.styleObject.year;
+	car_to_storage.trimName = newCar.styleObject.name;
+	car_to_storage.styleID = newCar.styleObject.id;
+	localStorage.setItem( next_ls_key, JSON.stringify( car_to_storage ) );
+	//console.log( JSON.parse( localStorage.getItem( next_ls_key ) ) );
+	next_ls_key++; // increment for next car added
+}
+function getNextColor() {
+	var next_color = colors[ next_color_index ]; // see raph_settings
+	next_color_index++; // increment for next time a color is called for
+	if ( next_color_index == colors.length ) { next_color_index = 0; } // wrap around to start of colors list
+	return next_color;
+}
 function addCarToUI( newcar_index, trim_name )
 {
 	/* var newCar = {};
@@ -877,7 +806,46 @@ function convertObjectToHtml( menus_object )
 		current_group = menus_object[i].vehicle_type;
 		
 	}
-	$( '#discover_area' ).slideDown();
+	$( '#discover_area' ).slideDown('slow');
+}
+// handler for selecting an EasyLoad style
+function setEasyloadHandlers() 
+{
+	$( '#discover_area select' ).change( function() {
+		var styleID_to_get = $( this ).find( 'option:selected' ).val();
+		console.log ( styleID_to_get );
+		$( this ).attr( 'disabled', 'disabled' );
+		var original_color = $( this ).css( 'color' ); // preserve for below
+		var that = $( this );
+		$( this ).css( 'color', '#777');
+		$.getJSON(
+			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
+			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
+			styleID_to_get +
+			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+			function ( data ) {  // callback: populate trim_select
+				//console.log( new_style_object );
+				// Create object to hold chosen style object and color, and add to cars[]
+				var newCar = {};
+				newCar['styleObject'] = data.styleHolder[0];
+				newCar['color'] = getNextColor(); 
+				cars.push( newCar );
+				// call addCarData(car_object, car_counter_index)
+				var newcar_index = cars.length - 1; // what's array index of car just added
+				addCarData( newCar.styleObject, newcar_index );
+				// Add car to UI
+				addCarToUI( newcar_index, newCar.styleObject.name );
+			// ADD CAR TO LOCAL STORAGE
+				saveCarToLocStorage( newcar_index ); // add to local storage
+				// remove disabled attr
+				$( '#discover_area select' )
+					.removeAttr( 'disabled' )
+					.css( 'color', original_color );
+				// reset dropdown
+				that.val('');
+			} // end getJSON callback
+		);
+	});
 }
 
 /* **** LAST-TO-LOAD SCRIPTS ****
@@ -887,6 +855,7 @@ $(window).bind("load", function() {
 	// generate EasyLoad dropdowns in Discover section 
 	$.getScript( '../chooser_objects/easyload_menu_object.js', function() {
 		convertObjectToHtml( easyload_menu_object );
+		setEasyloadHandlers();
 	});
 });
 
