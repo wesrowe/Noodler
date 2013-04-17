@@ -185,8 +185,8 @@ $(document).ready( function() {
 	cars = [];
 	// call load local storage cars
 	loadLocalStorageCars(); 
-	// generate EasyLoad dropdowns in Discover section 
-	convertObjectToHtml( easyload_menu_object );
+	
+	// convertObjectToHtml( easyload_menu_object );
 	
 	function containerShow()
 	{
@@ -877,8 +877,18 @@ function convertObjectToHtml( menus_object )
 		current_group = menus_object[i].vehicle_type;
 		
 	}
+	$( '#discover_area' ).slideDown();
 }
 
+/* **** LAST-TO-LOAD SCRIPTS ****
+ * load scripts here that are low-importance, or not needed right away.
+*/
+$(window).bind("load", function() {
+	// generate EasyLoad dropdowns in Discover section 
+	$.getScript( '../chooser_objects/easyload_menu_object.js', function() {
+		convertObjectToHtml( easyload_menu_object );
+	});
+});
 
 
 
