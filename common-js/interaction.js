@@ -180,13 +180,13 @@ $(document).ready( function() {
 	// create Axis and render them to screen
 	axesInit();
 	
-	
 	// CARS
 	// add data to Axes and render
 	cars = [];
 	// call load local storage cars
 	loadLocalStorageCars(); 
-	
+	// generate EasyLoad dropdowns in Discover section 
+	convertObjectToHtml( easyload_menu_object );
 	
 	function containerShow()
 	{
@@ -843,3 +843,42 @@ function loadPageSpecificDemo()
 $(window).bind('beforeunload', function(){
   return 'Are you done with your comparison?  If you do leave, the cars you added will be waiting for easy reload under "My Cars" (on the left console).';
 });
+// generate EasyLoad dropdowns from easyload_menu_object.js
+function convertObjectToHtml( menus_object )
+{
+	var current_group = ""; // initialize for first group
+	// build <select> elements
+	for ( var i = 0; i < menus_object.length; i++ ) {
+		// if current object IS NOT same vehicle_type as previous one, create a <select> element
+		if ( menus_object[i].vehicle_type != current_group ) {
+			$( '#discover_area' ).append(
+				$( '<select id=' + menus_object[i].vehicle_type + '>' + menus_object[i].vehicle_type + '</select>' )
+			);
+		}
+		// update current_group
+		current_group = menus_object[i].vehicle_type;
+	}
+	// build <option> lists
+	current_group = ""; // re-initialize for this time through
+	
+	for ( var i = 0; i < menus_object.length; i++ ) {
+	
+		if ( menus_object[i].vehicle_type != current_group ) {
+			$( '#discover_area #' + menus_object[i].vehicle_type ).append(
+				$( '<option value>' + menus_object[i].vehicle_type + '</option>' )
+			);
+		
+		} else {
+			$( '#discover_area #' + menus_object[i].vehicle_type ).append(
+				$( '<option value=' + menus_object[i].style_id + '>' + menus_object[i].make + ' ' + menus_object[i].model + '</option>' )
+			);
+		}
+		// update current_group
+		current_group = menus_object[i].vehicle_type;
+		
+	}
+}
+
+
+
+
