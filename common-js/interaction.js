@@ -661,7 +661,7 @@ function addCarToUI( newcar_index, trim_name )
 	new_section.find( '.car_name' )
 		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
 	new_section
-		.find( '.edmunds_link' )
+		.find( '.trim_level' ) //.find( '.edmunds_link' )
 		.html( trim_name ); 
 	// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
 	// commented link out b/c it doesn't serve any purpose and might send people to wrong place.
