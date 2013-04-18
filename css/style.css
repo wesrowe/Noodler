@@ -126,6 +126,7 @@ section#header {
 	.close_x:hover { opacity: 1; }
 /* DISCOVER CONTROLS */
 #discover_area {
+	position: relative;
 	background-color: #222;
 }
 	#discover_area h1 { margin: 0px; }
@@ -138,13 +139,17 @@ section#header {
 		cursor: pointer;
 	}
 	#discover_area  option { margin-top: 2px; }
-select.disc_list {
-	font-size: 16px;
-	width: 23%;
-	margin: 5px;
-	background-color: #333;
-	color: #fff;
+#load_demo_btn {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	margin: 3px;
+	padding: 4px;
+	color: #777;
+	border: solid 1px #777;
+	cursor: pointer;
 }
+	
 #tooltip {
 	position: fixed;
 	border: 3px solid #aaf;

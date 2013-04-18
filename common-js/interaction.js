@@ -108,55 +108,9 @@ $(document).ready( function() {
 			$( '<li>' + LS_helpful_tip + '</li>' )
 				.appendTo( '#remembered_cars_list' )
 				.show();
-			//DEMO STUFF
-			// display car picker briefly
-			setTimeout( function() {
-				$( '#dynamic_picker .picker_title' ).click(); 
-			}, 3500); 
-			setTimeout( function() {
-				$( '#dynamic_picker .picker_title' ).click(); 
-			}, 4500); // keep it out of the way for DEMO
-			setTimeout( function() {
-				$( '#demo_x_flasher' ).fadeIn(); 
-			}, 5500);
-			setTimeout( function() {
-				$( '#demo_x_flasher' ).fadeOut(); 
-			}, 6000);
-			setTimeout( function() {
-				$( '#demo_x_flasher' ).fadeIn(); 
-			}, 6500);
-			setTimeout( function() {
-				$( '#demo_x_flasher' ).fadeOut(); 
-			}, 7000);
-			
-			// show then hide the Demo annoucement
-			setTimeout( function() {
-				$( '#demo_announcement' ).fadeIn( 'slow' );
-			}, 500);
-			setTimeout( function() {
-				$( '#demo_announcement' ).fadeOut( 'slow' ); 
-			}, 3000); 
-			
-			// Expand a section for DEMO
-			setTimeout( function() {
-				$( '#section0_toggle' ).click(); 
-			}, 1000); 
-			// show hints to new users
-			setTimeout( function() { $( '#hints_btn' ).click(); }, 7000 ); 
-			
 			// load demo (function defined in page-specific js
 			loadPageSpecificDemo();
 			
-			/* loadDemoCar( odyssey_styles.styleHolder[0] );
-			
-			loadDemoCar( sienna_styles.styleHolder[0] );
-			
-			loadDemoCar( quest_styles.styleHolder[0] );
-			
-			loadDemoCar( mazda5_styles.styleHolder[0] );
-			
-			loadDemoCar( grandcaravan_styles.styleHolder[0] ); */
-		
 		} else { // default if they've been here before
 			// display local storage cars
 			setTimeout( function() {
@@ -634,6 +588,10 @@ $(document).ready( function() {
 			$( '#section0_toggle' ).click();
 		}
 	});
+	// DEMO button
+	$( '#load_demo_btn' ).click( function() {
+		loadPageSpecificDemo();
+	});
 	/*
 	$( '.add_stored_car_btn' ).click( function() {
 		// retrieve style object from API by ID#
@@ -701,19 +659,20 @@ function addCarToUI( newcar_index, trim_name )
 		);
 	// add car name and trim name
 	new_section.find( '.car_name' )
-		.html( newCar.styleObject.makeName + ' ' + newCar.styleObject.modelName + '<br/>' + newCar.styleObject.year );
+		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
 	new_section
 		.find( '.edmunds_link' )
 		.html( trim_name ); 
 	// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
-	var edmunds_url = 'http://www.edmunds.com/' + 
+	// commented link out b/c it doesn't serve any purpose and might send people to wrong place.
+	/* var edmunds_url = 'http://www.edmunds.com/' + 
 		newCar.styleObject.makeNiceName +
 		'/' + newCar.styleObject.modelNiceName +
 		'/' + newCar.styleObject.year +
 		'/features-specs.html?style=' +
 		newCar.styleObject.id;
 	new_section.find( '.edmunds_link' )
-		.attr( 'href', edmunds_url );
+		.attr( 'href', edmunds_url ); */
 	// add click listener for REMOVE button
 	new_section.find( '.delete_btn' )
 		.click( function() {
@@ -768,6 +727,40 @@ function loadPageSpecificDemo()
 	for ( var i = 0; i < demo_array.length; i++ ) {
 		loadDemoCar( demo_array[ i ].styleHolder[0] ); // demo_array[] defined in page-specific js
 	}
+	// display car picker briefly
+	setTimeout( function() {
+		$( '#dynamic_picker .picker_title' ).click(); 
+	}, 3500); 
+	setTimeout( function() {
+		$( '#dynamic_picker .picker_title' ).click(); 
+	}, 4500); // keep it out of the way for DEMO
+	setTimeout( function() {
+		$( '#demo_x_flasher' ).fadeIn(); 
+	}, 5500);
+	setTimeout( function() {
+		$( '#demo_x_flasher' ).fadeOut(); 
+	}, 6000);
+	setTimeout( function() {
+		$( '#demo_x_flasher' ).fadeIn(); 
+	}, 6500);
+	setTimeout( function() {
+		$( '#demo_x_flasher' ).fadeOut(); 
+	}, 7000);
+	
+	// show then hide the Demo annoucement
+	setTimeout( function() {
+		$( '#demo_announcement' ).fadeIn( 'slow' );
+	}, 500);
+	setTimeout( function() {
+		$( '#demo_announcement' ).fadeOut( 'slow' ); 
+	}, 3000); 
+	
+	// Expand a section for DEMO
+	setTimeout( function() {
+		$( '#section0_toggle' ).click(); 
+	}, 1000); 
+	// show hints to new users
+	setTimeout( function() { $( '#hints_btn' ).click(); }, 7000 ); 
 }
 // confirm user wants to close comparison
 $(window).bind('beforeunload', function(){
