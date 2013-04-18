@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<script src="d3.v2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<style>
+select { width: 100px; }
+
+</style>	
+
+<body>
+<h1>CSV to JSON object converter</h1>
+This page will load the CSV and spit out sample menus and the JSON object from which they were generated.<br/>
+Workflow:<br/>
+1) get CSV looking good.  Don't forget to sort by type, then make, then model.
+2) run this script (open this page).
+3) copy the JSON object into relevant file in Noodler/chooser_objects/.
+4) check JSON object for "?", encoding problems from excel.
+Selects only:
+<div id="selects_only"></div>
+Full Menus:
+<div id="main_div"></div>
+
+JSON object<br>
+
+<div id="json_obj" style="color:blue;">var easyload_menu_object = </div>
+
+<script>
+var output = '';
+
+/* THE d3 PART is only for generating STATIC menu object */
+d3.csv( "discover_menus_data_d3format.csv", function( csv_data ) {
+	// csv_data is supposed to be an array of objects
+	output = csv_data;
+	
+	convertObjectToHtml( csv_data );
+	var str = JSON.stringify( output ); 
+
+	$( '#json_obj' ).append( str );
+	
+	//console.log( output );// yep, it's an array of objects
+});
+
+/* This function will live in /common/ somewhere, probably interaction.js */
+function convertObjectToHtml( menus_object )
+{
+	//console.log( menus_object );
+
+	var current_group = ""; // initialize for first group
+	// build <select> elements
+	for ( var i = 0; i < menus_object.length; i++ ) {
+		// if current object IS NOT same vehicle_type as previous one, create a <select> element
+		if ( menus_object[i].vehicle_type != current_group ) {
+			$( '#selects_only' ).append(
+				$( '<select id=' + menus_object[i].vehicle_type + '></select>' )
+			);
+			$( '#main_div' ).append(
+				$( '<select id=' + menus_object[i].vehicle_type + '></select>' )
+			);
+		}
+		// update current_group
+		current_group = menus_object[i].vehicle_type;
+	}
+	// build <option> lists
+	current_group = ""; // re-initialize for this time through
+	
+	for ( var i = 0; i < menus_object.length; i++ ) {
+	
+		if ( menus_object[i].vehicle_type != current_group ) {
+			$( '#selects_only #' + menus_object[i].vehicle_type ).append(
+				$( '<option value>' + menus_object[i].vehicle_type + '</option>' )
+			);
+			$( '#main_div #' + menus_object[i].vehicle_type ).append(
+				$( '<option value>' + menus_object[i].vehicle_type + '</option>' )
+			);
+		
+		} else {
+			$( '#main_div #' + menus_object[i].vehicle_type ).append(
+				$( '<option>' + menus_object[i].make + ' ' + menus_object[i].model + '</option>' )
+			);
+		}
+		// update current_group
+		current_group = menus_object[i].vehicle_type;
+		
+	}
+	
+}
+
+
+
+</script>
+</body>

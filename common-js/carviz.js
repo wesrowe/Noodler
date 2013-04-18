@@ -880,6 +880,7 @@ var connector_highlight_settings =
 			var top_ax = axesAll[i][j-1];
 			var bott_ax = axesAll[i][j];
 			// draw a path (have to draw "backwards" (up) b/c forward dot doesn't exist yet
+			console.log ( cars );
 			var path_bottom_x = bott_ax.dots[cars_index].attr( 'cx' );
 			// var path_bottom_y = top_ax.dots[cars_index].attr( 'cy' );
 			var path_bottom_y = axis_margin_top + ( spread_max * ( bott_ax.index_in_sect - 1 ) );  // no spread for first real Axis

@@ -666,7 +666,8 @@ function saveCarToLocStorage( newcar_index )
 	//console.log( JSON.parse( localStorage.getItem( next_ls_key ) ) );
 	next_ls_key++; // increment for next car added
 }
-function getNextColor() {
+function getNextColor() 
+{
 	var next_color = colors[ next_color_index ]; // see raph_settings
 	next_color_index++; // increment for next time a color is called for
 	if ( next_color_index == colors.length ) { next_color_index = 0; } // wrap around to start of colors list
@@ -831,18 +832,18 @@ function setEasyloadHandlers()
 				newCar['color'] = getNextColor(); 
 				cars.push( newCar );
 				// call addCarData(car_object, car_counter_index)
-				var newcar_index = cars.length - 1; // what's array index of car just added
+				var newcar_index = cars.length - 1; // array index of added car
 				addCarData( newCar.styleObject, newcar_index );
 				// Add car to UI
 				addCarToUI( newcar_index, newCar.styleObject.name );
-			// ADD CAR TO LOCAL STORAGE
+				// add car to local storage
 				saveCarToLocStorage( newcar_index ); // add to local storage
 				// remove disabled attr
 				$( '#discover_area select' )
 					.removeAttr( 'disabled' )
 					.css( 'color', original_color );
-				// reset dropdown
-				that.val('');
+				
+				that.val(''); // reset dropdown
 			} // end getJSON callback
 		);
 	});
