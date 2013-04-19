@@ -1,0 +1,409 @@
+@charset "utf-8";
+@import url("typography.css");
+/* Simple fluid media
+   Note: Fluid media requires that you remove the media's height and width attributes from the HTML
+   http://www.alistapart.com/articles/fluid-images/ 
+*/
+img, object, embed, video {
+	max-width: 100%;
+}
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+	width:100%;
+}
+
+/*
+	Dreamweaver Fluid Grid Properties
+	----------------------------------
+	dw-num-cols-mobile:		6;
+	dw-num-cols-tablet:		8;
+	dw-num-cols-desktop:	11;
+	dw-gutter-percentage:	12;
+	
+	Inspiration from "Responsive Web Design" by Ethan Marcotte 
+	http://www.alistapart.com/articles/responsive-web-design
+	
+	and Golden Grid System by Joni Korpi
+	http://goldengridsystem.com/
+*/
+
+/* Mobile Layout: 480px and below. */
+
+.gridContainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 98%;
+	padding-left: 0.9749%;
+	padding-right: 0.9749%;
+}
+#container { }
+#header {
+	clear: both;
+	float: left;
+	margin: 0 auto;
+	width: 100%;
+	display: block;
+	background-color:#000;
+}
+#article {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+	margin-top: 30px;
+}
+#footer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#hook {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#title {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#left_img,
+#right_img,
+#good_bad_img {
+	margin-top: 15px;
+}
+#left_img {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 25%;
+	display: block;
+}
+#good_bad_img {
+	clear: none;
+	float: left;
+	margin-left: 2.1897%;
+	width: 40%;
+	display: block;
+	margin-bottom:20px;
+}
+#right_img {
+	clear: none;
+	float: left;
+	margin-left: 2.1897%;
+	width: 25%;
+	display: block;
+}
+#right_img img {
+	-moz-box-shadow: 1px 3px 10px 2px #000;
+	-webkit-box-shadow: 1px 3px 10px 2px #000;
+	box-shadow: 1px 3px 10px 2px #000;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000')";
+}
+#main_graphic {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+.feature {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.text_right {
+	padding-left: 20px;
+	padding-right: 20px;
+	
+}
+.text_left {
+	padding-right:20px;
+	padding-left:20px;
+}
+#arithmetic {
+	background: url(images/outlier2.png) center top  scroll no-repeat;
+	padding-top: 190px;
+}
+#save_time {
+	background: url(images/Ford_truck_length_composite.png) center top scroll no-repeat;
+	padding-top: 100px;
+}
+#compare_more {
+	background:url(images/so_many_at_once.png) center top  scroll no-repeat;
+	padding-top: 240px;
+}
+#drill_down {
+	background:url(images/collapsed+expanded_large.png) center top scroll no-repeat;
+	padding-top: 300px;
+}
+#car_you_know {
+	background:url(images/familiar_car.png) center top scroll no-repeat;
+	padding-top: 140px;
+}
+#take_with {
+	background:url(images/mobile_noodle_300w.png) center top scroll no-repeat;
+	padding-top: 130px;
+}
+#explore {
+	background:url(images/pulldowns.png) center top scroll no-repeat;
+	padding-top: 110px;
+}
+.demos {
+	text-align: center;
+	padding: 10px 0px;
+}
+.demos a {
+	text-decoration: none;
+	width: 20%;
+	padding: 5px 1%;
+	margin: 0 1%;
+	display: inline-block;
+	
+}
+#demos_row_1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#demos_row_2 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+
+/* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 481px) {
+.gridContainer {
+	width: 97%;
+	padding-left: 0.6227%;
+	padding-right: 0.6227%;
+}
+#header {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#article {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#good-vs-bad {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#footer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#hook {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#title {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#left_img {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 36.6515%;
+	display: block;
+}
+#good_bad_img {
+	clear: none;
+	float: left;
+	margin-left: 1.3574%;
+	width: 23.9819%;
+	display: block;
+}
+#right_img {
+	clear: none;
+	float: left;
+	margin-left: 1.3574%;
+	width: 36.6515%;
+	display: block;
+}
+#main_graphic {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+.text_right {
+	padding-left: 320px;
+	padding-right: 0px;
+	
+}
+.text_left {
+	padding-right:320px;
+	padding-left:0px;
+}
+.feature {
+	
+}
+
+
+#arithmetic {
+	background-position: left center;
+	padding-top: 10px;
+}
+#save_time {
+	background-position: right center;
+	padding-top: 10px;
+}#compare_more {
+	background-position: left center;
+	padding-top: 10px;
+}
+#drill_down {
+	background-position: right center;
+	padding-top: 10px;
+}
+#car_you_know {
+	background-position: left center;
+	padding-top: 10px;
+}
+#take_with {
+	background-position: right center;
+	padding-top: 10px;
+}
+#explore {
+	background-position: left center;
+	padding-top: 10px;
+}
+
+
+
+} /* end 768px-max-width
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 769px) {
+.gridContainer {
+	width: 89.1964%;
+	max-width: 900px;
+	padding-left: 0.4017%;
+	padding-right: 0.4017%;
+	margin: auto;
+}
+#LayoutDiv1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#header {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#article {
+	clear: both;
+	float: left;
+	margin-left: 9.1803%;
+	width: 81.6393%;
+	display: block;
+}
+#good-vs-bad {
+	clear: none;
+	float: left;
+	margin-left: 0.9009%;
+	width: 100%;
+	display: block;
+}
+#footer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#hook {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#title {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#left_img {
+	clear: both;
+	float: left;
+	margin-left: 9.1803%;
+	width: 26.5573%;
+	display: block;
+}
+#good_bad_img {
+	clear: none;
+	float: left;
+	margin-left: 0.9836%;
+	width: 26.5573%;
+	display: block;
+}
+#right_img {
+	clear: none;
+	float: left;
+	margin-left: 0.9836%;
+	width: 26.5573%;
+	display: block;
+}
+
+.text_right {
+	padding-left: 350px;
+	padding-right: 10px;
+	
+}
+.text_left {
+	padding-right:350px;
+	padding-left:10px;
+}
+.feature {
+	
+}
+
+
+
+
+
+}  /* end Desktop */
