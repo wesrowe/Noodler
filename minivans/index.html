@@ -42,13 +42,16 @@
 		
 		<section id="header">
 			
-			<img id="main_logo" src="../images/NoodlerLogo1.png" alt="Noodler Visual Car Comparison Engine" Title="Noodler Logo">
+			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Car Compare Home" title="Noodler Car Compare Home"><img id="main_logo" src="../images/NoodlerLogo1.png" alt="Noodler Visual Car Comparison Engine" Title="Noodler Car Compare Home"></a>
+			<ul id="tabs">
+				<li id="hints_btn">HINTS</li>
+				<li id="discover_btn">DISCOVER</li>
+			</ul>
 			<div id="demo_announcement">
 				<h1>A Demo has loaded for you.</h1>
 				<h2>Customize your comparison at left by <span class="add_car_color">adding new cars</span> and deleting ones you don't want.</h2>
 			</div>
-			<div id="demo_x_flasher">X</div>
-			<div id="helpful_hints_container">
+			<!-- <div id="helpful_hints_container">
 				<p id="hints_btn">HINTS</p>
 				<div id="hints">
 					<p class="close_x">CLOSE X</p>
@@ -62,7 +65,7 @@
 						<li>Use the color-key tiles to highlight, or click link for the full Edmunds.com page about that car.</li>
 					</ol>
 				</div>
-			</div>
+			</div> -->
 			<!-- <div id="fb_share">
 					<div id="sharer">Share on <img src="../images/facebook.png" alt="Share on Facebook"/></div>
 						<script>
@@ -88,7 +91,8 @@
 			</div>
 		<section id="left_bar">
 			<div id="outside_left_mask"></div>
-			
+			<div id="demo_x_flasher">X</div>
+		
 			<div id="dynamic_picker">
 				<!-- <p class="close_handle">&lt; &lt; &lt; CLOSE &lt; &lt; &lt;</p> --> 
 				<div class="picker_title">
@@ -146,9 +150,24 @@
 			<!-- <p>Lots of products can be Noodled. Have an idea? Get in touch!<br/>wes [at] wesrowe [dot] net</p> -->
 			</div>
 		</section>
-		
+			
 		<div id="content_area">
 		
+			<div id="helpful_hints_container">
+				<div id="hints">
+					<p class="close_x">CLOSE X</p>
+					<h3>Helpful hints:</h3>
+					<ol>
+						<li>Pick a car you know well as a baseline.</li>
+						<li>Note that left doesn't necessarily mean a smaller number, such as when less is more.</li>
+						<li>Expand sections you're interested in to drill down.</li>
+						<li>You <em>can</em> take it with you &ndash; Noodler is the only car comparison that's useful on a mobile screen.</li>
+						<li>Your device will remember cars you've noodled before, look for them under "Previous Noodles" next time.</li>
+						<li>Use the color-key tiles to highlight, or click link for the full Edmunds.com page about that car.</li>
+					</ol>
+				</div>
+			</div>
+			
 			<div style="display: none;" id="discover_area">
 				
 				<h1>Discover...</h1>

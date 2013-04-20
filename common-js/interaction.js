@@ -219,11 +219,19 @@ $(document).ready( function() {
 	// Helpful hints controls
 	$( '#hints_btn' ).toggle( 
 		function() {
-			$( '#hints' ).slideDown();
-		}, function() {
 			$( '#hints' ).slideUp();
-	});
-	
+		}, function() {
+			$( '#hints' ).slideDown();
+		}
+	);
+	// Discover control
+	$( '#discover_btn' ).toggle( 
+		function() {
+			$( '#discover_area' ).slideUp();
+		}, function() {
+			$( '#discover_area' ).slideDown();
+		}
+	);
 	$( '#hints .close_x' ).click( function() {
 		$( '#hints_btn' ).click();
 	});
@@ -760,7 +768,8 @@ function loadPageSpecificDemo()
 		$( '#section0_toggle' ).click(); 
 	}, 1000); 
 	// show hints to new users
-	setTimeout( function() { $( '#hints_btn' ).click(); }, 7000 ); 
+	/* ACTUALLY, PUT THE HIDE HINTS CODE FOR NON-FIRST-TIMERS*/
+	// setTimeout( function() { $( '#hints_btn' ).hide(); }, 7000 ); 
 }
 // confirm user wants to close comparison
 $(window).bind('beforeunload', function(){
