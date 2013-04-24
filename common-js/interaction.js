@@ -31,22 +31,21 @@ $(document).ready( function() {
 	next_ls_key = 1;
 		// BUGGY CODE -- this method would eventually break, as it leaves gaps behind, eventually user's LS keys would reach 100 (or any number) and it would stop finding newly stored cars.  BETTER: cruise LS keys looking for gaps, and find next open spot when incrementing (order not a big deal, I'm planning to sort alphabetically anyway).
 	
-	/* function loadDemoCar( demoStyleObject ) 
-	{
-		var newCar = {};
-		newCar['styleObject'] = demoStyleObject;
-		newCar['color'] = colors[next_color_index]; // see raph_settings
-		next_color_index++; // increment for next time a color is called for
-		//console.log( newCar );
-		cars.push( newCar );
-		var newcar_index = cars.length - 1;
-		// call addCarData(car_object, car_counter_index) to display data
-		addCarData( cars[ newcar_index ].styleObject, newcar_index );
-		// Add car to UI
-		addCarToUI( newcar_index, newCar.styleObject.name );
-	
+	// QUERY STRING parsing
+	var query_params = getUrlVars();
+	console.log(query_params );
+	if ( query_params[ 'demo' ] != undefined ) {
+		var chosen_demo = query_params[ 'demo' ];
+		var demo_js_url = "common-js/" + chosen_demo + '.js';
+		console.log( "demo-load string found");
+		$.getScript( demo_js_url, function() { // file located in common-js too
+			console.log("demo loaded callback fired");
+			loadPageSpecificDemo();
+		});
 	}
-	 */	
+	
+	
+	
 	function loadLocalStorageCars() // & set storage_empty
 	{
 		var storage_empty = true;
@@ -109,7 +108,7 @@ $(document).ready( function() {
 				.appendTo( '#remembered_cars_list' )
 				.show();
 			// load demo (function defined in page-specific js
-			loadPageSpecificDemo();
+			// loadPageSpecificDemo();
 			
 		} else { // default if they've been here before
 			// display local storage cars
@@ -600,6 +599,7 @@ $(document).ready( function() {
 	$( '#load_demo_btn' ).click( function() {
 		loadPageSpecificDemo();
 	});
+	
 	/*
 	$( '.add_stored_car_btn' ).click( function() {
 		// retrieve style object from API by ID#
@@ -715,6 +715,7 @@ function addCarToUI( newcar_index, trim_name )
 		.appendTo( '#dynamic_car_display' )
 		.show();
 }
+/* DEMOS */
 function loadDemoCar( demoStyleObject ) 
 {
 	var newCar = {};
@@ -771,7 +772,23 @@ function loadPageSpecificDemo()
 	/* ACTUALLY, PUT THE HIDE HINTS CODE FOR NON-FIRST-TIMERS*/
 	// setTimeout( function() { $( '#hints_btn' ).hide(); }, 7000 ); 
 }
-// confirm user wants to close comparison
+// QUERY STRINGS-- 
+// Read a page's GET URL variables and return them as an associative array. (from SO 4656843)
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+
+// CONFIRM user wants to close comparison
 $(window).bind('beforeunload', function(){
   return 'Are you done with your comparison?  If you do leave, the cars you added will be waiting for easy reload under "My Cars" (on the left console).';
 });
