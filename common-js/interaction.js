@@ -33,7 +33,7 @@ $(document).ready( function() {
 	
 	// QUERY STRING parsing
 	var query_params = getUrlVars();
-	console.log(query_params );
+	// load demo from url
 	if ( query_params[ 'demo' ] != undefined ) {
 		var chosen_demo = query_params[ 'demo' ];
 		var demo_js_url = "common-js/" + chosen_demo + '.js';
@@ -43,7 +43,15 @@ $(document).ready( function() {
 			loadPageSpecificDemo();
 		});
 	}
-	
+	// load demo from select dropdown
+	$( '#load_demo_btn' ).change( function() {
+		var chosen_demo = $( '#load_demo_btn option:selected' ).val();
+		var demo_js_url = "common-js/" + chosen_demo + '.js';
+		$.getScript( demo_js_url, function() { // file located in common-js too
+			console.log("demo loaded callback fired");
+			loadPageSpecificDemo();
+		});
+	});
 	
 	
 	function loadLocalStorageCars() // & set storage_empty
@@ -231,6 +239,10 @@ $(document).ready( function() {
 			$( '#discover_area' ).slideDown();
 		}
 	);
+	$( '#discover_area .close_x' ).click( function() {
+		$( '#discover_btn' ).click();
+	});
+	// Hints control
 	$( '#hints .close_x' ).click( function() {
 		$( '#hints_btn' ).click();
 	});
@@ -595,10 +607,7 @@ $(document).ready( function() {
 			$( '#section0_toggle' ).click();
 		}
 	});
-	// DEMO button
-	$( '#load_demo_btn' ).click( function() {
-		loadPageSpecificDemo();
-	});
+	
 	
 	/*
 	$( '.add_stored_car_btn' ).click( function() {
@@ -801,7 +810,7 @@ function convertObjectToHtml( menus_object )
 		// if current object IS NOT same vehicle_type as previous one, create a <select> element
 		if ( menus_object[i].vehicle_type != current_group ) {
 			$( '#discover_area' ).append(
-				$( '<select id=' + menus_object[i].vehicle_type + '>' + menus_object[i].vehicle_type + '</select>' )
+				$( '<select class="easy_loader" id=' + menus_object[i].vehicle_type + '>' + menus_object[i].vehicle_type + '</select>' )
 			);
 		}
 		// update current_group
@@ -831,7 +840,7 @@ function convertObjectToHtml( menus_object )
 // handler for selecting an EasyLoad style
 function setEasyloadHandlers() 
 {
-	$( '#discover_area select' ).change( function() {
+	$( '#discover_area select.easy_loader' ).change( function() {
 		var styleID_to_get = $( this ).find( 'option:selected' ).val();
 		console.log ( styleID_to_get );
 		$( this ).attr( 'disabled', 'disabled' );
@@ -873,7 +882,9 @@ function setEasyloadHandlers()
 */
 $(window).bind("load", function() {
 	// generate EasyLoad dropdowns in Discover section 
-	$.getScript( '../chooser_objects/easyload_menu_object.js', function() {
+	console.log( 'window load fired' );
+	$.getScript( 'chooser_objects/easyload_menu_object.js', function() {
+		console.log('menu object loaded');
 		convertObjectToHtml( easyload_menu_object );
 		setEasyloadHandlers();
 	});

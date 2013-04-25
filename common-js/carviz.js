@@ -817,9 +817,9 @@ var connector_highlight_settings =
 						// bind data() for tooltip to dot -- this worked!
 						new_dot.data( 'myAxis', current_axis );
 						// add HOVER handlers
-						new_dot.hover( function() {
+						new_dot.hover( function( event ) {
 							this.toFront();
-							showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index ); // -- pass in section index (start at 1), true means include data in tooltip, and pass in Axis dot lives in.
+							showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- pass in section index (start at 1), true means include data in tooltip, and pass in Axis dot lives in.
 							highlightCar( cars_index ); // 
 						}, function() {
 							hideTooltip();
@@ -854,9 +854,9 @@ var connector_highlight_settings =
 					.attr( {"fill": cars[ cars_index ]['color'] } );
 				// Separate HOVER treatment
 				agg_dot.hover( 
-					function() {
+					function( event ) {
 						this.toFront();
-						showTooltip( cars[cars_index] ); 
+						showTooltip( cars[cars_index], false, null, null, event ); 
 						highlightCar( cars_index );  
 					}, 
 					function() {
@@ -906,9 +906,9 @@ var connector_highlight_settings =
 				new_connector.attr( { 'opacity': 0 } );
 			}
 			// add HOVER handlers
-			new_connector.hover( function() {
+			new_connector.hover( function( event ) {
 				this.toFront();
-				showTooltip( cars[cars_index] ); 
+				showTooltip( cars[cars_index], false, null, null, event ); 
 				highlightCar( cars_index );  
 			}, function() {
 				hideTooltip();
@@ -994,7 +994,7 @@ var connector_highlight_settings =
 		}
 	}
 	
-	function showTooltip( current_car, isDataDot, axisOfDataDot, cars_index )  
+	function showTooltip( current_car, isDataDot, axisOfDataDot, cars_index, event )  
 	{  // isDataDot is boolean, indicates to display data
 		var vscroll = (document.all ? document.scrollTop : window.pageYOffset);
 		
@@ -1011,7 +1011,7 @@ var connector_highlight_settings =
 			}
 			$( '<div id="tooltip"></div>' ).css( {
 				border: '2px solid ' + current_car.color,
-				top: (/* vscroll +  */event.clientY) + 'px', // used fixed pos. instead
+				top: event.clientY + 'px', 
 				left: (event.clientX + 20) + 'px',
 			})
 			.html( tt_text )
