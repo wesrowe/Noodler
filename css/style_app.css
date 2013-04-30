@@ -105,7 +105,9 @@ ul#tabs li {
 	opacity: .6;
 }
 	ul#tabs li:hover { opacity: 1; }
+/* HINTS block */
 #hints {
+	font-size: 16px;
 	padding: 10px;
 	background-color: #555;
 	opacity: .9;
@@ -114,18 +116,34 @@ ul#tabs li {
 	-webkit-transition: opacity 300ms; /* Safari and Chrome */
 	-o-transition: opacity 300ms; /* Opera */
 }
+#hints h3 { margin-top: 0px; }
 	#hints:hover { opacity: 1; }
-	#hints li { 
-		color: #fff; 
-		margin-bottom: 3px;
+#hints li { 
+	color: #fff; 
+	margin-bottom: 3px;
+}
+#want_more_devices {
+	cursor: pointer;
+	color: #8bf;
+}
+	#want_more_devices:hover {
+		color: #acf;
 	}
-	.close_x { 
-		position: absolute;
-		top: 3px;
-		right: 100px;
-		opacity: .6;
-		cursor: pointer;
-	}
+#working_on_it {
+	display: none;
+	margin-left: 100px;
+	color: #8bf;
+	font-size: 1.6em;
+}
+.close_x { 
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	margin: 0px;
+	opacity: .6;
+	cursor: pointer;
+	font-size: 12px;
+}
 	.close_x:hover { opacity: 1; }
 /* DISCOVER CONTROLS */
 #discover_area {
@@ -143,15 +161,15 @@ ul#tabs li {
 		width: 20%; 
 		margin: 5px 2%;
 		cursor: pointer;
+		border: solid 1px #777;
 	}
 	#discover_area  option { margin-top: 2px; }
-#load_demo_btn {
+#discover_area select#load_demo_btn {
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	margin: 3px;
-	color: #777;
-	border: solid 1px #777;
+	color: #8bf;
 	cursor: pointer;
 }
 	
@@ -188,7 +206,8 @@ section#left_bar {
 }
 #remembered_cars_container li {
 	color: #ddd;
-}	
+}
+#remembered_cars_container .title_span { color: #8bf; }
 #picker_expander_btn {
 	cursor: pointer;
 	color: #ff9;
@@ -352,7 +371,12 @@ img#edmunds_credit {
 	width: 550px;
 	/* padding-left: 200px; */
 	z-index: 6;
+}
+.shadowed { /* add to anything that needs standard shadow, such as pickers */
 	text-align: left;
+	-moz-box-shadow: 1px 3px 10px 2px #000;
+	-webkit-box-shadow: 1px 3px 4px 2px #000;
+	box-shadow: 1px 3px 4px 2px #000;
 }
 #remembered_cars_container .picker_title { margin-right: 0px; }
 #remembered_cars_container .picker_title:hover { background-color: #444; }
@@ -538,6 +562,6 @@ img#edmunds_credit {
 		opacity: 1;
 		cursor: default;
 	}
-		
-
+/* GENERAL TYPOGRAPHY */	
+.blue { color: #8bf; font-weight: bold; font-size: 1.2em; }
 

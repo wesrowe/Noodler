@@ -83,7 +83,7 @@ $(document).ready( function() {
 					$.getJSON(
 						'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 						styleID_to_get +
-						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=full_json&callback=?', 
 						function ( data ) {  // callback: populate trim_select
 							//console.log( new_style_object );
 							// Create object to hold chosen style object and color, and add to cars[]
@@ -155,7 +155,8 @@ $(document).ready( function() {
 		$( '#remembered_cars_container' ).animate(
 			{
 				'left': '0px'
-			}, 300);
+			}, 300)
+			.addClass( 'shadowed' );
 	}
 	function containerHide()
 	{
@@ -163,7 +164,7 @@ $(document).ready( function() {
 			{
 				'left': '-350px'
 			}, 300, function() {
-				/* $( '#remembered_cars_mask' ).hide(); */
+				$( this ).removeClass( 'shadowed' );
 			});
 	}
 	$( '#remembered_cars_container .picker_title' ).toggle( 
@@ -178,7 +179,8 @@ $(document).ready( function() {
 		$( '#dynamic_picker' ).animate(
 			{
 				'left': '0px'
-			}, 300);
+			}, 300)
+			.addClass( 'shadowed' );
 		if ( $( '#remembered_cars_container' ).css( 'left' ) == '0px' ) {
 			$( '#remembered_cars_container .picker_title' ).click();
 		}
@@ -189,7 +191,7 @@ $(document).ready( function() {
 			{
 				'left': '-350px' //'' + (-1 * $( '#dynamic_picker' ).width ) + 'px'
 			}, 300, function() {
-				/* $( '#picker_mask' ).hide(); */
+				$( this ).removeClass( 'shadowed' );
 			});
 	}
 
@@ -245,6 +247,9 @@ $(document).ready( function() {
 	// Hints control
 	$( '#hints .close_x' ).click( function() {
 		$( '#hints_btn' ).click();
+	});
+	$( '#want_more_devices' ).click( function() {
+		$( '#working_on_it' ).show( 300 );
 	});
 	// spread adjusters ( aka "zoom" )
 	$( '.bigger' ).click( function() {
@@ -479,7 +484,7 @@ $(document).ready( function() {
 				chosen_model +
 				'&year=' +
 				chosen_year +
-				'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+				'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=full_json&callback=?', 
 			function ( styles ) {  // callback: populate trim_select
 				new_style_object = styles.styleHolder;
 				//console.log( new_style_object );
@@ -650,14 +655,6 @@ function getNextColor()
 }
 function addCarToUI( newcar_index, trim_name )
 {
-	/* var newCar = {};
-	newCar['styleObject'] = new_style_object[ chosen_trim_index ];
-	newCar['color'] = getNextColor(); 
-	cars.push( newCar );
-	// call addCarData(car_object, car_counter_index)
-	var newcar_index = cars.length - 1; // what's array index of car just added
-	addCarData( cars[ newcar_index ].styleObject, newcar_index ); 
-	 */
 	// CLONE AND POPULATE CAR INFO BOX
 	var newCar = cars[ newcar_index ];
 	var new_section = $('#dynamic_car_display .template')
@@ -678,7 +675,7 @@ function addCarToUI( newcar_index, trim_name )
 	new_section.find( '.car_name' )
 		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
 	new_section
-		.find( '.edmunds_link' )
+		.find( '.edmunds_link' ) // note: despite class name, no longer a link
 		.html( trim_name ); 
 	// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
 	// commented link out b/c it doesn't serve any purpose and might send people to wrong place.

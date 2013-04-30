@@ -298,7 +298,7 @@ var connector_highlight_settings =
 			}
 			
 		}, // next section
-		"Eco": {
+		"MPG": {
 			"CURB_WEIGHT": {
 				"label": "Curb Weight",
 				"minvalue": "7000",
@@ -363,19 +363,8 @@ var connector_highlight_settings =
 				},
 				"parent": "Price"
 			},
-			"DEALER_INVOICE": {
-				"label": "Invoice New",
-				"minvalue": "0",
-				"maxvalue": "150000",
-				"units": "dollars",
-				"dataKeys": {
-					"attributeGroup": "PRICING",
-					"attributes": "DEALER_INVOICE"
-				},
-				"parent": "Price"
-			},
 			"USED_TMV_RETAIL": {
-				"label": "TMV Retail (Edmunds)",
+				"label": "Used Retail (Edmunds)",
 				"minvalue": "0",
 				"maxvalue": "150000",
 				"units": "dollars",
@@ -384,20 +373,31 @@ var connector_highlight_settings =
 					"attributes": "USED_TMV_RETAIL"
 				},
 				"parent": "Price"
-			},
-			"USED_TMV_TRADE_IN": {
-				"label": "TMV Trade-in (Edmunds)",
-				"minvalue": "0",
-				"maxvalue": "150000",
-				"units": "dollars",
-				"dataKeys": {
-					"attributeGroup": "PRICING",
-					"attributes": "USED_TMV_TRADE_IN"
-				},
-				"parent": "Price"
 			}
 		},
 		"Performance": {
+			"TORQUE": {
+				"label": "Torque",
+				"minvalue": "0",
+				"maxvalue": "300",
+				"units": "ft-lb",
+				"dataKeys": {
+					"attributeGroup": "ENGINE",
+					"attributes": "TORQUE"
+				},
+				"parent": "Performance"
+			},
+			"HORSEPOWER": {
+				"label": "Horsepower",
+				"minvalue": "0",
+				"maxvalue": "400",
+				"units": "HP",
+				"dataKeys": {
+					"attributeGroup": "ENGINE",
+					"attributes": "HORSEPOWER"
+				},
+				"parent": "Performance"
+			},
 			"MANUFACTURER_0_60MPH_ACCELERATION_TIME_(SECONDS)": {
 				"label": "Acceleration 0-60",
 				"minvalue": "20",

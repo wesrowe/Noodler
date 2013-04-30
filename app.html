@@ -11,7 +11,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.noodlercompare.com"/>
     <meta property="og:image" content="http://www.noodlercompare.com/images/NoodlerClose-up_sq.png"/>
-    <meta property="og:site_name" content="Noodler Car Compare"/>
+    <meta property="og:site_name" content="Noodler Vehicle Compare"/>
     <meta property="og:description"
           content="Noodler makes vehicle comparison fun! See similarities and differences at a glance. Data from Edmunds.com, the highly reputable research site."/>
 	
@@ -41,7 +41,7 @@
 		
 		<section id="header">
 			
-			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Car Compare Home" title="Noodler Car Compare Home"><img id="main_logo" src="images/NoodlerLogo1.png" alt="Noodler Visual Car Comparison Engine" Title="Noodler Car Compare Home"></a>
+			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Vehicle Compare Home" title="Noodler Vehicle Compare Home"><img id="main_logo" src="images/NoodlerLogo_vehicles_475x100.png" alt="Noodler Visual Vehicle Comparison Engine" Title="Noodler Vehicle Compare Home"></a>
 			<ul id="tabs">
 				<li id="hints_btn">HINTS</li>
 				<li id="discover_btn">DISCOVER</li>
@@ -71,7 +71,7 @@
 				<!-- <p class="close_handle">&lt; &lt; &lt; CLOSE &lt; &lt; &lt;</p> --> 
 				<div class="picker_title">
 					<span class="picker_close_arrows"></span>
-					<span class="title_span">Add a Car</span>
+					<span class="title_span">Add a Vehicle</span>
 					<!-- <span class="picker_x">X</span> -->
 					
 				</div>
@@ -88,14 +88,14 @@
 					<select disabled="disabled" id="trim_select" name="trim" disabled="disabled">
 						<option value>Select Trim</option>
 					</select>
-					<button id="add_car_btn" disabled="disabled">Add Car</button>
+					<button id="add_car_btn" disabled="disabled">Add Vehicle</button>
 					<div class="loading_mask"></div>
 				</div>
 			</div>
 			<div id="remembered_cars_container">
 					<div class="picker_title">
 						<span class="picker_close_arrows"></span>
-						<span class="title_span">My Cars</span>
+						<span class="title_span">My Rides</span>
 						<!-- <span class="picker_x">X</span> -->
 					</div>
 					<ul id="remembered_cars_list">
@@ -112,13 +112,13 @@
 				<ul id="dynamic_car_display"> <!-- the color-keyed boxes identifying cars -->
 					<li class="template car_info_box" style="display:none">
 						<h3 class="car_name"></h3>
-						<p class="trim_level"><a class="edmunds_link" title="Click for Edmunds.com specs page for this car" target="_blank"></a></p>
+						<p class="trim_level"><a class="edmunds_link" title="Click for Edmunds.com specs page for this vehicle" target="_blank"></a></p>
 						<div class="delete_btn">X</div>
 					</li>
 				</ul>
-				<a href="http://www.jdoqocy.com/click-7024258-10364260" target="_blank" onmouseover="window.status='http://www.edmunds.com';return true;" onmouseout="window.status=' ';return true;">
+				<!-- <a href="http://www.jdoqocy.com/click-7024258-10364260" target="_blank" onmouseover="window.status='http://www.edmunds.com';return true;" onmouseout="window.status=' ';return true;">
 					<img src="http://www.tqlkg.com/image-7024258-10364260" width="125" height="125" alt="Search for your next car or truck at Edmunds.com" border="0"/>
-				</a>
+				</a> -->
 				<a href="http://www.edmunds.com/" target="_new"><img id="edmunds_credit" src="images/edmunds_api150x30vb.png" title="Data provided by Edmunds.com" alt="Data via the Edmunds API"></a>
 				<p class="copyright">Code and design <br/>&copy;2013 Wesley Rowe</p>
 			<!-- <p>Lots of products can be Noodled. Have an idea? Get in touch!<br/>wes [at] wesrowe [dot] net</p> -->
@@ -132,12 +132,12 @@
 					<p class="close_x">CLOSE X</p>
 					<h3>Helpful hints:</h3>
 					<ol>
-						<li>Pick a car you know well as a baseline.</li>
-						<li>Note that left doesn't necessarily mean a smaller number, such as when less is more.</li>
-						<li>Expand sections you're interested in to drill down.</li>
-						<li>You <em>can</em> take it with you &ndash; Noodler is the only car comparison that's useful on a mobile screen.</li>
-						<li>Your device will remember cars you've noodled before, look for them under "Previous Noodles" next time.</li>
-						<li>Use the color-key tiles to highlight, or click link for the full Edmunds.com page about that car.</li>
+						<li>You can <span class="blue">compare any car or truck, new or used</span>, that can be found at Edmunds.com. Compare minivans, pickups, SUVs, hybrids, luxury cars. Just click "Add a Vehicle" at left. Pro tip: Pick a vehicle you know well as a baseline, to compare others against.</li>
+						<li><span class="blue">Demos</span> will help you see how easy it is to compare the vehicle specs you care about with Noodler. Pick one from the list in the Discover menu.</li>
+						<li><span class="blue">You <em>can</em> take it with you</span> &ndash; Noodler is the only vehicle comparison that's useful on a mobile screen.</li>
+						<li><span class="blue">Your device will remember</span> cars you've noodled before, look for them under "My Rides" next time. <span id="want_more_devices"><i>(Do you want to send your custom vehicle comparison to another device?)</i></span> <br/>
+						<span id="working_on_it">We're working on it!</span></li>
+						<li>Click or tap the brightly colored stuff. You'll be glad you did!</li>
 					</ol>
 				</div>
 			</div>
@@ -147,7 +147,7 @@
 				<h1>Discover...</h1>
 				<p class="close_x">CLOSE X</p>
 				<select id="load_demo_btn">
-					<option value>Load demo</option>
+					<option value>Choose a demo</option>
 					<option value="minivans">Minivans</option>
 					<option value="crossovers">Crossovers</option>
 					<option value="hatchbacks">Hatchbacks</option>
@@ -181,32 +181,15 @@
 				<div class="clear"></div>
 			</div>	<!-- /main_paper_container -->
 			<div id="privacy_policy">
-				<div><span id="pp_bright_text">Privacy Policy:</span> This website's server does not store information of any kind regarding you or your car interests. Noodler does utilize your computer's hard drive, if your browser allows it, to remember a few facts about cars you've compared so that you can find them again easily. Your use of this web application confirms that you are okay with that.</div>
+				<div><span id="pp_bright_text">Privacy Policy:</span> This website's server does not store information of any kind regarding you or your vehicle interests. Noodler does utilize your computer's hard drive, if your browser allows it, to remember a few facts about cars you've compared so that you can find them again easily. Your use of this web application confirms that you are okay with that.</div>
 			</div>
 		</div> <!-- content_area -->  
 
-
-
-
-
-
-
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 		<div class="clear"></div>
-	<script type="text/javascript">
+
+<!-- GA -->
+<script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-38228914-1']);
