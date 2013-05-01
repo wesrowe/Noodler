@@ -48,7 +48,6 @@ $(document).ready( function() {
 		var chosen_demo = $( '#load_demo_btn option:selected' ).val();
 		var demo_js_url = "common-js/" + chosen_demo + '.js';
 		$.getScript( demo_js_url, function() { // file located in common-js too
-			console.log("demo loaded callback fired");
 			loadPageSpecificDemo();
 		});
 	});
@@ -846,7 +845,7 @@ function setEasyloadHandlers()
 		$( this ).css( 'color', '#777'); // gray out for "disabled" look
 		$.getJSON(
 			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
-			'http://api.edmunds.com/v1/vehicle/stylerepository/findbyid?id=' +
+			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 			styleID_to_get +
 			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
 			function ( data ) {  
@@ -879,9 +878,7 @@ function setEasyloadHandlers()
 */
 $(window).bind("load", function() {
 	// generate EasyLoad dropdowns in Discover section 
-	console.log( 'window load fired' );
 	$.getScript( 'chooser_objects/easyload_menu_object.js', function() {
-		console.log('menu object loaded');
 		convertObjectToHtml( easyload_menu_object );
 		setEasyloadHandlers();
 	});

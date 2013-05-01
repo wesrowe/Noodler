@@ -230,7 +230,7 @@ var connector_highlight_settings =
 				"parent": "Cargo"
 			}
 		} ,
-		/* "Safety": {
+		"Safety": {
 			"NHTSA_FRONTAL_DRIVER_RATING": {
 				"label": "NHTSA Frontal driver",
 				"minvalue": "1",
@@ -320,7 +320,7 @@ var connector_highlight_settings =
 				"parent": "Safety"
 			}
 		},
-		*/"Exterior Size": {
+		"Exterior Size": {
 			"OVERALL_WIDTH_WITHOUT_MIRRORS": {
 				"label": "Body width",
 				"minvalue": "58",
@@ -872,6 +872,16 @@ var connector_highlight_settings =
 			// cache which raph paper this section is working in, picked [0] at random
 			var current_paper = axesAll[i][0].paper; 
 			
+	/* CLEAN UP DATA for certain areas of Edmunds object */
+			if ( axesAll[i][1].attributeGroup_key == 'CRASH_TEST_RATINGS' ) { // in Safety?
+				in_safety_section = true;
+				console.log( 'in_safety_section' );
+				
+			} else { 
+				in_safety_section = false;
+			}
+		
+			
 			// per car, each section will have its own sub-array to hold paths by section, for collapse.
 			//cars[ cars_index ].connectors[i] = []; 
 			
@@ -882,23 +892,62 @@ var connector_highlight_settings =
 				var att_key = current_axis.attributes_key;
 				
 				// DOTS
-				if ( car_obj.attributeGroups[ group_key ] == undefined ) {
+				if ( car_obj.attributeGroups[ group_key ] == undefined ) { // if whold att group is missing
 					current_axis.data.push( "NUTS" );
 					current_axis.dots.push( "NUTS" );
 					// flag aggregate-dot creator below NOT to create dot for this section's aggregate:
 					no_data_to_aggregate = true;
-				} else { // safe to look at attributes now
+				} else { // safe to look at attributes themselves now
 					var att_obj = car_obj.attributeGroups[ group_key ].attributes[ att_key ];
 					
-					if ( att_obj == undefined ) {  // check if data missing
+					if ( att_obj == undefined ) {  // check if attribute data is missing
 						current_axis.data.push( "NUTS" );
 						current_axis.dots.push( "NUTS" );
-					} else {
+					}
+					else if ( att_obj.value == 'Not Tested' ) {
+						current_axis.data.push( "NUTS" );
+						current_axis.dots.push( "NUTS" );
+					} else { // there is definitely a value to display.
 						var value = att_obj.value;
 						current_axis.data.push( value );
-						// big formula I figured out on paper
-						var dot_x = current_axis.anchor_x + current_axis.pixel_ratio * ( current_axis.data[cars_index] - current_axis.minvalue );
-						
+				/* DOT CALC DIFFERS FOR NON-NUMERICAL RATINGS */
+						if ( !in_safety_section ) {
+							var dot_x = current_axis.anchor_x + current_axis.pixel_ratio * ( current_axis.data[cars_index] - current_axis.minvalue );
+						} else { // actually in Safety section
+							var ratio = 0;
+							switch ( value )
+							{
+								case '5 stars': 
+									ratio = .8;
+									break;
+								case 'Good':
+									ratio = .8;
+									break;
+								case '4 stars':
+									ratio = .6;
+									break;
+								case 'Acceptable':
+									ratio = .6;
+									break;
+								case '3 stars':
+									ratio = .4;
+									break;
+								case '2 stars':
+									ratio = .2;
+									break;
+								case 'Marginal':
+									ratio = .4;
+									break;
+								case '1 star':
+									ratio = .1;
+									break;
+								case 'Poor':
+									ratio = .2;
+									break;
+								
+							}  
+							var dot_x = current_axis.anchor_x + ( ratio * axis_length_const );
+						}
 						var transform_height = /* axis_margin_top */ + ( slider_value * spread_max * ( current_axis.index_in_sect - 1 ) );
 						
 						var new_dot = current_paper.circle( dot_x, current_axis.anchor_y, dot_radius )
