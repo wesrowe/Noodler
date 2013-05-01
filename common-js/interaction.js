@@ -83,7 +83,7 @@ $(document).ready( function() {
 					$.getJSON(
 						'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 						styleID_to_get +
-						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=full_json&callback=?', 
+						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
 						function ( data ) {  // callback: populate trim_select
 							//console.log( new_style_object );
 							// Create object to hold chosen style object and color, and add to cars[]
@@ -484,7 +484,7 @@ $(document).ready( function() {
 				chosen_model +
 				'&year=' +
 				chosen_year +
-				'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=full_json&callback=?', 
+				'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
 			function ( styles ) {  // callback: populate trim_select
 				new_style_object = styles.styleHolder;
 				//console.log( new_style_object );
@@ -843,13 +843,13 @@ function setEasyloadHandlers()
 		$( this ).attr( 'disabled', 'disabled' );
 		var original_color = $( this ).css( 'color' ); // preserve for below
 		var that = $( this );
-		$( this ).css( 'color', '#777');
+		$( this ).css( 'color', '#777'); // gray out for "disabled" look
 		$.getJSON(
 			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
-			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
+			'http://api.edmunds.com/v1/vehicle/stylerepository/findbyid?id=' +
 			styleID_to_get +
 			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-			function ( data ) {  // callback: populate trim_select
+			function ( data ) {  
 				//console.log( new_style_object );
 				// Create object to hold chosen style object and color, and add to cars[]
 				var newCar = {};

@@ -125,7 +125,8 @@ var connector_highlight_settings =
 	/* ******************************************************** 
 	   ******  axesData OBJECT: RECIPE FOR BUILDING AXES ****************
 	   ****************************************************/
-	var axesData = {
+	var axesData = 
+	{
 		"Roominess": {  // if I name them w/o "_axes" I can use these keys to name other things
 			"1ST_ROW_HEAD_ROOM": {
 				"label": "Headroom (front)",
@@ -229,7 +230,97 @@ var connector_highlight_settings =
 				"parent": "Cargo"
 			}
 		} ,
-		"Exterior Size": {
+		/* "Safety": {
+			"NHTSA_FRONTAL_DRIVER_RATING": {
+				"label": "NHTSA Frontal driver",
+				"minvalue": "1",
+				"maxvalue": "5",
+				"units": "stars",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "NHTSA_FRONTAL_DRIVER_RATING"
+				},
+				"parent": "Safety"
+			},
+			"NHTSA_FRONTAL_PASSENGER_RATING": {
+				"label": "NHTSA Frontal passenger",
+				"minvalue": "1",
+				"maxvalue": "5",
+				"units": "stars",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "NHTSA_FRONTAL_PASSENGER_RATING"
+				},
+				"parent": "Safety"
+			},
+			"NHTSA_SIDE_DRIVER_RATING": {
+				"label": "NHTSA Side driver",
+				"minvalue": "1",
+				"maxvalue": "5",
+				"units": "stars",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "NHTSA_SIDE_DRIVER_RATING"
+				},
+				"parent": "Safety"
+			},
+			"NHTSA_ROLLOVER_RATING": {
+				"label": "NHTSA Rollover",
+				"minvalue": "1",
+				"maxvalue": "5",
+				"units": "stars",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "NHTSA_ROLLOVER_RATING"
+				},
+				"parent": "Safety"
+			},
+			"IIHS_FRONTAL_OFFSET_TEST_RESULTS": {
+				"label": "IIHS Frontal offset",
+				"minvalue": "poor",
+				"maxvalue": "good",
+				"units": "",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "IIHS_FRONTAL_OFFSET_TEST_RESULTS"
+				},
+				"parent": "Safety"
+			},
+			"IIHS_ROOF_STRENGTH_TEST_RESULTS": {
+				"label": "IIHS Roof strength",
+				"minvalue": "poor",
+				"maxvalue": "good",
+				"units": "",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "IIHS_ROOF_STRENGTH_TEST_RESULTS"
+				},
+				"parent": "Safety"
+			},
+			"IIHS_REAR_CRASH_PROTECTION/HEAD_RESTRAINT_RATINGS": {
+				"label": "IIHS Rear/head restraint",
+				"minvalue": "poor",
+				"maxvalue": "good",
+				"units": "",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "IIHS_REAR_CRASH_PROTECTION/HEAD_RESTRAINT_RATINGS"
+				},
+				"parent": "Safety"
+			},
+			"IIHS_SIDE_IMPACT_TEST_RESULTS": {
+				"label": "IIHS Side impact",
+				"minvalue": "poor",
+				"maxvalue": "good",
+				"units": "",
+				"dataKeys": {
+					"attributeGroup": "CRASH_TEST_RATINGS",
+					"attributes": "IIHS_SIDE_IMPACT_TEST_RESULTS"
+				},
+				"parent": "Safety"
+			}
+		},
+		*/"Exterior Size": {
 			"OVERALL_WIDTH_WITHOUT_MIRRORS": {
 				"label": "Body width",
 				"minvalue": "58",
@@ -376,7 +467,7 @@ var connector_highlight_settings =
 			}
 		},
 		"Performance": {
-			"TORQUE": {
+			/* "TORQUE": {
 				"label": "Torque",
 				"minvalue": "0",
 				"maxvalue": "300",
@@ -397,7 +488,7 @@ var connector_highlight_settings =
 					"attributes": "HORSEPOWER"
 				},
 				"parent": "Performance"
-			},
+			}, */
 			"MANUFACTURER_0_60MPH_ACCELERATION_TIME_(SECONDS)": {
 				"label": "Acceleration 0-60",
 				"minvalue": "20",
@@ -479,8 +570,8 @@ var connector_highlight_settings =
 		this.endpoint_y = this.anchor_y;
 		if ( !is_aggregate_axis ) {
 			this.label = axis_data.label;
-			this.minvalue = Number(axis_data.minvalue); 
-			this.maxvalue = Number(axis_data.maxvalue); 
+			this.minvalue = axis_data.minvalue; // Number(axis_data.minvalue); 
+			this.maxvalue = axis_data.maxvalue; // Number(axis_data.maxvalue); 
 			this.units = axis_data.units;
 			this.attributeGroup_key = axis_data.dataKeys.attributeGroup; // these navigate path inside 
 			this.attributes_key = axis_data.dataKeys.attributes;			// Edmunds style object
@@ -531,6 +622,7 @@ var connector_highlight_settings =
 					'y': this.unitslabel_svg.attr('y') + ( this.unitslabel_svg.attr('font-size') / 2 )
 				}); 
 	}
+	
 	/* *********** FUNCTIONS RELATED TO AXES *********** */
 	var collapse_elements_list = {
 		"1": "axisline_svg",
