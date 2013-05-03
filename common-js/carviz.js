@@ -210,7 +210,7 @@ var connector_highlight_settings =
 			"CARGO_CAPACITY,_ALL_SEATS_IN_PLACE": {
 				"label": "Cargo Space",
 				"minvalue": "0",
-				"maxvalue": "100",
+				"maxvalue": "160",
 				"units": "cu.ft.",
 				"dataKeys": {
 					"attributeGroup": "CARGO_DIMENSIONS",
@@ -876,12 +876,9 @@ var connector_highlight_settings =
 			if ( axesAll[i][1].attributeGroup_key == 'CRASH_TEST_RATINGS' ) { // in Safety?
 				in_safety_section = true;
 				console.log( 'in_safety_section' );
-				
 			} else { 
 				in_safety_section = false;
 			}
-		
-			
 			// per car, each section will have its own sub-array to hold paths by section, for collapse.
 			//cars[ cars_index ].connectors[i] = []; 
 			
@@ -898,19 +895,24 @@ var connector_highlight_settings =
 					// flag aggregate-dot creator below NOT to create dot for this section's aggregate:
 					no_data_to_aggregate = true;
 				} else { // safe to look at attributes themselves now
+					
 					var att_obj = car_obj.attributeGroups[ group_key ].attributes[ att_key ];
 					
-					if ( att_obj == undefined ) {  // check if attribute data is missing
-						current_axis.data.push( "NUTS" );
-						current_axis.dots.push( "NUTS" );
-					}
-					else if ( att_obj.value == 'Not Tested' ) {
+					// test for second version of MAX_CARGO_CAPACITY, such as in Mazda5 minivan case.
+					if ( att_obj == undefined && 
+						group_key == "CARGO_DIMENSIONS" &&
+						car_obj.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ] !== undefined ) 
+					{
+							att_obj = car_obj.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ]; // switches to alternative attribute.
+					} 
+					if ( att_obj == undefined ) { // if attribute is still missing after fixes...
 						current_axis.data.push( "NUTS" );
 						current_axis.dots.push( "NUTS" );
 					} else { // there is definitely a value to display.
 						var value = att_obj.value;
 						current_axis.data.push( value );
-				/* DOT CALC DIFFERS FOR NON-NUMERICAL RATINGS */
+						/* DOT CALC DIFFERS FOR NON-QUANTITATIVE RATINGS */
+						// SAFETY section
 						if ( !in_safety_section ) {
 							var dot_x = current_axis.anchor_x + current_axis.pixel_ratio * ( current_axis.data[cars_index] - current_axis.minvalue );
 						} else { // actually in Safety section
@@ -939,15 +941,23 @@ var connector_highlight_settings =
 									ratio = .4;
 									break;
 								case '1 star':
-									ratio = .1;
+									ratio = .05;
 									break;
 								case 'Poor':
 									ratio = .2;
 									break;
-								
+								case 'Not tested':
+									ratio = -.1;
+									break;
 							}  
-							var dot_x = current_axis.anchor_x + ( ratio * axis_length_const );
+							var dot_x = get_nonquantitative_dotx( cars_index, ratio, i, j );
+							function get_nonquantitative_dotx( cars_index, ratio, i, j ) 
+							{
+								return ( current_axis.anchor_x + ( ratio * axis_length_const ) + 
+								4 * ( cars_index % 8 ) ); // 4 is for pixels offset 
+							}
 						}
+						// height calcs
 						var transform_height = /* axis_margin_top */ + ( slider_value * spread_max * ( current_axis.index_in_sect - 1 ) );
 						
 						var new_dot = current_paper.circle( dot_x, current_axis.anchor_y, dot_radius )
