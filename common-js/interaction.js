@@ -89,6 +89,7 @@ $(document).ready( function() {
 							var newCar = {};
 							newCar['styleObject'] = data.styleHolder[0];
 							newCar['color'] = getNextColor(); 
+							newCar['is_selected'] = false;
 							cars.push( newCar );
 							// call addCarData(car_object, car_counter_index)
 							var newcar_index = cars.length - 1; // what's array index of car just added
@@ -121,6 +122,7 @@ $(document).ready( function() {
 			// display local storage cars
 			setTimeout( function() {
 				$( '#remembered_cars_container .picker_title' ).click();
+				$( '#hints_btn' ).click();
 			}, 500);
 		}
 	}
@@ -134,6 +136,8 @@ $(document).ready( function() {
 	axesAll = []; // object literal holds Axes, with a layer of organization for sections
 	
 	isExpanded = [] // array, indexed by section (starting at 0), holding true for expanded; initialized with all true in papersInit(), maintained by collapse() and expand()
+	
+	selected_cars = []; // track which cars user has clicked on, in order
 	
 	// initialize papers and axes
 	papersInit();
@@ -298,7 +302,6 @@ $(document).ready( function() {
 					$(this).parent().parent().find( '.spread_adjust_container' ).hide();
 					$(this).parent().find( '.expand_indicator' ).html( '+' );
 				}
-				
 			); 
 		});
 
@@ -532,6 +535,7 @@ $(document).ready( function() {
 		var newCar = {};
 		newCar['styleObject'] = new_style_object[ chosen_trim_index ];
 		newCar['color'] = getNextColor(); 
+		newCar['is_selected'] = false;
 		cars.push( newCar );
 		// call addCarData(car_object, car_counter_index)
 		var newcar_index = cars.length - 1; // array index of car just added
@@ -652,6 +656,20 @@ function getNextColor()
 	if ( next_color_index == colors.length ) { next_color_index = 0; } // wrap around to start of colors list
 	return next_color;
 }
+function updateSelectedCars( cars_index, action ) { // moves current car to front of array, so that highlighted cars can maintain their order.
+	// loop thru array, find cars_index if it's there, .pop() it.
+	var new_array = []
+	for ( var i in selected_cars ){
+		if ( selected_cars[ i ] !== cars_index ) 
+			new_array.push( selected_cars[ i ] );
+	}
+	selected_cars = new_array; 
+	if ( action !== 'remove' ) {
+		selected_cars.push( cars_index );
+		console.log('inside add action');
+	} 
+	console.log( selected_cars );
+}
 function addCarToUI( newcar_index, trim_name )
 {
 	// CLONE AND POPULATE CAR INFO BOX
@@ -663,11 +681,24 @@ function addCarToUI( newcar_index, trim_name )
 		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
 		.hover( 
 			function() {
-				highlightCar( newcar_index );
+				// don't highlight if it's already selected/highlighted
+				if ( !cars[ newcar_index ].is_selected ) highlightCar( newcar_index );
 				//$(this).css( 'backgroundColor', '#666666' );//moved to CSS
 			}, function() { 
-				unHighlightCar( newcar_index );
+				// don't highlight if it's already selected/highlighted
+				if ( !cars[ newcar_index ].is_selected ) unHighlightCar( newcar_index );
 				//$(this).css( 'backgroundColor', '#000000' );
+			}
+		)
+		.toggle( // new click behavior for touch 5/4
+			function() {
+				cars[ newcar_index ].is_selected = true;
+				updateSelectedCars( newcar_index, 'add' );
+				highlightCar( newcar_index );
+			}, function() {
+				cars[ newcar_index ].is_selected = false;
+				unHighlightCar( newcar_index );
+				updateSelectedCars( newcar_index, 'remove' );
 			}
 		);
 	// add car name and trim name
@@ -727,7 +758,7 @@ function loadDemoCar( demoStyleObject )
 	newCar['styleObject'] = demoStyleObject;
 	newCar['color'] = colors[next_color_index]; // see raph_settings
 	next_color_index++; // increment for next time a color is called for
-	//console.log( newCar );
+	newCar['is_selected'] = false;
 	cars.push( newCar );
 	var newcar_index = cars.length - 1;
 	// call addCarData(car_object, car_counter_index) to display data
@@ -853,7 +884,8 @@ function setEasyloadHandlers()
 				// Create object to hold chosen style object and color, and add to cars[]
 				var newCar = {};
 				newCar['styleObject'] = data.styleHolder[0];
-				newCar['color'] = getNextColor(); 
+				newCar['color'] = getNextColor();
+				newCar['is_selected'] = false;
 				cars.push( newCar );
 				// call addCarData(car_object, car_counter_index)
 				var newcar_index = cars.length - 1; // array index of added car

@@ -1,4 +1,3 @@
-
 /* Raphael style sheet, basically */
 
 // vars that control Axis display
@@ -120,11 +119,7 @@ var connector_highlight_settings =
 	}
 
 
-/* ******************************************************** 
-	   ******  example Edmunds object structure, with label text versions ****************
-	   ****************************************************/
-	/* ******************************************************** 
-	   ******  axesData OBJECT: RECIPE FOR BUILDING AXES ****************
+ /* ******  axesData OBJECT: RECIPE FOR BUILDING AXES ****************
 	   ****************************************************/
 	var axesData = 
 	{
@@ -697,58 +692,43 @@ var connector_highlight_settings =
 
 	function hideshowAllInSection( section_index, hide_or_show, timing ) 
 	{  //used for fading axes out on collapse, fading them back in on expand
-		//console.log("hideshowAllInSection");
 		var axs = axesAll[ section_index ];
 		// are we hiding or showing all?
-		var new_opacity = null;
-		var new_connector_opacity = null;
 		if ( hide_or_show == "hide" ) {
-			new_opacity = 0;
-			new_connector_opacity = 0;
-		} else { 
-			new_opacity = dot_common_opacity_setting; 
-			new_connector_opacity = connector_path_opacity;
+			var new_opacity = 0;
+			var new_connector_opacity = 0;
+		} else { // i.e., "show"
+			var new_opacity = dot_common_opacity_setting; 
+			var new_connector_opacity = connector_path_opacity;
 		}
 		// DOTS and AXES
 		// loop thru axs for axes and dots
-		for (var i = 1; i < axs.length; i++ ) { // don't hide aggregate
+		for (var i = 1; i < axs.length; i++ ) { // Loop thru axes (non-aggregate)
 			// hide/show axes & labels
-				/* //this seems redundant to lines above
-				if ( hide_or_show == "hide" ) {
-					new_opacity = 0;
-				} else { new_opacity = dot_common_opacity_setting; }
-				*/
 				var ax = axs[ i ];
 				for ( var key in collapse_elements_list ) {
 					
 					var el_to_showhide = collapse_elements_list[ key ];
-					var animation_debug = ax[ el_to_showhide ].attr( { 'opacity': Math.ceil( new_opacity ) }/* , timing */ );  // for some reason .animate dosn't work but .attr does.  Math.ceil() rounds up, and in this case takes opacity for various axis elements up to 1 on show so that their attributes can be styled directly by raph_settings.js (but keeps 0 if it's 0).
+					var animation_debug = ax[ el_to_showhide ].attr( { 'opacity': Math.ceil( new_opacity ) }/* , timing */ );  // for some reason .animate dosn't work but .attr does.  Math.ceil() rounds up, and in this case takes opacity for various axis elements up to 1 on show so that their attributes can be styled directly by settings vars at top of carviz.js (but keeps 0 if it's 0).
 				}
-			// hide/show dots: animate to new_opacity
-				for ( var d in ax.dots ) {
-					if ( ax.dots[ d ] != "NUTS" ) {
-						ax.dots[ d ].animate( { 'opacity': new_opacity }, timing );
+			// hide/show dots & connectors: animate to new_opacity
+				for ( var cars_index in ax.dots ) { 
+					// DOTS
+					if ( ax.dots[ cars_index ] != "NUTS" ) {
+						ax.dots[ cars_index ].animate( { 'opacity': new_opacity }, timing );
 					}
-					// CONNECTORS -- NEW CODE FRI NIGHT
-					if ( /* ( ax.connectors[ d ] ) && */ ( ax.connectors[ d ] != "NUTS" ) ) {
-						ax.connectors[ d ].animate( { 'opacity': new_connector_opacity }, timing );
+					// CONNECTORS
+					if ( ( ax.connectors[ cars_index ] != "NUTS" ) && !cars[ cars_index ].is_selected ) {
+						//excluded is_selcted connectors b/c the animation competed with highlightCar and canceled it out.
+						ax.connectors[ cars_index ].animate( { 'opacity': new_connector_opacity }, timing ); 
+					}
+					if ( hide_or_show != 'hide' && cars[ cars_index ].is_selected ) {
+						console.log('highlightCar() called inside showhide');
+						highlightCar( cars_index );
 					}
 				}
 		}
-		// CONNECTORS
-		// loop thru all paths per car in that section
-		/*
-		for ( var c in cars ) { // loop thru all cars, c is integer
-			for ( var j = 0; j < cars[c].connectors[ section_index ].length; j++ ) { 
-				 if ( hide_or_show == "hide" ) {
-					new_opacity = 0;
-				} else { new_opacity = connector_path_opacity; }
 		
-				if ( cars[c].connectors[ section_index ][ j ] != "NUTS" ) {
-					cars[c].connectors[ section_index ][ j ].animate( { 'opacity': new_opacity }, timing );
-				} 
-			}
-		}*/
 		
 	}
 
@@ -857,7 +837,7 @@ var connector_highlight_settings =
 	/* ******************************************************** 
 	   ******  ADD NEW CAR WHEN REQUESTED****************
 	   ****************************************************/
-	function addCarData ( car_obj, cars_index )     // adds car data to Axis.data[] arrays.
+	function addCarData ( car_obj, cars_index )     // adds car data and svg elements to Axis.data[] arrays.
 	{
 		// load data, then draw Raph circles and paths while I'm there
 		
@@ -873,7 +853,7 @@ var connector_highlight_settings =
 			// cache which raph paper this section is working in, picked [0] at random
 			var current_paper = axesAll[i][0].paper; 
 			
-	/* CLEAN UP DATA for certain areas of Edmunds object */
+			/* EXCEPTIONS for certain areas of Edmunds object */
 			if ( axesAll[i][1].attributeGroup_key == 'CRASH_TEST_RATINGS' ) { // in Safety?
 				in_safety_section = true;
 				console.log( 'in_safety_section' );
@@ -972,10 +952,12 @@ var connector_highlight_settings =
 						new_dot.hover( function( event ) {
 							this.toFront();
 							showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- pass in section index (start at 1), true means include data in tooltip, and pass in Axis dot lives in.
-							highlightCar( cars_index ); // 
+							// don't highlight if it's already selected/highlighted
+							/* if ( !cars[ cars_index ].is_selected ) */ highlightCar( cars_index ); 
 						}, function() {
 							hideTooltip();
-							unHighlightCar ( cars_index );
+							// don't unhighlight if it's already selected/highlighted
+							if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
 						}); 
 						
 						// push new dot to array in cars
@@ -1009,11 +991,13 @@ var connector_highlight_settings =
 					function( event ) {
 						this.toFront();
 						showTooltip( cars[cars_index], false, null, null, event ); 
-						highlightCar( cars_index );  
+						// don't highlight if it's already selected/highlighted
+						if ( !cars[ cars_index ].is_selected ) highlightCar( cars_index );  
 					}, 
 					function() {
 						hideTooltip();
-						unHighlightCar ( cars_index );
+						// don't highlight if it's already selected/highlighted
+						if ( !cars[ cars_index ].is_selected ) unHighlightCar( cars_index );
 				}); 
 				axesAll[i][0].dots.push( agg_dot );
 			} else {
@@ -1058,14 +1042,18 @@ var connector_highlight_settings =
 				new_connector.attr( { 'opacity': 0 } );
 			}
 			// add HOVER handlers
-			new_connector.hover( function( event ) {
-				this.toFront();
-				showTooltip( cars[cars_index], false, null, null, event ); 
-				highlightCar( cars_index );  
-			}, function() {
-				hideTooltip();
-				unHighlightCar ( cars_index );
-			}); 
+			new_connector.hover( 
+				function( event ) {
+					showTooltip( cars[cars_index], false, null, null, event ); 
+					// don't highlight or toFront() if it's already selected/highlighted
+					this.toFront();
+					highlightCar( cars_index );
+				}, function() {
+					hideTooltip();
+					// don't highlight if it's already selected/highlighted
+					if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
+				}
+			); 
 			// store it to axesAll (NOT cars[])
 			//cars[ cars_index ].connectors[i].push( new_connector );
 			axesAll[i][j].connectors.push( new_connector ); // NEW CODE FRI NIGHT
@@ -1077,17 +1065,8 @@ var connector_highlight_settings =
 	}
 	function highlightCar( cars_index ) 
 	{  // index "should" correspond to spot in axes' .dots[] arrays
-		//console.log("highlightCar ("+cars_index);
-		for ( var i = 0; i < axesAll.length; i++ ) { // i corresponds to section
+		for ( var i = 0; i < axesAll.length; i++ ) { // loop thru sections
 			if ( isExpanded[ i ] ) {
-				/* 
-				// connector curves -- .connectors [ section index ], so that's i... and then, loop thru them.
-				for (var t in cars[ cars_index ].connectors[i] ) {
-					if ( cars[ cars_index ].connectors[i][t] != "NUTS" ) {
-						cars[ cars_index ].connectors[i][t].animate( connector_highlight_settings, 200 )
-						.toFront();
-					}
-				} */
 				for ( var j = 1; j < axesAll[i].length; j++ ) {
 					// connectors
 					if ( ( axesAll[i][j].connectors[ cars_index ] ) && ( axesAll[i][j].connectors[ cars_index ] != 'NUTS' ) ) {
@@ -1115,6 +1094,8 @@ var connector_highlight_settings =
 				axesAll[ i ][ 0 ].dots[ cars_index ].animate( dot_highlight_attrs, 200 )
 				.toFront();
 			}
+			$( '#dynamic_car_display' ).find( "[data-carindex='" + cars_index + "']" )
+				.css( 'background-color', '#444' );
 		}
 	}
 	function unHighlightCar( cars_index ) 
@@ -1131,18 +1112,20 @@ var connector_highlight_settings =
 						axesAll[i][j].connectors[ cars_index ].animate( connector_path_settings, 200 );
 					}
 				}
-				/* // connector curves -- .connectors [ section index ], so that's i... and then, loop thru them.
-				for (var t in cars[ cars_index ].connectors[i] ) {
-					if ( cars[ cars_index ].connectors[i][t] != "NUTS" ) {
-						cars[ cars_index ].connectors[i][t].animate( connector_path_settings, 200 );
-					}
-				} */
 			}
 			// aggregate axes
 			if ( axesAll[ i ][ 0 ].dots[ cars_index ] != 'NUTS' ) {
 				axesAll[ i ][ 0 ].dots[ cars_index ].animate( dot_common_settings, 200 )
 				.toFront();
 			}
+			$( '#dynamic_car_display' ).find( "[data-carindex='" + cars_index + "']" )
+				.css( 'background-color', '#000' );
+		}
+		selectedToFront();
+	}
+	function selectedToFront() {
+		for ( var cars_index in selected_cars ) {
+			if ( cars[ cars_index ].is_selected ) highlightCar( cars_index );
 		}
 	}
 	
