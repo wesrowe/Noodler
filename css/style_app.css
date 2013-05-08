@@ -259,12 +259,18 @@ section#left_bar {
 	font-size: 12px;
 	font-weight: bold;
 }
+#lower_left_bar { /* lays over pickers when they're retracted  */
+	position: absolute;
+	top: 72px;
+	width: 200px;
+	background-color: #000;
+	z-index: 10;
+}
 ul#dynamic_car_display {
 	list-style: none;
-	margin: 10px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
 	padding: 0px;
-	min-height: 200px;
-	position: fixed;
+	position: relative;
 	width: 200px;
 }
 	.car_info_box {
@@ -297,6 +303,12 @@ ul#dynamic_car_display {
 		cursor: pointer;
 		background-color: #333;
 	}
+/* FIXED-SCROLL KEY AREA */
+#lower_left_bar.fixed { position: fixed; top: 0px; }
+
+
+
+/* credit & copyright */
 img#edmunds_credit {
 	padding: 0px;
 	margin: 20px 0px 0px 0px;
@@ -311,8 +323,6 @@ img#edmunds_credit {
 	left: 205px;
 	top: 120px;
 }
-/* FIXED-SCROLL KEY AREA */
-section#lower_left_bar.fixed { position: fixed; top: 0px; }
 
 /* car picker slide-outs */
 .picker_title {
@@ -424,13 +434,6 @@ section#lower_left_bar.fixed { position: fixed; top: 0px; }
 	.trim_level_rem {
 		color: #ccc;
 	}
-#lower_left_bar { /* lays over pickers when they're retracted  */
-	position: absolute;
-	top: 72px;
-	width: 100%;
-	background-color: #000;
-	z-index: 10;
-}
 .picker_close_arrows {
 	position: absolute;
 	top: 4px;
