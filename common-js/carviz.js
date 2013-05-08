@@ -930,13 +930,13 @@ var connector_highlight_settings =
 								case 'Not tested':
 									ratio = -.1;
 									break;
-							}  
-							var dot_x = get_nonquantitative_dotx( cars_index, ratio, i, j );
+							}
 							function get_nonquantitative_dotx( cars_index, ratio, i, j ) 
 							{
 								return ( current_axis.anchor_x + ( ratio * axis_length_const ) + 
 								4 * ( cars_index % 8 ) ); // 4 is for pixels offset 
-							}
+							}  
+							var dot_x = get_nonquantitative_dotx( cars_index, ratio, i, j );
 						}
 						// height calcs
 						var transform_height = /* axis_margin_top */ + ( slider_value * spread_max * ( current_axis.index_in_sect - 1 ) );

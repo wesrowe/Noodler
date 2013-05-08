@@ -208,7 +208,7 @@ ul#tabs li {
 section#left_bar {
 	color: #fff;
 	width: 200px;
-	background-color: #000;
+	/* background-color: #000; */
 	position: absolute; /* haven't found a way to implement fixed that doesn't infringe on other UX needs*/
 	left: 0px;
 	top: 120px;
@@ -259,12 +259,14 @@ section#left_bar {
 	font-size: 12px;
 	font-weight: bold;
 }
-#lower_left_bar { /* lays over pickers when they're retracted  */
+#lower_left_bar { /* holds only the keys now  */
 	position: absolute;
 	top: 72px;
-	width: 200px;
-	background-color: #000;
+	width: 220px; /* added 20px to allow for scrollbar */
+	/* background-color: #000; */
 	z-index: 10;
+	height: 700px;
+	overflow: auto;
 }
 ul#dynamic_car_display {
 	list-style: none;
@@ -320,7 +322,7 @@ img#edmunds_credit {
 /* MAIN GRAPHICS AREAS */
 #content_area {
 	position: absolute;
-	left: 205px;
+	left: 225px;
 	top: 120px;
 }
 

@@ -16,6 +16,10 @@ $(document).ready( function() {
             }
         }
     }); 
+	/* set height of key section to height of window (overflow: auto in styles) */
+	$( '#lower_left_bar' ).css( 'height', function() {
+		return $(window).height();
+	});
 	
 	// end fixed-scroll
 	
