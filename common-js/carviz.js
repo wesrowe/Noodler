@@ -442,7 +442,7 @@ var connector_highlight_settings =
 			"MSRP": {
 				"label": "MSRP New",
 				"minvalue": "0",
-				"maxvalue": "150000",
+				"maxvalue": "80000",
 				"units": "dollars",
 				"dataKeys": {
 					"attributeGroup": "PRICING",
@@ -453,7 +453,7 @@ var connector_highlight_settings =
 			"USED_TMV_RETAIL": {
 				"label": "Used Retail (Edmunds)",
 				"minvalue": "0",
-				"maxvalue": "150000",
+				"maxvalue": "80000",
 				"units": "dollars",
 				"dataKeys": {
 					"attributeGroup": "PRICING",

@@ -1,5 +1,24 @@
 $(document).ready( function() {
 	
+	/* fixed-scroll action for key */
+	/* var theLoc = $('#lower_left_bar').position().top;
+	var left_offset = $('#lower_left_bar').position().left;
+    $(window).scroll(function() {
+        if(theLoc >= $(window).scrollTop()) {
+            if($('#lower_left_bar').hasClass('fixed')) {
+                $('#lower_left_bar').removeClass('fixed');
+				
+            }
+        } else { 
+            if(!$('#lower_left_bar').hasClass('fixed')) {
+                $('#lower_left_bar').addClass('fixed');
+				
+            }
+        }
+    });  */
+	
+	// end fixed-scroll
+	
 	// Papers -- HTML template cloner for papers
 	var sg_section_counter = 0;
 		

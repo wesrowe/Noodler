@@ -188,12 +188,22 @@ ul#tabs li {
 	/* left side bar */
 #outside_left_mask {
 	position: absolute;
-	height: 1200px;
+	height: 1500px;
 	top: 0px;
 	left: -500px;
 	width: 500px;
 	background-color: #000;
 	z-index: 12;
+}
+#low_left_mask { 
+	color: #fff;
+	width: 205px;
+	height: 1500px;
+	background-color: #000;
+	position: absolute; /* haven't found a way to implement fixed that doesn't infringe on other UX needs*/
+	left: 0px;
+	top: 70px;
+	z-index: 6;
 }
 section#left_bar {
 	color: #fff;
@@ -254,11 +264,13 @@ ul#dynamic_car_display {
 	margin: 10px 0px 0px 0px;
 	padding: 0px;
 	min-height: 200px;
+	position: fixed;
+	width: 200px;
 }
 	.car_info_box {
 		position: relative;
 		padding: 5px;
-		margin: 5px;
+		margin: 5px 0px;
 		border: 5px solid #000;
 		/* cursor: move; */ /* for draggable functionality later */
 		background-color: #000;
@@ -299,6 +311,8 @@ img#edmunds_credit {
 	left: 205px;
 	top: 120px;
 }
+/* FIXED-SCROLL KEY AREA */
+section#lower_left_bar.fixed { position: fixed; top: 0px; }
 
 /* car picker slide-outs */
 .picker_title {
