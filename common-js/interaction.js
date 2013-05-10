@@ -1,6 +1,11 @@
 $(document).ready( function() {
-	
-	/* FastClick implementation */
+	// is browser touch-compatible? http://stackoverflow.com/a/13470899
+	function detect_touch_device () {
+		return  ( !!('ontouchstart' in window) || !!('msmaxtouchpoints' in window.navigator) );
+	}
+	IS_TOUCH_DEVICE = detect_touch_device(); // global var!
+	console.log( "touch device? : " + IS_TOUCH_DEVICE );
+	/* FastClick implementation -- holy shit, it's 22k unminified */
 	$(function() {
 		FastClick.attach(document.body);
 	});
@@ -713,17 +718,6 @@ function addCarToUI( newcar_index, trim_name )
 		.removeClass( 'template' )
 		.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
 		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
-		.hover( 
-			function() {
-				// don't highlight if it's already selected/highlighted
-				if ( !cars[ newcar_index ].is_selected ) highlightCar( newcar_index );
-				//$(this).css( 'backgroundColor', '#666666' );//moved to CSS
-			}, function() { 
-				// don't highlight if it's already selected/highlighted
-				if ( !cars[ newcar_index ].is_selected ) unHighlightCar( newcar_index );
-				//$(this).css( 'backgroundColor', '#000000' );
-			}
-		)
 		.toggle( // new click behavior for touch 5/4
 			function() {
 				cars[ newcar_index ].is_selected = true;
@@ -735,6 +729,20 @@ function addCarToUI( newcar_index, trim_name )
 				updateSelectedCars( newcar_index, 'remove' );
 			}
 		);
+	if ( !IS_TOUCH_DEVICE ) { // hover behavior for UI key
+		new_section.hover( 
+			function() {
+				// don't highlight if it's already selected/highlighted
+				if ( !cars[ newcar_index ].is_selected ) highlightCar( newcar_index );
+				
+			}, function() { 
+				// don't highlight if it's already selected/highlighted
+				if ( !cars[ newcar_index ].is_selected ) unHighlightCar( newcar_index );
+				
+			}
+		)
+	}
+		
 	// add car name and trim name
 	new_section.find( '.car_name' )
 		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
