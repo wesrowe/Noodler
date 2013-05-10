@@ -1,11 +1,16 @@
 $(document).ready( function() {
 	
+	/* FastClick implementation */
+	$(function() {
+		FastClick.attach(document.body);
+	});
+	
 	/* fixed-scroll action for key */
-	var theLoc = $('#lower_left_bar').offset().top;
+	var keyScrollTop = $('#lower_left_bar').offset().top;
 	//var left_offset = $('#dynamic_car_display').position().left;
     $(window).scroll( function() {
-        if(theLoc >= $(window).scrollTop()) {
-            if($('#lower_left_bar').hasClass('fixed')) {
+        if ( keyScrollTop >= $(window).scrollTop() ) {
+            if ($('#lower_left_bar').hasClass('fixed') ) {
                 $('#lower_left_bar').removeClass('fixed');
 				
             }
@@ -16,9 +21,15 @@ $(document).ready( function() {
             }
         }
     }); 
-	/* set height of key section to height of window (overflow: auto in styles) */
+	// set height of key section to height of window (overflow: auto in styles)
 	$( '#lower_left_bar' ).css( 'height', function() {
-		return $(window).height();
+		return $(window).height() - keyScrollTop;
+	});
+	// in case of window resize, reset 'height'...
+	$(window).resize(function() 
+	{
+		var newheight = $(window).height();
+		$( '#lower_left_bar' ).css( 'height', newheight );
 	});
 	
 	// end fixed-scroll
