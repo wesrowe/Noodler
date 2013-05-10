@@ -718,7 +718,25 @@ function addCarToUI( newcar_index, trim_name )
 		.removeClass( 'template' )
 		.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
 		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
-		.toggle( // new click behavior for touch 5/4
+		.on('touchstart click', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			if (event.handled !== true) {
+				if ( !cars[ newcar_index ].is_selected ) { // it's not selected, so select & highlight
+					cars[ newcar_index ].is_selected = true;
+					updateSelectedCars( newcar_index, 'add' );
+					highlightCar( newcar_index );
+				} else {  // already selected, so unhighlight and unselect
+					cars[ newcar_index ].is_selected = false;
+					unHighlightCar( newcar_index );
+					updateSelectedCars( newcar_index, 'remove' );
+				}
+				event.handled = true; // stops the second event from firing
+			} else {
+				return false;
+			}
+		}); 
+		/* // OLD .toggle() behaviors
 			function() {
 				cars[ newcar_index ].is_selected = true;
 				updateSelectedCars( newcar_index, 'add' );
@@ -728,7 +746,7 @@ function addCarToUI( newcar_index, trim_name )
 				unHighlightCar( newcar_index );
 				updateSelectedCars( newcar_index, 'remove' );
 			}
-		);
+		); */
 	if ( !IS_TOUCH_DEVICE ) { // hover behavior for UI key
 		new_section.hover( 
 			function() {

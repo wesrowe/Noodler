@@ -1124,8 +1124,8 @@ var connector_highlight_settings =
 		selectedToFront();
 	}
 	function selectedToFront() {
-		for ( var cars_index in selected_cars ) {
-			if ( cars[ cars_index ].is_selected ) highlightCar( cars_index );
+		for ( var i in selected_cars ) {
+			highlightCar( selected_cars[ i ] );
 		}
 	}
 	
