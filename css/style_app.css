@@ -110,11 +110,11 @@ ul#tabs li {
 	font-size: 16px;
 	padding: 10px;
 	background-color: #555;
-	opacity: .9;
+	/* opacity: .9;
 	transition: opacity 300ms;
-	-moz-transition: opacity 300ms; /* Firefox 4 */
-	-webkit-transition: opacity 300ms; /* Safari and Chrome */
-	-o-transition: opacity 300ms; /* Opera */
+	-moz-transition: opacity 300ms;
+	-webkit-transition: opacity 300ms; 
+	-o-transition: opacity 300ms; */
 }
 #hints h3 { margin-top: 0px; }
 	#hints:hover { opacity: 1; }
@@ -157,7 +157,7 @@ ul#tabs li {
 	#discover_area select { 
 		font-size: 16px;
 		background-color: #333;
-		color: #bbb;
+		color: #fff;
 		width: 20%; 
 		margin: 5px 2%;
 		cursor: pointer;
@@ -306,7 +306,7 @@ ul#dynamic_car_display {
 		background-color: #333;
 	}
 /* FIXED-SCROLL KEY AREA */
-#lower_left_bar.fixed { position: fixed; top: 0px; }
+#lower_left_bar.fixed { position: fixed; top: 0px; left: 0px; }
 
 
 

@@ -728,25 +728,15 @@ function addCarToUI( newcar_index, trim_name )
 					highlightCar( newcar_index );
 				} else {  // already selected, so unhighlight and unselect
 					cars[ newcar_index ].is_selected = false;
-					unHighlightCar( newcar_index );
 					updateSelectedCars( newcar_index, 'remove' );
+					unHighlightCar( newcar_index );
+					
 				}
 				event.handled = true; // stops the second event from firing
 			} else {
 				return false;
 			}
-		}); 
-		/* // OLD .toggle() behaviors
-			function() {
-				cars[ newcar_index ].is_selected = true;
-				updateSelectedCars( newcar_index, 'add' );
-				highlightCar( newcar_index );
-			}, function() {
-				cars[ newcar_index ].is_selected = false;
-				unHighlightCar( newcar_index );
-				updateSelectedCars( newcar_index, 'remove' );
-			}
-		); */
+		}); // end chained methods
 	if ( !IS_TOUCH_DEVICE ) { // hover behavior for UI key
 		new_section.hover( 
 			function() {

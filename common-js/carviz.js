@@ -949,15 +949,15 @@ var connector_highlight_settings =
 						// bind data() for tooltip to dot -- this worked!
 						new_dot.data( 'myAxis', current_axis );
 						// add HOVER handlers
-						new_dot.hover( function( event ) {
-							this.toFront();
-							showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- pass in section index (start at 1), true means include data in tooltip, and pass in Axis dot lives in.
-							// don't highlight if it's already selected/highlighted
-							/* if ( !cars[ cars_index ].is_selected ) */ highlightCar( cars_index ); 
-						}, function() {
-							hideTooltip();
-							// don't unhighlight if it's already selected/highlighted
-							if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
+						new_dot.hover( 
+							function( event ) {
+								this.toFront();
+								showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- pass in section index (start at 1), true means include data in tooltip, and pass in Axis dot lives in.
+								highlightCar( cars_index ); 
+							}, function() {
+								hideTooltip();
+								// don't unhighlight if it's already selected/highlighted
+								if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
 						}); 
 						
 						// push new dot to array in cars
@@ -1042,18 +1042,20 @@ var connector_highlight_settings =
 				new_connector.attr( { 'opacity': 0 } );
 			}
 			// add HOVER handlers
-			new_connector.hover( 
-				function( event ) {
-					showTooltip( cars[cars_index], false, null, null, event ); 
-					// don't highlight or toFront() if it's already selected/highlighted
-					this.toFront();
-					highlightCar( cars_index );
-				}, function() {
-					hideTooltip();
-					// don't highlight if it's already selected/highlighted
-					if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
-				}
-			); 
+			if ( !IS_TOUCH_DEVICE ) {
+				new_connector.hover( 
+					function( event ) {
+						showTooltip( cars[cars_index], false, null, null, event ); 
+						// don't highlight or toFront() if it's already selected/highlighted
+						this.toFront();
+						highlightCar( cars_index );
+					}, function() {
+						hideTooltip();
+						// don't highlight if it's already selected/highlighted
+						if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
+					}
+				); 
+			}
 			// store it to axesAll (NOT cars[])
 			//cars[ cars_index ].connectors[i].push( new_connector );
 			axesAll[i][j].connectors.push( new_connector ); // NEW CODE FRI NIGHT

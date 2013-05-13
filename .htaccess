@@ -1,0 +1,7 @@
+RewriteEngine On
+# send noodler.us to noodlercompare.
+RewriteCond %{HTTP_HOST} ^noodler.us
+RewriteRule (.*) http://www.noodlercompare.com/$1 [R=301,L]
+# favor www version
+RewriteCond %{HTTP_HOST} www.noodler.us
+RewriteRule (.*) http://www.noodlercompare.com/$1 [R=301,L]
