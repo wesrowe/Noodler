@@ -306,8 +306,7 @@ ul#dynamic_car_display {
 		background-color: #333;
 	}
 /* FIXED-SCROLL KEY AREA */
-#lower_left_bar.fixed { position: fixed; top: 0px; left: 0px; }
-
+#lower_left_bar.fixed { position: fixed; top: 0px; }
 
 
 /* credit & copyright */
@@ -583,4 +582,18 @@ img#edmunds_credit {
 	}
 /* GENERAL TYPOGRAPHY */	
 .blue { color: #8bf; font-weight: bold; font-size: 1.2em; }
+
+/* ****** MOBILE STYLES ****** */
+@media only screen and (max-width: 480px) {
+	body { margin-left: 0px; }
+	ul#tabs { left: 300px; }
+	ul#tabs li {
+		font-size: 25px;
+	}
+	#dynamic_picker select { margin-bottom: 14px; }
+	#discover_area select { font-size: 22px; margin-bottom: 10px; }
+	#discover_area select#load_demo_btn { width: 30%; }
+	#discover_area h1 { margin-bottom: 10px; }
+	.close_x { font-size: 18px; }
+}
 

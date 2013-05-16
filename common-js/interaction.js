@@ -5,11 +5,7 @@ $(document).ready( function() {
 	}
 	IS_TOUCH_DEVICE = detect_touch_device(); // global var!
 	console.log( "touch device? : " + IS_TOUCH_DEVICE );
-	/* FastClick implementation -- holy shit, it's 22k unminified */
-	$(function() {
-		FastClick.attach(document.body);
-	});
-	
+		
 	/* fixed-scroll action for key */
 	var keyScrollTop = $('#lower_left_bar').offset().top;
 	//var left_offset = $('#dynamic_car_display').position().left;
@@ -22,8 +18,7 @@ $(document).ready( function() {
         } else { 
             if( !$('#lower_left_bar').hasClass('fixed') ) {
                 $('#lower_left_bar').addClass('fixed');
-				
-            }
+			}
         }
     }); 
 	// set height of key section to height of window (overflow: auto in styles)
@@ -555,7 +550,7 @@ $(document).ready( function() {
 						$('<option></option>')
 							.val( i )
 							.html( opt_txt )
-						);
+					);
 				}
 				// remove 'disabled' attr for Add Car button
 				$( '#dynamic_picker .loading_mask' ).hide();
@@ -582,66 +577,7 @@ $(document).ready( function() {
 		// Add car to UI (key at left)
 		var trim_name = $( '#trim_select option:selected' ).html();
 		addCarToUI( newcar_index, trim_name );
-		//BEGIN REUSABLE CODE -- moved to addCarToUI
-		/* // CLONE AND POPULATE CAR INFO BOX
-		var new_section = $('#dynamic_car_display .template')
-			.clone()
-			.removeClass( 'template' )
-			.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
-			.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
-			.hover( 
-				function() {
-					highlightCar( newcar_index );
-					$(this).css( 'backgroundColor', '#666666' );
-				}, function() { 
-					unHighlightCar( newcar_index );
-					$(this).css( 'backgroundColor', '#000000' );
-				}
-			);
-		// add car name and trim name
-		new_section.find( '.car_name' )
-			.html( newCar.styleObject.makeName + ' ' + newCar.styleObject.modelName + '<br/>' + newCar.styleObject.year );
-		new_section.find( '.edmunds_link' )
-			.html( $( '#trim_select option:selected' ).html() ); // places same trim text user selected on dropdown, including price
-		// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
-		var edmunds_url = 'http://www.edmunds.com/' + 
-			newCar.styleObject.makeNiceName +
-			'/' + newCar.styleObject.modelNiceName +
-			'/' + newCar.styleObject.year +
-			'/features-specs.html?style=' +
-			newCar.styleObject.id;
-		new_section.find( '.edmunds_link' )
-			.attr( 'href', edmunds_url );
-		// add click listener for REMOVE button
-		new_section.find( '.delete_btn' )
-			.click( function() {
-				//console.log("remove car");
-				var cars_index_to_del = new_section.attr( 'data-carindex' );
-				removeCarData( cars_index_to_del ); // removes all Raph objects
-				// return its color to colors[]
-				colors.push( cars[ cars_index_to_del ].color );
-				// removes <section> from DOM
-				new_section.remove(); 
-		});
-		// DRAGGALBE SORTING
-		$(function() {
-			$( "#dynamic_car_display" ).sortable({
-				revert: true
-			});
-			$( "#dynamic_car_display" ).draggable({
-				connectToSortable: "#sortable",
-				helper: "clone",
-				revert: "invalid"
-			});
-			$( "ul, li" ).disableSelection();
-		});
-		
-		// append new section to DOM
-		new_section
-			.css( 'borderColor', newCar.color )
-			.appendTo( '#dynamic_car_display' )
-			.show(); */
-		// end reusable code		
+			
 		// LOCAL STORAGE - add carName and trimName to car_to_storage, and store to local storage
 		saveCarToLocStorage( newcar_index );
 		
@@ -963,6 +899,12 @@ $(window).bind("load", function() {
 	$.getScript( 'chooser_objects/easyload_menu_object.js', function() {
 		convertObjectToHtml( easyload_menu_object );
 		setEasyloadHandlers();
+	});
+	$.getScript( 'common-js/fastclick.js', function() {
+		/* FastClick implementation -- holy shit, it's 22k unminified */
+		$(function() {
+			FastClick.attach(document.body);
+		});
 	});
 });
 
