@@ -52,17 +52,31 @@ if ( isset( $car1 ) ) { // param exists
 if ( isset( $car2 ) ) { // param exists
 	$id2 = lookup_style_id( $dbtable, $car2 );
 	$url_current .= "&id2=" . $id2;
-	$vs_string .= " vs " . $car2;
+	$vs_string .= " <span class='vs_txt'>vs.</span> " . $car2;
 }
 if ( isset( $car3 ) ) { // param exists
 	$id3 = lookup_style_id( $dbtable, $car3 );
 	$url_current .= "&id3=" . $id3;
-	$vs_string .= " vs " . $car3;
+	$vs_string .= " <span class='vs_txt'>vs.</span><br/>" . $car3;
 }
 if ( isset( $car4 ) ) { // param exists
 	$id4 = lookup_style_id( $dbtable, $car4 );
 	$url_current .= "&id4=" . $id4;
-	$vs_string .= " vs " . $car4;
+	$vs_string .= " <span class='vs_txt'>vs.</span> " . $car4;
+}
+// array of ids:
+$ids_array = "";
+if ( isset( $car1 ) ) {
+	if ( $id1 !== '' ) { $ids_array .= $id1; } 
+}
+if ( isset( $car2 ) ) {
+	if ( $id2 !== '' ) { $ids_array .= ", " . $id2; } 
+}
+if ( isset( $car3 ) ) {
+	if ( $id3 !== '' ) { $ids_array .= ", " . $id3; } 
+}
+if ( isset( $car4 ) ) {
+	if ( $id4 !== '' ) { $ids_array .= ", " . $id4; } 
 }
 
 // replace '-' with spaces for display of model_names
@@ -72,7 +86,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 //header("Location: " . $url_current ); // changes (redirects) the address bar url
 
 
-/* Okay, now output the real html file! */
+/* Okay, now output the markup */
 ?>
 <!doctype html>
 
@@ -113,29 +127,15 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 	
 	<link rel="stylesheet" href="css/style_app.css">
 	
-	<!-- Inject style_id's from SQL lookup of url model_names, so that interaction.js can access them -->
 	<script>
-		var dynamic_ids = [	<?php 
-			if ( isset( $car1 ) ) {
-				if ( $id1 !== '' ) { echo $id1; } 
-			}
-			if ( isset( $car2 ) ) {
-				if ( $id2 !== '' ) { echo ", " . $id2; } 
-			}
-			if ( isset( $car3 ) ) {
-				if ( $id3 !== '' ) { echo ", " . $id3; } 
-			}
-			if ( isset( $car4 ) ) {
-				if ( $id4 !== '' ) { echo ", " . $id4; } 
-			}	
-			?> ];
+		var dynamic_ids = [	<?php echo $ids_array ?> ];
 	</script>
 	
 </head>
 <body>
 		
 		<section id="header">
-			<h1><?php echo $vs_string_pretty ?></h1>
+			<h1 id="versus_title"><?php echo $vs_string_pretty ?></h1>
 			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Vehicle Compare Home" title="<?php $vs_string_pretty ?> &ndash; Noodler Compare"><img id="main_logo" src="images/NoodlerLogo_vehicles_475x100.png" alt="Noodler Visual Vehicle Comparison Engine" Title="Noodler Vehicle Compare Home"></a>
 			<ul id="tabs">
 				<li id="hints_btn">HINTS</li>

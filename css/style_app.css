@@ -105,6 +105,22 @@ ul#tabs li {
 	opacity: .6;
 }
 	ul#tabs li:hover { opacity: 1; }
+h1#versus_title {
+	position: absolute;
+	left: 300px;
+	top: 10px;
+	width: 500px;
+	text-align: center;
+	font-size: 30px;
+	color: #fff;
+	margin-top: 0px;
+	padding-top: 0px;
+	background-color: #000;
+}
+span.vs_txt {
+	font-style: italic;
+	font-weight: normal;
+}
 /* HINTS block */
 #hints {
 	font-size: 16px;

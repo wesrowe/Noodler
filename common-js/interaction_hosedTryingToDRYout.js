@@ -92,7 +92,7 @@ $(document).ready( function() {
 		if ( query_params[ 'id' + i ] !== undefined ) {
 // load up a car by id!  use loadDemoCar( demoStyleObject );
 			var styleID_to_get = query_params[ 'id' + i ];
-			loadCarByStyleID ( styleID_to_get, true );// true=add to LocStor
+			loadCarByStyleID ( styleID_to_get );
 			
 		}
 	}
@@ -133,7 +133,8 @@ $(document).ready( function() {
 					// the real action
 					var styleID_to_get = $(this).parent().attr( 'data-styleID' );
 					//console.log( styleID_to_get );
-					$.getJSON(
+					loadCarByStyleID ( styleID_to_get, true, 'load_ls_car_flag' )
+					/* $.getJSON(
 						'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 						styleID_to_get +
 						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
@@ -149,19 +150,23 @@ $(document).ready( function() {
 							var newcar_index = cars.length - 1; // what's array index of car just added
 							addCarData( cars[ newcar_index ].styleObject, newcar_index );
 							// Add car to UI
-							addCarToUI( newcar_index, remembered_car_obj.trimName );
-							// store newcar_index as data-newcar_index in new_li
-							new_li.attr( 'data-newcar_index', newcar_index );
-							// hide loading gif
-							$( '#remembered_cars_container .loading_mask' ).hide();
+							addCarToUI( newcar_index, remembered_car_obj.trimName ); 
 						} // end getJSON callback
-					);
+					);	
+						// store newcar_index as data-newcar_index in new_li
+						new_li.attr( 'data-newcar_index', newcar_index );
+						// hide loading gif
+						$( '#remembered_cars_container .loading_mask' ).hide();
+					*/
+					// add listing plus buttons to Rememberd Cars List
+				
+					new_li
+						.appendTo( '#remembered_cars_list' )
+						.show();
+					storage_empty = false;
+				
 				}); // end .click()
-				// add listing plus buttons to Rememberd Cars List
-				new_li
-					.appendTo( '#remembered_cars_list' )
-					.show();
-				storage_empty = false;
+				
 			}
 		}
 		if ( storage_empty ) { // UI Changes for first-time visitors
@@ -633,12 +638,12 @@ $(document).ready( function() {
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
 // TO FINISH DE-DUPING THE CODE: ADD A BOOLEAN FOR WHETHER CARS SHOULD BE ADDED TO LOCAL STORAGE, AND USE FN INSTEAD OF REPEATED CODE IN 2 OTHER PLACES NAMED BELOW.
-function loadCarByStyleID ( styleID_to_get, remember_in_ls ) 
+function loadCarByStyleID ( styleID_to_get, remember_in_ls, callback_flag ) 
 {
 	console.log( "retrieving style id: " + styleID_to_get );
 	$.getJSON(
-		// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()and discover menu easyloaders; however, each of those has its own issues that can't be resolved without setting up a callback function of some sort.
-		// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
+		// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
+		// ALSO DUPLICATE of code in discover menu easyloaders
 		'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 		styleID_to_get +
 		'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
@@ -659,11 +664,17 @@ function loadCarByStyleID ( styleID_to_get, remember_in_ls )
 			if ( remember_in_ls ) {
 				saveCarToLocStorage( newcar_index ); // add to local storage
 			}
+			if ( callback_flag !== undefined ) {
+				if ( callback_flag == 'load_ls_car_flag' ) {
+						new_li
+							.appendTo( '#remembered_cars_list' )
+							.show();
+						storage_empty = false;
+				}
+			}
 		}
 	)
 }
-
-
 function saveCarToLocStorage( newcar_index )
 {
 	var newCar = cars[ newcar_index ];
@@ -912,39 +923,17 @@ function setEasyloadHandlers()
 		var original_color = $( this ).css( 'color' ); // preserve for below
 		var that = $( this );
 		$( this ).css( 'color', '#777'); // gray out for "disabled" look
-		loadCarByStyleID ( styleID_to_get, true )
-		/* $.getJSON(
-			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
-			// ALSO DUPLICATE of code in loading demos from query string
-			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
-			styleID_to_get +
-			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-			function ( data ) {  
-				//console.log( new_style_object );
-				// Create object to hold chosen style object and color, and add to cars[]
-				var newCar = {};
-				newCar['styleObject'] = data.styleHolder[0];
-				newCar['color'] = getNextColor();
-				newCar['is_selected'] = false;
-				cars.push( newCar );
-				// call addCarData(car_object, car_counter_index)
-				var newcar_index = cars.length - 1; // array index of added car
-				addCarData( newCar.styleObject, newcar_index );
-				// Add car to UI
-				addCarToUI( newcar_index, newCar.styleObject.name );
-				// add car to local storage
-				saveCarToLocStorage( newcar_index ); // add to local storage
-		} // end getJSON callback	 */	
-	// these last items ARE NOT REUSABLE CODE. Idea for setting up callback detailed in comments inside loadCarByStyleID();
-		// remove disabled attr
-		setTimeout( function() { // cheesy delay to get UX point across without hard coding. :)
+		loadCarByStyleID ( styleID_to_get, true, 'easyloader_flag' );
+		
+	// these last items ARE NOT REUSABLE CODE. For UX purposes, and to keep it simple, I just briefly disable UI before resetting.
+		setTimeout( function() {
+			// remove disabled attr
 			$( '#discover_area select' )
 				.removeAttr( 'disabled' )
 				.css( 'color', original_color );
 			
 			that.val(''); // reset dropdown
-		}, 2000 );
-		
+		}, 1000);
 	});
 }
 
