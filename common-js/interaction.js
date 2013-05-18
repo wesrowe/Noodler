@@ -67,8 +67,9 @@ $(document).ready( function() {
 	
 	// QUERY STRING parsing
 	var query_params = getUrlVars();
+	
 	// load demo from url
-	if ( query_params[ 'demo' ] != undefined ) {
+	if ( query_params[ 'demo' ] !== undefined ) {
 		var chosen_demo = query_params[ 'demo' ];
 		var demo_js_url = "common-js/" + chosen_demo + '.js';
 		console.log( "demo-load string found");
@@ -77,6 +78,53 @@ $(document).ready( function() {
 			loadPageSpecificDemo();
 		});
 	}
+	
+// TO FINISH DE-DUPING THE CODE: ADD A BOOLEAN FOR WHETHER CARS SHOULD BE ADDED TO LOCAL STORAGE, AND USE FN INSTEAD OF REPEATED CODE IN 2 OTHER PLACES NAMED BELOW.
+	function loadCarByStyleID ( styleID_to_get ) 
+	{
+		console.log( "retrieving style id: " + styleID_to_get );
+		$.getJSON(
+			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
+			// ALSO DUPLICATE of code in discover menu easyloaders
+			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
+			styleID_to_get +
+			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+			function ( data ) {  
+				//console.log( new_style_object );
+				// Create object to hold chosen style object and color, and add to cars[]
+				var newCar = {};
+				newCar['styleObject'] = data.styleHolder[0];
+				newCar['color'] = getNextColor();
+				newCar['is_selected'] = false;
+				cars.push( newCar );
+				// call addCarData(car_object, car_counter_index)
+				var newcar_index = cars.length - 1; // array index of added car
+				addCarData( newCar.styleObject, newcar_index );
+				// Add car to UI
+				addCarToUI( newcar_index, newCar.styleObject.name );
+				// add car to local storage
+				saveCarToLocStorage( newcar_index ); // add to local storage
+			}
+		)
+	}
+	// load demo from PHP pass-in, var called dynamic_ids
+	for ( var n = 0; n < dynamic_ids.length; n++ ) {
+		var styleID_to_get = dynamic_ids[ n ];
+		console.log( "inside php style loader" );
+		loadCarByStyleID ( styleID_to_get );
+	}
+	
+	
+	// look for id1, id2, etc. query parameters
+	for ( var i = 1; i <= 20; i++ ) {
+		if ( query_params[ 'id' + i ] !== undefined ) {
+// load up a car by id!  use loadDemoCar( demoStyleObject );
+			var styleID_to_get = query_params[ 'id' + i ];
+			loadCarByStyleID ( styleID_to_get );
+			
+		}
+	}
+	
 	// load demo from select dropdown
 	$( '#load_demo_btn' ).change( function() {
 		var chosen_demo = $( '#load_demo_btn option:selected' ).val();
@@ -862,6 +910,7 @@ function setEasyloadHandlers()
 		$( this ).css( 'color', '#777'); // gray out for "disabled" look
 		$.getJSON(
 			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
+			// ALSO DUPLICATE of code in loading demos from query string
 			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 			styleID_to_get +
 			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
