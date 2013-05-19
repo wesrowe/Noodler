@@ -9,7 +9,7 @@ $(document).ready( function() {
 	/* fixed-scroll action for key */
 	var keyScrollTop = $('#lower_left_bar').offset().top;
 	//var left_offset = $('#dynamic_car_display').position().left;
-    if ( !IS_TOUCH_DEVICE ) {
+    //if ( !IS_TOUCH_DEVICE ) {
 		$(window).scroll( function() {
 			if ( keyScrollTop >= $(window).scrollTop() ) {
 				if ($('#lower_left_bar').hasClass('fixed') ) {
@@ -32,10 +32,10 @@ $(document).ready( function() {
 			$( '#lower_left_bar' ).css( 'height', newheight );
 		});
 		
-	}
-	if ( IS_TOUCH_DEVICE ) {
+	//}
+	/* if ( IS_TOUCH_DEVICE ) {
 		$( '#lower_left_bar' ).css( 'overflow', 'visible' );
-	}
+	} */
 	// end fixed-scroll
 	
 	// Papers -- HTML template cloner for papers
@@ -713,7 +713,7 @@ function addCarToUI( newcar_index, trim_name )
 		.removeClass( 'template' )
 		.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
 		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
-		.on('touchstart click', function(event){
+		.on(/* 'touchstart */ 'click', function(event){
 			event.stopPropagation();
 			event.preventDefault();
 			if (event.handled !== true) {
