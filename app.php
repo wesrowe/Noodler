@@ -107,7 +107,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 	
 	<meta charset="utf-8">
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+	<meta name="viewport" content="width=device-width, initial-scale=2, user-scalable=no"/>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>

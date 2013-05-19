@@ -281,7 +281,7 @@ section#left_bar {
 	width: 220px; /* added 20px to allow for scrollbar */
 	/* background-color: #000; */
 	z-index: 10;
-	height: 700px;
+	height: 1500px;
 	overflow: auto;
 }
 ul#dynamic_car_display {

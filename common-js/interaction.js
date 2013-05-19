@@ -9,29 +9,33 @@ $(document).ready( function() {
 	/* fixed-scroll action for key */
 	var keyScrollTop = $('#lower_left_bar').offset().top;
 	//var left_offset = $('#dynamic_car_display').position().left;
-    $(window).scroll( function() {
-        if ( keyScrollTop >= $(window).scrollTop() ) {
-            if ($('#lower_left_bar').hasClass('fixed') ) {
-                $('#lower_left_bar').removeClass('fixed');
-				
-            }
-        } else { 
-            if( !$('#lower_left_bar').hasClass('fixed') ) {
-                $('#lower_left_bar').addClass('fixed');
+    if ( !IS_TOUCH_DEVICE ) {
+		$(window).scroll( function() {
+			if ( keyScrollTop >= $(window).scrollTop() ) {
+				if ($('#lower_left_bar').hasClass('fixed') ) {
+					$('#lower_left_bar').removeClass('fixed');
+					
+				}
+			} else { 
+				if( !$('#lower_left_bar').hasClass('fixed') ) {
+					$('#lower_left_bar').addClass('fixed');
+				}
 			}
-        }
-    }); 
-	// set height of key section to height of window (overflow: auto in styles)
-	$( '#lower_left_bar' ).css( 'height', function() {
-		return $(window).height() - keyScrollTop;
-	});
-	// in case of window resize, reset 'height'...
-	$(window).resize(function() 
-	{
-		var newheight = $(window).height();
-		$( '#lower_left_bar' ).css( 'height', newheight );
-	});
-	
+		}); 
+		// set height of key section to height of window (overflow: auto in styles)
+		$( '#lower_left_bar' ).css( 'height', function() {
+			return $(window).height() - keyScrollTop;
+		});
+		// in case of window resize, reset 'height'...
+		$(window).resize( function() {
+			var newheight = $(window).height();
+			$( '#lower_left_bar' ).css( 'height', newheight );
+		});
+		
+	}
+	if ( IS_TOUCH_DEVICE ) {
+		$( '#lower_left_bar' ).css( 'overflow', 'visible' );
+	}
 	// end fixed-scroll
 	
 	// Papers -- HTML template cloner for papers
@@ -80,12 +84,13 @@ $(document).ready( function() {
 	}
 	
 	// load demo from PHP pass-in, var called dynamic_ids
-	for ( var n = 0; n < dynamic_ids.length; n++ ) {
-		var styleID_to_get = dynamic_ids[ n ];
-		console.log( "inside php style loader" );
-		loadCarByStyleID ( styleID_to_get, true ); // true=add to LocStor
-	}
-	
+	/* if ( dynamic_ids !== undefined ) {
+		for ( var n = 0; n < dynamic_ids.length; n++ ) {
+			var styleID_to_get = dynamic_ids[ n ];
+			console.log( "inside php style loader" );
+			loadCarByStyleID ( styleID_to_get, true ); // true=add to LocStor
+		}
+	} */
 	
 	// look for id1, id2, etc. query parameters
 	for ( var i = 1; i <= 20; i++ ) {
@@ -346,14 +351,16 @@ $(document).ready( function() {
 					isExpanded[ index ] = true;
 					hideshowAllInSection( index, "show", 300 );
 					changeSpread( index, slider_value, 300, false ); // section id, new spread, timing
-					$(this).parent().parent().find( '.spread_adjust_container' ).fadeIn();
+					if ( !IS_TOUCH_DEVICE ) { // tiny arrows
+						$(this).parent().parent().find( '.spread_adjust_container' ).fadeIn();
+					}
 					$(this).parent().find( '.expand_indicator' ).html( '&ndash;' );
 				},
 				function() {  // collapse
 					isExpanded[ index ] = false;
 					hideshowAllInSection( index, "hide", 300); 
 					changeSpread( index, 0, 300, true ); // section id, new spread, timing
-					$(this).parent().parent().find( '.spread_adjust_container' ).hide();
+					if ( !IS_TOUCH_DEVICE ) { $(this).parent().parent().find( '.spread_adjust_container' ).hide(); }
 					$(this).parent().find( '.expand_indicator' ).html( '+' );
 				}
 			); 
@@ -632,12 +639,12 @@ $(document).ready( function() {
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
-// TO FINISH DE-DUPING THE CODE: ADD A BOOLEAN FOR WHETHER CARS SHOULD BE ADDED TO LOCAL STORAGE, AND USE FN INSTEAD OF REPEATED CODE IN 2 OTHER PLACES NAMED BELOW.
+
 function loadCarByStyleID ( styleID_to_get, remember_in_ls ) 
 {
 	console.log( "retrieving style id: " + styleID_to_get );
 	$.getJSON(
-		// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()and discover menu easyloaders; however, each of those has its own issues that can't be resolved without setting up a callback function of some sort.
+		// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar(); however, it has scope issues that can't be resolved without setting up a callback function of some sort.
 		// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
 		'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
 		styleID_to_get +
@@ -913,29 +920,7 @@ function setEasyloadHandlers()
 		var that = $( this );
 		$( this ).css( 'color', '#777'); // gray out for "disabled" look
 		loadCarByStyleID ( styleID_to_get, true )
-		/* $.getJSON(
-			// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar()
-			// ALSO DUPLICATE of code in loading demos from query string
-			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
-			styleID_to_get +
-			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-			function ( data ) {  
-				//console.log( new_style_object );
-				// Create object to hold chosen style object and color, and add to cars[]
-				var newCar = {};
-				newCar['styleObject'] = data.styleHolder[0];
-				newCar['color'] = getNextColor();
-				newCar['is_selected'] = false;
-				cars.push( newCar );
-				// call addCarData(car_object, car_counter_index)
-				var newcar_index = cars.length - 1; // array index of added car
-				addCarData( newCar.styleObject, newcar_index );
-				// Add car to UI
-				addCarToUI( newcar_index, newCar.styleObject.name );
-				// add car to local storage
-				saveCarToLocStorage( newcar_index ); // add to local storage
-		} // end getJSON callback	 */	
-	// these last items ARE NOT REUSABLE CODE. Idea for setting up callback detailed in comments inside loadCarByStyleID();
+		
 		// remove disabled attr
 		setTimeout( function() { // cheesy delay to get UX point across without hard coding. :)
 			$( '#discover_area select' )
@@ -957,12 +942,12 @@ $(window).bind("load", function() {
 		convertObjectToHtml( easyload_menu_object );
 		setEasyloadHandlers();
 	});
-	$.getScript( 'common-js/fastclick.js', function() {
-		/* FastClick implementation -- holy shit, it's 22k unminified */
+	/* $.getScript( 'common-js/fastclick.js', function() {
+		// FastClick implementation -- holy shit, it's 22k unminified 
 		$(function() {
 			FastClick.attach(document.body);
 		});
-	});
+	}); */
 });
 
 
