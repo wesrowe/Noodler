@@ -876,7 +876,7 @@ function loadPageSpecificDemo()
 function getUrlVars()
 {
     var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('+'); 
     for(var i = 0; i < hashes.length; i++)
     {
         hash = hashes[i].split('=');
@@ -899,10 +899,13 @@ function updateMailtoURL()
 	for (var j = 0; j < email_array.length; j++ ) {
 		if ( j == 0 ) { 
 			mailto_url += "?"; 
-		} else { mailto_url += "&"; }
+		} else { mailto_url += "+"; }
 		mailto_url += "id" + ( j + 1 ) + "=" + email_array[ j ];
 	}
-	$( '#emailer' ).attr( 'href', 'mailto:?body='+ mailto_url );
+	var body_str = 'mailto:?body=Check out this car comparison I did on Noodler Compare. Add a car or two you like and send it back to me!%0A%0AThe cars I picked will load automatically:%0A'+ mailto_url + '%0A%0Ac/o www.noodlercompare.com';
+	body_str.replace( ' ', '%20' );
+	console.log( body_str );
+	$( '#emailer' ).attr( 'href', body_str );
 }
 
 

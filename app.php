@@ -157,7 +157,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			?></h1>
 			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
 			<ul id="tabs">
-				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', '0', false]); console.log('clicked discover');">DISCOVER</li>
+				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', '0', false]); console.log('clicked discover');">POPULAR</li>
 				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked hints');">HINTS</li>
 			</ul>
 			<div id="demo_announcement">
@@ -258,7 +258,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			
 			<div style="display: none;" id="discover_area">
 				
-				<h1>Discover...</h1>
+				<h1>Popular...</h1>
 				<p class="close_x">CLOSE X</p>
 				<select id="load_demo_btn">
 					<option value>Choose a demo</option>
