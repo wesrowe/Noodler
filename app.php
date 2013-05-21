@@ -43,26 +43,31 @@ function lookup_style_id( $table, $car_name ) {
 }
 // "VS" string that will be used to customize tags.
 $vs_string = "";
+$list_string = "";
 
 if ( isset( $car1 ) ) { // param exists
 	$id1 = lookup_style_id( $dbtable, $car1 );
 	$url_current .= "&id1=" . $id1;
 	$vs_string .= $car1;
+	$list_string .= $car1;
 }
 if ( isset( $car2 ) ) { // param exists
 	$id2 = lookup_style_id( $dbtable, $car2 );
 	$url_current .= "&id2=" . $id2;
 	$vs_string .= " <span class='vs_txt'>vs.</span> " . $car2;
+	$list_string .= ", " . $car2;
 }
 if ( isset( $car3 ) ) { // param exists
 	$id3 = lookup_style_id( $dbtable, $car3 );
 	$url_current .= "&id3=" . $id3;
 	$vs_string .= " <span class='vs_txt'>vs.</span><br/>" . $car3;
+	$list_string .= ", " . $car3;
 }
 if ( isset( $car4 ) ) { // param exists
 	$id4 = lookup_style_id( $dbtable, $car4 );
 	$url_current .= "&id4=" . $id4;
 	$vs_string .= " <span class='vs_txt'>vs.</span> " . $car4;
+	$list_string .= ", " . $car4;
 }
 // array of ids:
 $ids_array = "";
@@ -80,7 +85,8 @@ if ( isset( $car4 ) ) {
 }
 
 // replace '-' with spaces for display of model_names
-$vs_string_pretty = str_replace ( "-", " ", $vs_string );
+$vs_string_pretty = str_replace ( "-", " ", $vs_string ); // using hyphens for spaces in url params
+$list_string_pretty = str_replace ( "-", " ", $list_string );
 
 //echo $url_current; // original url plus params holding style_ids.
 //header("Location: " . $url_current ); // changes (redirects) the address bar url
@@ -95,13 +101,17 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
                   website: http://ogp.me/ns/website#">
 
-	<title>NOODLER Cars Visual Comparison</title>
+	<title><?php 
+		$s = ( $vs_string_pretty !== "" ) ? $vs_string_pretty : "Compare Cars Visually";
+		echo $s .= "&ndash; Noodler Compare" ;
+	?> &ndash; Noodler Compare</title>
 	
+	<meta property="fb:admins" content="1034261419" />
 	<meta property="og:title" content="Compare Cars with Noodler"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.noodlercompare.com"/>
     <meta property="og:image" content="http://www.noodlercompare.com/images/NoodlerClose-up_sq.png"/>
-    <meta property="og:site_name" content="Noodler Vehicle Compare"/>
+    <meta property="og:site_name" content="Noodler Car Compare"/>
     <meta property="og:description"
           content="Noodler makes vehicle comparison fun! See similarities and differences at a glance. Data from Edmunds.com, the highly reputable research site."/>
 	
@@ -112,7 +122,13 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<meta name="description" content="Noodler makes vehicle comparison elegant and fun! See similarities and differences at a glance. Data from Edmunds.com, the highly reputable research site.">
+	<meta name="description" content="Noodler Compare lets you see the key differences YOU care about, between the <?php 
+		if ( $list_string_pretty != "" ) { 
+			echo $list_string_pretty; 
+		} else { 
+			echo "cars you care about";
+		}
+	?>. Specs and pricing data by Edmunds.com.">
 		
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="common-js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
@@ -135,11 +151,14 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 <body>
 		
 		<section id="header">
-			<h1 id="versus_title"><?php echo $vs_string_pretty ?></h1>
-			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Vehicle Compare Home" title="<?php $vs_string_pretty ?> &ndash; Noodler Compare"><img id="main_logo" src="images/NoodlerLogo_vehicles_475x100.png" alt="Noodler Visual Vehicle Comparison Engine" Title="Noodler Vehicle Compare Home"></a>
+			<h1 id="versus_title"><?php 
+				$vs_string_pretty .= " <span class='vs_txt'>vs.</span> <span id='anything'>Anything</span>";
+				echo $vs_string_pretty 
+			?></h1>
+			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
 			<ul id="tabs">
-				<li id="hints_btn">HINTS</li>
-				<li id="discover_btn">DISCOVER</li>
+				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', '0', false]); console.log('clicked discover');">DISCOVER</li>
+				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked hints');">HINTS</li>
 			</ul>
 			<div id="demo_announcement">
 				<h1>A Demo has loaded for you.</h1>
@@ -164,7 +183,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 		
 			<div id="dynamic_picker">
 				<!-- <p class="close_handle">&lt; &lt; &lt; CLOSE &lt; &lt; &lt;</p> --> 
-				<div class="picker_title">
+				<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'AddCar', '0', true]); console.log('opened/closed');">
 					<span class="picker_close_arrows"></span>
 					<span class="title_span">Add a Vehicle</span>
 					<!-- <span class="picker_x">X</span> -->
@@ -172,7 +191,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 				</div>
 				<div id="options_list">
 					<select id="make_select" name="make">
-						<option value>Select Make</option>  <!-- empty "value" required for one-choice select lists -->
+						<option  onclick="console.log('make dropdown');" value>Select Make</option>  <!-- empty "value" required for one-choice select lists -->
 					</select>
 					<select disabled="disabled" id="model_select" name="model" disabled="disabled">
 						<option value>Select Model</option> 
@@ -188,14 +207,14 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 				</div>
 			</div>
 			<div id="remembered_cars_container">
-					<div class="picker_title">
+					<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'RememberedCars', '0', true]); console.log('opened/closed');">
 						<span class="picker_close_arrows"></span>
 						<span class="title_span">My Rides</span>
 						<!-- <span class="picker_x">X</span> -->
 					</div>
 					<ul id="remembered_cars_list">
 						<li class="template remembered_car" style="display:none">
-							<button class="add_remembered_car_btn">Add to Compare</button>
+							<button class="add_remembered_car_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Remembered car', 'Added', '1', false]);">Add to Compare</button>
 							<span class="car_name_rem"></span><br/><span class="trim_level_rem"></span>
 						</li>
 					</ul>
@@ -205,7 +224,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 			<div id="low_left_mask"></div>
 			<div id="lower_left_bar">
 				<ul id="dynamic_car_display"> <!-- the color-keyed boxes identifying cars -->
-					<li class="template car_info_box" style="display:none">
+					<li class="template car_info_box" style="display:none" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked key tile');">
 						<h3 class="car_name"></h3>
 						<p class="trim_level"><a class="edmunds_link"  target="_blank"></a></p>
 						<div class="delete_btn">X</div>
@@ -257,7 +276,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 					<div class="paper" ></div>
 					
 					<div class="button_area">
-						<p class="expander"><span class="expand_indicator">+</span>&nbsp;&nbsp;<span class="section_title"></span></p>
+						<p class="expander" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Expander', 'Clicked', '0', false]); console.log('clicked expander');"><span class="expand_indicator">+</span>&nbsp;&nbsp;<span class="section_title"></span></p>
 							
 					</div>
 				
@@ -275,7 +294,7 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 				
 				<div class="clear"></div>
 			</div>	<!-- /main_paper_container -->
-			<a href="http://www.edmunds.com/" target="_new"><img id="edmunds_credit" src="images/edmunds_api150x30vb.png" title="Data provided by Edmunds.com" alt="Data via the Edmunds API"></a>
+			<a href="http://www.edmunds.com/" target="_new"><img id="edmunds_credit" src="images/edmunds_api150x30vb.png" title="Data provided by Edmunds.com" alt="Data via the Edmunds API" onclick="_gaq.push(['_trackEvent', 'OutboundLink', 'EdmundsCredit', 'Clicked', '0', false]);"></a>
 			<p class="copyright">Code and design <br/>&copy;2013 Wesley Rowe</p>
 			<div id="privacy_policy">
 				<div><span id="pp_bright_text">Privacy Policy:</span> This website's server does not store information of any kind regarding you or your vehicle interests. Noodler does utilize your computer's hard drive, if your browser allows it, to remember a few facts about cars you've compared so that you can find them again easily. Your use of this web application confirms that you are okay with that.</div>
@@ -289,6 +308,8 @@ $vs_string_pretty = str_replace ( "-", " ", $vs_string );
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
   _gaq.push(['_setAccount', 'UA-38228914-1']);
   _gaq.push(['_trackPageview']);
 

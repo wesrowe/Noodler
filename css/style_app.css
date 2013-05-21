@@ -56,22 +56,36 @@ section#header {
 #main_logo {
 	/* margin-top: 30px; */
 	margin-left: 30px;
+	margin-top: 15px;
 	float: left;
 }
 #fb_share {
 	position: absolute;
-	left: 600px;
+	margin-top: 0px;
+	left: 400px;
 	top: 0px;
 	padding-top: 5px;
 	font-size: 16px;
 	cursor: pointer;
 	color: #ccf;
+	z-index: 13;
+	width: 500px;
 }
 	#fb_share :hover {
-		color: #fff;
+		color: #aaf;
 	}
-
-#fb_share  img { vertical-align: middle; }
+#sharer p { 
+	display: inline;
+	float: left;
+	margin: 5px 0px;
+}
+#fb_icon { margin-right: 14px; margin-top: 0px; /* vertical-align: middle; */ }
+#emailer,
+#emailer:visited { 
+	font-weight: bold;
+	color: #88f;
+	text-decoration: none;
+}
 #helpful_hints_container {
 	/* position: absolute;
 	left: 250px;
@@ -303,7 +317,7 @@ ul#dynamic_car_display {
 		-webkit-transition: background-color 300ms linear; /* Safari and Chrome */
 		-o-transition: background-color 300ms linear; /* Opera */
 	}
-		.car_info_box:hover { background-color: #333; }
+		.car_info_box:hover { background-color: #111; cursor: pointer; }
 	.car_info_box  h3 {
 		margin: 3px 4px;
 	}

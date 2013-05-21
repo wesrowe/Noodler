@@ -1,41 +1,48 @@
+// Set-up parameters
+var HOME_URL = 'http://www.noodlercompare.com/app.html';
+
 $(document).ready( function() {
+	
+	// primitive FB share button
+	$( '#fb_icon' ).click( function () {
+		console.log("shared");
+		var url = 'https://www.facebook.com/sharer/sharer.php?u=';
+		url += encodeURIComponent(location.href);
+		window.open(url, 'fbshare', 'width=640,height=320');
+	});
+	
 	// is browser touch-compatible? http://stackoverflow.com/a/13470899
 	function detect_touch_device () {
 		return  ( !!('ontouchstart' in window) || !!('msmaxtouchpoints' in window.navigator) );
 	}
 	IS_TOUCH_DEVICE = detect_touch_device(); // global var!
 	console.log( "touch device? : " + IS_TOUCH_DEVICE );
-		
+	
 	/* fixed-scroll action for key */
 	var keyScrollTop = $('#lower_left_bar').offset().top;
-	//var left_offset = $('#dynamic_car_display').position().left;
-    //if ( !IS_TOUCH_DEVICE ) {
-		$(window).scroll( function() {
-			if ( keyScrollTop >= $(window).scrollTop() ) {
-				if ($('#lower_left_bar').hasClass('fixed') ) {
-					$('#lower_left_bar').removeClass('fixed');
-					
-				}
-			} else { 
-				if( !$('#lower_left_bar').hasClass('fixed') ) {
-					$('#lower_left_bar').addClass('fixed');
-				}
+	
+	$(window).scroll( function() {
+		if ( keyScrollTop >= $(window).scrollTop() ) {
+			if ($('#lower_left_bar').hasClass('fixed') ) {
+				$('#lower_left_bar').removeClass('fixed');
+				
 			}
-		}); 
-		// set height of key section to height of window (overflow: auto in styles)
-		$( '#lower_left_bar' ).css( 'height', function() {
-			return $(window).height() - keyScrollTop;
-		});
-		// in case of window resize, reset 'height'...
-		$(window).resize( function() {
-			var newheight = $(window).height();
-			$( '#lower_left_bar' ).css( 'height', newheight );
-		});
-		
-	//}
-	/* if ( IS_TOUCH_DEVICE ) {
-		$( '#lower_left_bar' ).css( 'overflow', 'visible' );
-	} */
+		} else { 
+			if( !$('#lower_left_bar').hasClass('fixed') ) {
+				$('#lower_left_bar').addClass('fixed');
+			}
+		}
+	}); 
+	// set height of key section to height of window (overflow: auto in styles)
+	$( '#lower_left_bar' ).css( 'height', function() {
+		return $(window).height() - keyScrollTop;
+	});
+	// in case of window resize, reset 'height'...
+	$(window).resize( function() {
+		var newheight = $(window).height();
+		$( '#lower_left_bar' ).css( 'height', newheight );
+	});
+	
 	// end fixed-scroll
 	
 	// Papers -- HTML template cloner for papers
@@ -83,16 +90,16 @@ $(document).ready( function() {
 		});
 	}
 	
-	// load demo from PHP pass-in, var called dynamic_ids
-	/* if ( dynamic_ids !== undefined ) {
+	// PHP -- load demo from PHP pass-in, var called dynamic_ids
+	if ( dynamic_ids !== undefined ) {
 		for ( var n = 0; n < dynamic_ids.length; n++ ) {
 			var styleID_to_get = dynamic_ids[ n ];
 			console.log( "inside php style loader" );
 			loadCarByStyleID ( styleID_to_get, true ); // true=add to LocStor
 		}
-	} */
+	}
 	
-	// look for id1, id2, etc. query parameters
+	// EMAILED cars -- look for id1, id2, etc. query parameters
 	for ( var i = 1; i <= 20; i++ ) {
 		if ( query_params[ 'id' + i ] !== undefined ) {
 // load up a car by id!  use loadDemoCar( demoStyleObject );
@@ -117,9 +124,7 @@ $(document).ready( function() {
 		var storage_empty = true;
 		for ( var i = 1; i < 100; i++ ){
 			if ( localStorage.getItem( '' + i ) !== null ) {
-				next_ls_key = i + 1; // basically remember highest occupied key + 1
-				//console.log("incremented next_ls_key");
-				//console.log( JSON.parse( localStorage.getItem ( '' + i ) ) );
+				next_ls_key = i + 1; // remember highest occupied key + 1
 				var remembered_car_obj = JSON.parse( localStorage.getItem ( '' + i ) );
 				// CLONE and populate template div.template.remembered_car
 				var new_li = $('.remembered_car.template')
@@ -169,6 +174,17 @@ $(document).ready( function() {
 				storage_empty = false;
 			}
 		}
+		// sort list alphabetically -- SO #1134976
+		function sortUL(selector) 
+		{
+			$(selector).children("li").sort(function(a, b) {
+				var upA = $(a).text().toUpperCase();
+				var upB = $(b).text().toUpperCase();
+				return (upA < upB) ? -1 : (upA > upB) ? 1 : 0;
+			}).appendTo(selector);
+		}
+		sortUL("#remembered_cars_list");
+		
 		if ( storage_empty ) { // UI Changes for first-time visitors
 			var LS_helpful_tip = 'The next time you come to this site, cars you\'ve looked at previously will be waiting for you here.'
 			$( '<li>' + LS_helpful_tip + '</li>' )
@@ -795,6 +811,8 @@ function addCarToUI( newcar_index, trim_name )
 		.css( 'borderColor', newCar.color )
 		.appendTo( '#dynamic_car_display' )
 		.show();
+	// emailer
+	updateMailtoURL();
 }
 /* DEMOS */
 function loadDemoCar( demoStyleObject ) 
@@ -866,6 +884,25 @@ function getUrlVars()
         vars[hash[0]] = hash[1];
     }
     return vars;
+}
+// Emailing noodles
+function updateMailtoURL()
+{ // called when car added to UI (key tile)
+	var mailto_url = HOME_URL; // .html vs .php, top of this file
+	var email_array = [];
+	if ( cars !== undefined ) {
+		for ( var i = 0; i < cars.length; i++ ) {
+			email_array.push( cars[ i ].styleObject.id );
+			console.log( email_array[i] )
+		}
+	}
+	for (var j = 0; j < email_array.length; j++ ) {
+		if ( j == 0 ) { 
+			mailto_url += "?"; 
+		} else { mailto_url += "&"; }
+		mailto_url += "id" + ( j + 1 ) + "=" + email_array[ j ];
+	}
+	$( '#emailer' ).attr( 'href', 'mailto:?body='+ mailto_url );
 }
 
 
@@ -942,12 +979,13 @@ $(window).bind("load", function() {
 		convertObjectToHtml( easyload_menu_object );
 		setEasyloadHandlers();
 	});
-	/* $.getScript( 'common-js/fastclick.js', function() {
+	$.getScript( 'common-js/fastclick.js', function() {
 		// FastClick implementation -- holy shit, it's 22k unminified 
 		$(function() {
 			FastClick.attach(document.body);
 		});
-	}); */
+	});
+	// $.getScript( 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-519a904f584c0b14#async=1' ); // NOTE: addthis uses cookies to track my users, and it will slow the site.
 });
 
 

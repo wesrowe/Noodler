@@ -7,11 +7,12 @@
 
 	<title>NOODLER Cars Visual Comparison</title>
 	
+	<meta property="fb:admins" content="1034261419" />
 	<meta property="og:title" content="Compare Cars with Noodler"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.noodlercompare.com"/>
     <meta property="og:image" content="http://www.noodlercompare.com/images/NoodlerClose-up_sq.png"/>
-    <meta property="og:site_name" content="Noodler Vehicle Compare"/>
+    <meta property="og:site_name" content="Noodler Car Compare"/>
     <meta property="og:description"
           content="Noodler makes vehicle comparison fun! See similarities and differences at a glance. Data from Edmunds.com, the highly reputable research site."/>
 	
@@ -28,12 +29,16 @@
 	
 	<!-- <script type="text/javascript" src="chooser_objects/easyload_menu_object.js"></script> -->
 	
+	<script type="text/javascript" src="common-js/fastclick.js"></script>
+	
 	<script type="text/javascript" src="chooser_objects/makeQuery_newandusedmakes_noYearOption.js"></script>
 	
 	<script type="text/javascript" src="common-js/interaction.js"></script>
 	
 	<script src="common-js/carviz.js"></script>
-	
+	<script>
+		var dynamic_ids = [	]; // php version populates
+	</script>
 	<link rel="stylesheet" href="css/style_app.css">
 	
 	
@@ -42,7 +47,7 @@
 		
 		<section id="header">
 			
-			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Vehicle Compare Home" title="Noodler Vehicle Compare Home"><img id="main_logo" src="images/NoodlerLogo_vehicles_475x100.png" alt="Noodler Visual Vehicle Comparison Engine" Title="Noodler Vehicle Compare Home"></a>
+			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Vehicle Compare Home" title="Noodler Vehicle Compare Home"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Visual Vehicle Comparison Engine" Title="Noodler Vehicle Compare Home"></a>
 			<ul id="tabs">
 				<li id="hints_btn">HINTS</li>
 				<li id="discover_btn">DISCOVER</li>
@@ -54,16 +59,29 @@
 				
 			<div class="clear"></div>
 		</section>
-			<!-- <div id="fb_share">
-					<div id="sharer">Share on <img src="images/facebook.png" alt="Share on Facebook"/></div>
-						<script>
-						document.getElementById('sharer').onclick = function () {
-						  var url = 'https://www.facebook.com/sharer/sharer.php?u=';
-						  url += encodeURIComponent(location.href);
-						  window.open(url, 'fbshare', 'width=640,height=320');
-						};
-						</script>
-			</div> -->
+			<div id="fb_share">
+				<!-- AddThis Button BEGIN -->
+				<!-- <div class="addthis_toolbox addthis_default_style ">
+				<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+				<a class="addthis_button_tweet"></a>
+				<a class="addthis_button_pinterest_pinit"></a>
+				<a class="addthis_counter addthis_pill_style"></a>
+				</div> -->
+				<!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-519a904f584c0b14#async=1"></script> -->
+				
+				<!-- AddThis Button END -->
+				<div id="sharer">
+					<p>
+						<img id="fb_icon" src="images/facebook.png" alt="Share on Facebook"/>
+					</p>
+					<p>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-text="compared cars with Noodler" data-via="noodlerviz" data-size="large" data-hashtags="noodlercarcompare">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 't	witter-wjs');</script>
+					</p>
+					<p><a target="_blank" id="emailer">Save your work<br/>by email</a></p>
+				</div>
+				
+			</div> 
 		<div id="outside_left_mask"></div>
 		<section id="left_bar">
 			<div id="demo_x_flasher">X</div>
@@ -101,7 +119,7 @@
 					</div>
 					<ul id="remembered_cars_list">
 						<li class="template remembered_car" style="display:none">
-							<button class="add_remembered_car_btn">Add to Compare</button>
+							<button class="add_remembered_car_btn" onclick="console.log('button clicked!');">VIEW</button>
 							<span class="car_name_rem"></span><br/><span class="trim_level_rem"></span>
 						</li>
 					</ul>
@@ -184,7 +202,7 @@
 			<a href="http://www.edmunds.com/" target="_new"><img id="edmunds_credit" src="images/edmunds_api150x30vb.png" title="Data provided by Edmunds.com" alt="Data via the Edmunds API"></a>
 			<p class="copyright">Code and design <br/>&copy;2013 Wesley Rowe</p>
 			<div id="privacy_policy">
-				<div><span id="pp_bright_text">Privacy Policy:</span> This website's server does not store information of any kind regarding you or your vehicle interests. Noodler does utilize your computer's hard drive, if your browser allows it, to remember a few facts about cars you've compared so that you can find them again easily. Your use of this web application confirms that you are okay with that.</div>
+				<div><span id="pp_bright_text">Privacy Policy:</span> This website's server does not store information of any kind regarding you or your vehicle interests. Noodler does utilize your device's storage, if your browser allows it, to remember a few facts about cars you've compared so that you can find them again easily. Your use of this web application confirms that you are okay with that.</div>
 			</div>
 		</div> <!-- content_area -->  
 
@@ -195,7 +213,8 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-38228914-1']);
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);_gaq.push(['_setAccount', 'UA-38228914-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
