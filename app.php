@@ -244,7 +244,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 						</p>
 						<p class="tile_button_row">
 							<!--<img class="add_trims_btn" src="images/plus_btn_32.png"/>-->
-							<a class="edmunds_link" target="_blank"><img class="edmunds_btn" src="images/Edmunds_logo_87x28.png"/></a>
+							<a class="edmunds_link" target="_blank"><img class="edmunds_btn" title="View car at Edmunds.com" src="images/Edmunds_link_logo_74x24.png"/></a>
 						</p>
 						<div class="delete_btn">X</div>
 					</li>
