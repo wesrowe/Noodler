@@ -340,7 +340,17 @@ ul#dynamic_car_display {
 		color: #888;
 		font-weight: bold;
 	}
-/* FIXED-SCROLL KEY AREA */
+.tile_button_row {
+	/* has to be hidden in js b/c of .show() propagates down-DOM */
+}
+	.edmunds_btn {
+		
+	}
+	.add_trims_btn { 
+		
+	}
+	
+	/* FIXED-SCROLL KEY AREA */
 #lower_left_bar.fixed { position: fixed; top: 0px; }
 
 

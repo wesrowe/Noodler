@@ -742,23 +742,25 @@ function addCarToUI( newcar_index, trim_name )
 		.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
 		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
 		.on(/* 'touchstart */ 'click', function(event){
-			event.stopPropagation();
-			event.preventDefault();
-			if (event.handled !== true) {
-				if ( !cars[ newcar_index ].is_selected ) { // it's not selected, so select & highlight
-					cars[ newcar_index ].is_selected = true;
-					updateSelectedCars( newcar_index, 'add' );
-					highlightCar( newcar_index );
-				} else {  // already selected, so unhighlight and unselect
-					cars[ newcar_index ].is_selected = false;
-					updateSelectedCars( newcar_index, 'remove' );
-					unHighlightCar( newcar_index );
-					
-				}
-				event.handled = true; // stops the second event from firing
-			} else {
-				return false;
+			//event.stopPropagation(); NOTE: stopProp breaks any links inside of this li. If you must restore this touchstart thing, apply click event to text that fills most of li box, rather than box itself.
+			//event.preventDefault();
+			//if (event.handled !== true) {
+			if ( !cars[ newcar_index ].is_selected ) { // it's not already selected
+				cars[ newcar_index ].is_selected = true;
+				updateSelectedCars( newcar_index, 'add' );
+				highlightCar( newcar_index );
+				$( this ).find( '.tile_button_row' ).slideDown();
+			} else {  // already selected, so unhighlight and unselect
+				cars[ newcar_index ].is_selected = false;
+				updateSelectedCars( newcar_index, 'remove' );
+				unHighlightCar( newcar_index );
+				$( this ).find( '.tile_button_row' ).slideUp();
 			}
+			
+			//event.handled = true; // stops the second event from firing
+			//} else {
+			//	return false;
+			//}
 		}); // end chained methods
 	if ( !IS_TOUCH_DEVICE ) { // hover behavior for UI key
 		new_section.hover( 
@@ -778,18 +780,17 @@ function addCarToUI( newcar_index, trim_name )
 	new_section.find( '.car_name' )
 		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
 	new_section
-		.find( '.edmunds_link' ) // note: despite class name, no longer a link (see below, no href)
+		.find( '.trim_text' ) // note: despite class name, no longer a link (see below, no href)
 		.html( trim_name ); 
 	// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
-	// commented link out b/c it doesn't serve any purpose and might send people to wrong place.
-	/* var edmunds_url = 'http://www.edmunds.com/' + 
+	var edmunds_url = 'http://www.edmunds.com/' + 
 		newCar.styleObject.makeNiceName +
 		'/' + newCar.styleObject.modelNiceName +
 		'/' + newCar.styleObject.year +
 		'/features-specs.html?style=' +
 		newCar.styleObject.id;
 	new_section.find( '.edmunds_link' )
-		.attr( 'href', edmunds_url ); */
+		.attr( 'href', edmunds_url );
 	// add click listener for REMOVE button
 	new_section.find( '.delete_btn' )
 		.click( function() {
@@ -823,6 +824,8 @@ function addCarToUI( newcar_index, trim_name )
 		.css( 'borderColor', newCar.color )
 		.appendTo( '#dynamic_car_display' )
 		.show();
+	// hide buttons
+	new_section.find( '.tile_button_row' ).hide();
 	// emailer
 	updateMailtoURL();
 }

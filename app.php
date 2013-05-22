@@ -239,10 +239,12 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			<div id="lower_left_bar">
 				<ul id="dynamic_car_display">
 					<li class="template car_info_box" style="display:none" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked key tile');">
-						<h3 class="car_name"></h3>
-						<p class="trim_level">
-							<!--<select><option class="edmunds_link"></option><select>-->
-							<a class="edmunds_link"  target="_blank"></a>
+						<h3 class="car_name key_clickable"></h3>
+						<p class="trim_level key_clickable trim_text" >
+						</p>
+						<p class="tile_button_row">
+							<!--<img class="add_trims_btn" src="images/plus_btn_32.png"/>-->
+							<a class="edmunds_link" target="_blank"><img class="edmunds_btn" src="images/Edmunds_logo_87x28.png"/></a>
 						</p>
 						<div class="delete_btn">X</div>
 					</li>

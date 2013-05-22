@@ -18,7 +18,8 @@
 
 // spread-slider adjustment
 	slider_value = .7; // initialize in highest scope, MATCH TO MARKUP (which sets initial value).
-	
+// other js-based styles
+var keytile_highlight = '#222';	
 
 var colors =
 	[
@@ -1096,8 +1097,9 @@ var connector_highlight_settings =
 				axesAll[ i ][ 0 ].dots[ cars_index ].animate( dot_highlight_attrs, 200 )
 				.toFront();
 			}
+			// highlight UI key
 			$( '#dynamic_car_display' ).find( "[data-carindex='" + cars_index + "']" )
-				.css( 'background-color', '#444' );
+				.css( 'background-color', keytile_highlight );
 		}
 	}
 	function unHighlightCar( cars_index ) 
