@@ -51,7 +51,7 @@ section#header {
 	z-index: 10;
 	width: 100%;
 	text-align: left;
-	height: 120px;
+	height: 150px;
 }
 #main_logo {
 	/* margin-top: 30px; */
@@ -121,10 +121,10 @@ ul#tabs li {
 	ul#tabs li:hover { opacity: 1; }
 h1#versus_title {
 	position: absolute;
-	left: 300px;
-	top: 10px;
+	left: 250px;
+	top: 50px;
 	width: 500px;
-	text-align: center;
+	/* text-align: center; */
 	font-size: 30px;
 	color: #fff;
 	margin-top: 0px;
@@ -242,6 +242,7 @@ section#left_bar {
 	position: absolute; /* haven't found a way to implement fixed that doesn't infringe on other UX needs*/
 	left: 0px;
 	top: 120px;
+	z-index: 10;
 	/* padding-left: 5px; */
 }
 #remembered_cars_container li {
@@ -352,7 +353,7 @@ img#edmunds_credit {
 #content_area {
 	position: absolute;
 	left: 225px;
-	top: 120px;
+	top: 150px;
 }
 
 /* car picker slide-outs */

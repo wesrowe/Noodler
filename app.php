@@ -11,78 +11,98 @@ sample url:  http://localhost/dynamic-url-exp/app.php?car1=Accord&car2=Camry
 
 */
 
+$run_php_flag = true;
+$bluehost_db_flag = true;
 
-// SQL parameters
-$dbhost = 'localhost';
-$dbname = 'style_ids';
-$dbtable = 'styles';
-$dbuser = 'root';
-$dbpassword = '';
-// table columns are model_name and style_id
+// Vars need defining if php below is turned off:
+	// "VS" string that will be used to customize tags.
+	$vs_string = "";
+	$list_string = "";
+	// array of ids:
+	$ids_array = "";
 
-mysql_connect( $dbhost, $dbuser, $dbpassword ) or die(mysql_error()); 
-
-mysql_select_db( $dbname ) or die(mysql_error()); 
-
-
-$url_current = "http://" . $_SERVER['SERVER_NAME'] . "/dynamic-url-exp/app.html?" . $_SERVER['QUERY_STRING'];
-
-parse_str( $_SERVER['QUERY_STRING'] );
-
-// query var names have to be unique, & have to exist or it will SCREAM
-function lookup_style_id( $table, $car_name ) {
-	// if lookup succeeds
-	$query = "SELECT * FROM " . $table . " WHERE model_name='" . $car_name . "'";
-	//echo $query;
-	$resource = mysql_query($query); // returning false. hmmmmm.
-	if ( !$resource ) { echo "<br/>query resource is false<br/>"; }
-	// puts the resource into the $info array 
-	$info = mysql_fetch_array( $resource ); 
-	return( $info['style_id'] );
+if ( $run_php_flag ) {
+	if ( $bluehost_db_flag ) {
+		$dbhost = 'localhost';
+		$dbname = 'wesrowen_carids';
+		$dbtable = 'styles';
+		$dbuser = 'noodler';
+		$dbpassword = 'w9y^s@bIk)&g';
+	} else {
+		$dbhost = 'localhost';
+		$dbname = 'style_ids';
+		$dbtable = 'styles';
+		$dbuser = 'root';
+		$dbpassword = '';
+	}
 	
-}
-// "VS" string that will be used to customize tags.
-$vs_string = "";
-$list_string = "";
+	
+	// table columns are model_name and style_id
 
-if ( isset( $car1 ) ) { // param exists
-	$id1 = lookup_style_id( $dbtable, $car1 );
-	$url_current .= "&id1=" . $id1;
-	$vs_string .= $car1;
-	$list_string .= $car1;
-}
-if ( isset( $car2 ) ) { // param exists
-	$id2 = lookup_style_id( $dbtable, $car2 );
-	$url_current .= "&id2=" . $id2;
-	$vs_string .= " <span class='vs_txt'>vs.</span> " . $car2;
-	$list_string .= ", " . $car2;
-}
-if ( isset( $car3 ) ) { // param exists
-	$id3 = lookup_style_id( $dbtable, $car3 );
-	$url_current .= "&id3=" . $id3;
-	$vs_string .= " <span class='vs_txt'>vs.</span><br/>" . $car3;
-	$list_string .= ", " . $car3;
-}
-if ( isset( $car4 ) ) { // param exists
-	$id4 = lookup_style_id( $dbtable, $car4 );
-	$url_current .= "&id4=" . $id4;
-	$vs_string .= " <span class='vs_txt'>vs.</span> " . $car4;
-	$list_string .= ", " . $car4;
-}
-// array of ids:
-$ids_array = "";
-if ( isset( $car1 ) ) {
-	if ( $id1 !== '' ) { $ids_array .= $id1; } 
-}
-if ( isset( $car2 ) ) {
-	if ( $id2 !== '' ) { $ids_array .= ", " . $id2; } 
-}
-if ( isset( $car3 ) ) {
-	if ( $id3 !== '' ) { $ids_array .= ", " . $id3; } 
-}
-if ( isset( $car4 ) ) {
-	if ( $id4 !== '' ) { $ids_array .= ", " . $id4; } 
-}
+	mysql_connect( $dbhost, $dbuser, $dbpassword ) or die(mysql_error()); 
+
+	mysql_select_db( $dbname ) or die(mysql_error()); 
+
+
+	$url_current = "http://" . $_SERVER['SERVER_NAME'] . "/dynamic-url-exp/app.html?" . $_SERVER['QUERY_STRING'];
+
+	parse_str( $_SERVER['QUERY_STRING'] );
+
+	// query var names have to be unique, & have to exist or it will SCREAM
+	function lookup_style_id( $table, $car_name ) {
+		// if lookup succeeds
+		$query = "SELECT * FROM " . $table . " WHERE model_name='" . $car_name . "'";
+		//echo $query;
+		$resource = mysql_query($query); // returning false. hmmmmm.
+		if ( !$resource ) { echo "<br/>query resource is false<br/>"; }
+		// puts the resource into the $info array 
+		$info = mysql_fetch_array( $resource ); 
+		return( $info['style_id'] );
+		
+	}
+	
+	if ( isset( $car1 ) ) { // param exists
+		$id1 = lookup_style_id( $dbtable, $car1 );
+		$url_current .= "&id1=" . $id1;
+		$vs_string .= $car1;
+		$list_string .= $car1;
+	}
+	if ( isset( $car2 ) ) { // param exists
+		$id2 = lookup_style_id( $dbtable, $car2 );
+		$url_current .= "&id2=" . $id2;
+		$vs_string .= " <span class='vs_txt'>vs.</span> " . $car2;
+		$list_string .= ", " . $car2;
+	}
+	if ( isset( $car3 ) ) { // param exists
+		$id3 = lookup_style_id( $dbtable, $car3 );
+		$url_current .= "&id3=" . $id3;
+		$vs_string .= " <span class='vs_txt'>vs.</span><br/>" . $car3;
+		$list_string .= ", " . $car3;
+	}
+	if ( isset( $car4 ) ) { // param exists
+		$id4 = lookup_style_id( $dbtable, $car4 );
+		$url_current .= "&id4=" . $id4;
+		$vs_string .= " <span class='vs_txt'>vs.</span> " . $car4;
+		$list_string .= ", " . $car4;
+	}
+	
+	if ( isset( $car1 ) ) {
+		if ( $id1 !== '' ) { $ids_array .= $id1; } 
+	}
+	if ( isset( $car2 ) ) {
+		if ( $id2 !== '' ) { $ids_array .= ", " . $id2; } 
+	}
+	if ( isset( $car3 ) ) {
+		if ( $id3 !== '' ) { $ids_array .= ", " . $id3; } 
+	}
+	if ( isset( $car4 ) ) {
+		if ( $id4 !== '' ) { $ids_array .= ", " . $id4; } 
+	}
+
+	// replace '-' with spaces for display of model_names
+	$vs_string_pretty = str_replace ( "-", " ", $vs_string ); // using hyphens for spaces in url params
+	$list_string_pretty = str_replace ( "-", " ", $list_string );
+} // end of $run_php_flag conditional
 
 // replace '-' with spaces for display of model_names
 $vs_string_pretty = str_replace ( "-", " ", $vs_string ); // using hyphens for spaces in url params
@@ -113,12 +133,10 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
     <meta property="og:image" content="http://www.noodlercompare.com/images/NoodlerClose-up_sq.png"/>
     <meta property="og:site_name" content="Noodler Car Compare"/>
     <meta property="og:description"
-          content="Noodler makes vehicle comparison fun! See similarities and differences at a glance. Data from Edmunds.com, the highly reputable research site."/>
+          content="Noodler makes car comparison easy! See similarities and differences at a glance. Data from Edmunds.com."/>
 	
 	<meta charset="utf-8">
 	
-	<meta name="viewport" content="width=device-width, initial-scale=2, user-scalable=no"/>
-
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -134,6 +152,8 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 	<script src="common-js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
 	
 	<!-- <script type="text/javascript" src="chooser_objects/easyload_menu_object.js"></script> -->
+	
+	<script type="text/javascript" src="common-js/fastclick.js"></script>
 	
 	<script type="text/javascript" src="chooser_objects/makeQuery_newandusedmakes_noYearOption.js"></script>
 	
@@ -167,16 +187,19 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				
 			<div class="clear"></div>
 		</section>
-			<!-- <div id="fb_share">
-					<div id="sharer">Share on <img src="images/facebook.png" alt="Share on Facebook"/></div>
-						<script>
-						document.getElementById('sharer').onclick = function () {
-						  var url = 'https://www.facebook.com/sharer/sharer.php?u=';
-						  url += encodeURIComponent(location.href);
-						  window.open(url, 'fbshare', 'width=640,height=320');
-						};
-						</script>
-			</div> -->
+			<div id="fb_share">
+				<div id="sharer">
+					<p>
+						<img id="fb_icon" src="images/facebook.png" alt="Share on Facebook"/>
+					</p>
+					<p>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-text="compared cars with Noodler" data-via="noodlerviz" data-size="large" data-hashtags="noodlercarcompare">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 't	witter-wjs');</script>
+					</p>
+					<p><a target="_blank" id="emailer">Email your work</a></p>
+				</div>
+			</div>
+				
 		<div id="outside_left_mask"></div>
 		<section id="left_bar">
 			<div id="demo_x_flasher">X</div>
@@ -210,7 +233,6 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 					<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'RememberedCars', '0', true]); console.log('opened/closed');">
 						<span class="picker_close_arrows"></span>
 						<span class="title_span">My Rides</span>
-						<!-- <span class="picker_x">X</span> -->
 					</div>
 					<ul id="remembered_cars_list">
 						<li class="template remembered_car" style="display:none">
@@ -223,7 +245,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			</div>
 			<div id="low_left_mask"></div>
 			<div id="lower_left_bar">
-				<ul id="dynamic_car_display"> <!-- the color-keyed boxes identifying cars -->
+				<ul id="dynamic_car_display">
 					<li class="template car_info_box" style="display:none" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked key tile');">
 						<h3 class="car_name"></h3>
 						<p class="trim_level"><a class="edmunds_link"  target="_blank"></a></p>
@@ -249,8 +271,8 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 						<li>You can <span class="blue">compare any car or truck, new or used</span>, that can be found at Edmunds.com. Compare minivans, pickups, SUVs, hybrids, luxury cars. Just click "Add a Vehicle" at left. Pro tip: Pick a vehicle you know well as a baseline, to compare others against.</li>
 						<li><span class="blue">Demos</span> will help you see how easy it is to compare the vehicle specs you care about with Noodler. Pick one from the list in the Discover menu.</li>
 						<li><span class="blue">You <em>can</em> take it with you</span> &ndash; Noodler is the only vehicle comparison that's useful on a mobile screen.</li>
-						<li><span class="blue">Your device will remember</span> cars you've noodled before, look for them under "My Rides" next time. <span id="want_more_devices"><i>(Do you want to send your custom vehicle comparison to another device?)</i></span> <br/>
-						<span id="working_on_it">We're working on it!</span></li>
+						<li><span class="blue">Your device will remember</span> cars you've noodled before, look for them under "My Rides" next time. <span id="want_more_devices"><i>Do you want to send your custom vehicle comparison to another device?</i></span> <br/>
+						<span id="working_on_it">Email it to yourself! (top of screen)</span></li>
 						<li>Click or tap the brightly colored stuff. You'll be glad you did!</li>
 					</ol>
 				</div>
