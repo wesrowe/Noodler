@@ -12,7 +12,7 @@ sample url:  http://localhost/dynamic-url-exp/app.php?car1=Accord&car2=Camry
 */
 
 $run_php_flag = true;
-$bluehost_db_flag = true;
+$bluehost_db_flag = false;
 
 // Vars need defining if php below is turned off:
 	// "VS" string that will be used to customize tags.
@@ -26,7 +26,7 @@ if ( $run_php_flag ) {
 		$dbhost = 'localhost';
 		$dbname = 'wesrowen_carids';
 		$dbtable = 'styles';
-		$dbuser = 'noodler';
+		$dbuser = 'wesrowen_noodler';
 		$dbpassword = 'w9y^s@bIk)&g';
 	} else {
 		$dbhost = 'localhost';
@@ -46,7 +46,7 @@ if ( $run_php_flag ) {
 
 	$url_current = "http://" . $_SERVER['SERVER_NAME'] . "/dynamic-url-exp/app.html?" . $_SERVER['QUERY_STRING'];
 
-	parse_str( $_SERVER['QUERY_STRING'] );
+	parse_str( str_replace( '&amp;', '&', $_SERVER['QUERY_STRING'] ) );
 
 	// query var names have to be unique, & have to exist or it will SCREAM
 	function lookup_style_id( $table, $car_name ) {
@@ -172,7 +172,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 		
 		<section id="header">
 			<h1 id="versus_title"><?php 
-				$vs_string_pretty .= " <span class='vs_txt'>vs.</span> <span id='anything'>Anything</span>";
+				$vs_string_pretty .= " ...<span class='vs_txt'>vs.</span> <span id='anything'>Anything</span>";
 				echo $vs_string_pretty 
 			?></h1>
 			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
@@ -190,13 +190,13 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			<div id="fb_share">
 				<div id="sharer">
 					<p>
-						<img id="fb_icon" src="images/facebook.png" alt="Share on Facebook"/>
+						<img id="fb_icon" src="images/facebook.png" alt="Share on Facebook" width="30"/>
 					</p>
 					<p>
-						<a href="https://twitter.com/share" class="twitter-share-button" data-text="compared cars with Noodler" data-via="noodlerviz" data-size="large" data-hashtags="noodlercarcompare">Tweet</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 't	witter-wjs');</script>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="noodlerviz" data-hashtags="noodlercarcompare">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 					</p>
-					<p><a target="_blank" id="emailer">Email your work</a></p>
+					<p><a href="mailto:?body=Check out this car comparison site: Noodler Compare. Add a car or two you like and send it back to me!%0A%0AThe cars you pick will load automatically!%0A%0A%0Ac/o www.noodlercompare.com" target="_blank" id="emailer"><img id="email_icon" src="images/email_icon.png" alt="Email your comparison to yourself or a friend." title="Save or send your work."/>&nbsp;Email your work</a></p>
 				</div>
 			</div>
 				

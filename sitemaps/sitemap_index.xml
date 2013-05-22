@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_crossovers.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_hatchbacks.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_hybrids.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_minivans.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_sedans.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_suvs.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_trucks.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>http://www.noodlercompare.com/sitemap_wagons.xml</loc>
+	</sitemap>
+</sitemapindex>

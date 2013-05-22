@@ -80,6 +80,7 @@ section#header {
 	margin: 5px 0px;
 }
 #fb_icon { margin-right: 14px; margin-top: 0px; /* vertical-align: middle; */ }
+#email_icon { margin-right:8px; vertical-align: middle; }
 #emailer,
 #emailer:visited { 
 	font-weight: bold;

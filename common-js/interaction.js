@@ -122,56 +122,66 @@ $(document).ready( function() {
 	function loadLocalStorageCars() // & set storage_empty
 	{
 		var storage_empty = true;
+		var remembered_ids = [];
 		for ( var i = 1; i < 100; i++ ){
 			if ( localStorage.getItem( '' + i ) !== null ) {
 				next_ls_key = i + 1; // remember highest occupied key + 1
 				var remembered_car_obj = JSON.parse( localStorage.getItem ( '' + i ) );
-				// CLONE and populate template div.template.remembered_car
-				var new_li = $('.remembered_car.template')
-					.clone()
-					.removeClass( 'template' )
-					.addClass( 'live' ); // so we don't attach listeners to hidden markup
-				new_li.attr( 'data-styleID', remembered_car_obj.styleID );
-				new_li.find( '.car_name_rem' ).html( remembered_car_obj.carName );
-				new_li.find( '.trim_level_rem' ).html( remembered_car_obj.trimName );
-				// ADD REMEMBERED CAR Listener
-				new_li.find( '.add_remembered_car_btn' ).click( function () {
-					// loading gif over UI
-					$( '#remembered_cars_container .loading_mask' ).show();
-					// prevent reloading same car
-					$( this ).attr( 'disabled', 'disabled' );
-					// the real action
-					var styleID_to_get = $(this).parent().attr( 'data-styleID' );
-					//console.log( styleID_to_get );
-					$.getJSON(
-						'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
-						styleID_to_get +
-						'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-						function ( data ) {  // callback: populate trim_select
-							//console.log( new_style_object );
-							// Create object to hold chosen style object and color, and add to cars[]
-							var newCar = {};
-							newCar['styleObject'] = data.styleHolder[0];
-							newCar['color'] = getNextColor(); 
-							newCar['is_selected'] = false;
-							cars.push( newCar );
-							// call addCarData(car_object, car_counter_index)
-							var newcar_index = cars.length - 1; // what's array index of car just added
-							addCarData( cars[ newcar_index ].styleObject, newcar_index );
-							// Add car to UI
-							addCarToUI( newcar_index, remembered_car_obj.trimName );
-							// store newcar_index as data-newcar_index in new_li
-							new_li.attr( 'data-newcar_index', newcar_index );
-							// hide loading gif
-							$( '#remembered_cars_container .loading_mask' ).hide();
-						} // end getJSON callback
-					);
-				}); // end .click()
-				// add listing plus buttons to Rememberd Cars List
-				new_li
-					.appendTo( '#remembered_cars_list' )
-					.show();
-				storage_empty = false;
+				var duplicate_detected = false;
+				for ( var z = 0; z < remembered_ids.length; z++ ) {
+					if ( remembered_ids[ z ] == remembered_car_obj.styleID ) {
+						duplicate_detected = true;
+					}
+				}
+				if ( !duplicate_detected ) {
+					// CLONE and populate template div.template.remembered_car
+					var new_li = $('.remembered_car.template')
+						.clone()
+						.removeClass( 'template' )
+						.addClass( 'live' ); // so we don't attach listeners to hidden markup
+					remembered_ids.push( remembered_car_obj.styleID );
+					new_li.attr( 'data-styleID', remembered_car_obj.styleID );
+					new_li.find( '.car_name_rem' ).html( remembered_car_obj.carName );
+					new_li.find( '.trim_level_rem' ).html( remembered_car_obj.trimName );
+					// ADD REMEMBERED CAR Listener
+					new_li.find( '.add_remembered_car_btn' ).click( function () {
+						// loading gif over UI
+						$( '#remembered_cars_container .loading_mask' ).show();
+						// prevent reloading same car
+						$( this ).attr( 'disabled', 'disabled' );
+						// the real action
+						var styleID_to_get = $(this).parent().attr( 'data-styleID' );
+						//console.log( styleID_to_get );
+						$.getJSON(
+							'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
+							styleID_to_get +
+							'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+							function ( data ) {  // callback: populate trim_select
+								//console.log( new_style_object );
+								// Create object to hold chosen style object and color, and add to cars[]
+								var newCar = {};
+								newCar['styleObject'] = data.styleHolder[0];
+								newCar['color'] = getNextColor(); 
+								newCar['is_selected'] = false;
+								cars.push( newCar );
+								// call addCarData(car_object, car_counter_index)
+								var newcar_index = cars.length - 1; // what's array index of car just added
+								addCarData( cars[ newcar_index ].styleObject, newcar_index );
+								// Add car to UI
+								addCarToUI( newcar_index, remembered_car_obj.trimName );
+								// store newcar_index as data-newcar_index in new_li
+								new_li.attr( 'data-newcar_index', newcar_index );
+								// hide loading gif
+								$( '#remembered_cars_container .loading_mask' ).hide();
+							} // end getJSON callback
+						);
+					}); // end .click()
+					// add listing plus buttons to Rememberd Cars List
+					new_li
+						.appendTo( '#remembered_cars_list' )
+						.show();
+					storage_empty = false;
+				} // end !duplicate_detected
 			}
 		}
 		// sort list alphabetically -- SO #1134976
@@ -314,9 +324,9 @@ $(document).ready( function() {
 	// Discover control
 	$( '#discover_btn' ).toggle( 
 		function() {
-			$( '#discover_area' ).slideUp();
-		}, function() {
 			$( '#discover_area' ).slideDown();
+		},function() {
+			$( '#discover_area' ).slideUp();
 		}
 	);
 	$( '#discover_area .close_x' ).click( function() {
@@ -947,7 +957,7 @@ function convertObjectToHtml( menus_object )
 		current_group = menus_object[i].vehicle_type;
 		
 	}
-	$( '#discover_area' ).slideDown('slow');
+	//$( '#discover_area' ).slideDown('slow');
 }
 // handler for selecting an EasyLoad style
 function setEasyloadHandlers() 
