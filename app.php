@@ -11,41 +11,33 @@ sample url:  http://localhost/dynamic-url-exp/app.php?car1=Accord&car2=Camry
 
 */
 
-$run_php_flag = true;
-$bluehost_db_flag = false;
+$run_php_flag = true; // can disable php if there's a db problem, will just lose that functionality.
 
-// Vars need defining if php below is turned off:
-	// "VS" string that will be used to customize tags.
-	$vs_string = "";
-	$list_string = "";
-	// array of ids:
-	$ids_array = "";
+// Declare vars to prevent breakage if php is "turned off":
+// "VS" string that will be used to customize tags.
+$vs_string = "";
+$list_string = "";
+// array of ids:
+$ids_array = "";
 
 if ( $run_php_flag ) {
-	if ( $bluehost_db_flag ) {
-		$dbhost = 'localhost';
-		$dbname = 'wesrowen_carids';
-		$dbtable = 'styles';
-		$dbuser = 'wesrowen_noodler';
-		$dbpassword = 'w9y^s@bIk)&g';
-	} else {
-		$dbhost = 'localhost';
-		$dbname = 'style_ids';
-		$dbtable = 'styles';
-		$dbuser = 'root';
-		$dbpassword = '';
-	}
 	
+	$dbhost = 'localhost';
+	$dbname = 'wesrowen_carids';
+	$dbtable = 'styles';
+	$dbuser = 'wesrowen_noodler';
+	$dbpassword = 'w9y^s@bIk)&g';
 	
 	// table columns are model_name and style_id
 
-	mysql_connect( $dbhost, $dbuser, $dbpassword ) or die(mysql_error()); 
+	mysql_connect( $dbhost, $dbuser, $dbpassword ) or die(/* mysql_error() */); 
 
 	mysql_select_db( $dbname ) or die(mysql_error()); 
 
 
 	$url_current = "http://" . $_SERVER['SERVER_NAME'] . "/dynamic-url-exp/app.html?" . $_SERVER['QUERY_STRING'];
 
+	// &'s are entity-escaped in sitemap
 	parse_str( str_replace( '&amp;', '&', $_SERVER['QUERY_STRING'] ) );
 
 	// query var names have to be unique, & have to exist or it will SCREAM
