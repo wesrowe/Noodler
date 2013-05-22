@@ -298,7 +298,8 @@ section#left_bar {
 	/* background-color: #000; */
 	z-index: 10;
 	height: 1500px;
-	overflow: auto;
+	overflow-x: visible;
+	overflow-y: auto;
 }
 ul#dynamic_car_display {
 	list-style: none;
@@ -332,10 +333,12 @@ ul#dynamic_car_display {
 	}
 	.car_info_box  .delete_btn {
 		position: absolute;
-		top: 3px;
-		right: 3px;
+		top: 2px;
+		right: 2px;
+		font-size: 16px;
 		cursor: pointer;
-		background-color: #333;
+		color: #888;
+		font-weight: bold;
 	}
 /* FIXED-SCROLL KEY AREA */
 #lower_left_bar.fixed { position: fixed; top: 0px; }

@@ -240,7 +240,10 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				<ul id="dynamic_car_display">
 					<li class="template car_info_box" style="display:none" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked key tile');">
 						<h3 class="car_name"></h3>
-						<p class="trim_level"><a class="edmunds_link"  target="_blank"></a></p>
+						<p class="trim_level">
+							<!--<select><option class="edmunds_link"></option><select>-->
+							<a class="edmunds_link"  target="_blank"></a>
+						</p>
 						<div class="delete_btn">X</div>
 					</li>
 				</ul>

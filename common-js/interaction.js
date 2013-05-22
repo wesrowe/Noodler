@@ -122,7 +122,7 @@ $(document).ready( function() {
 	function loadLocalStorageCars() // & set storage_empty
 	{
 		var storage_empty = true;
-		var remembered_ids = [];
+		var remembered_ids = []; // DUPE-KILLER
 		for ( var i = 1; i < 100; i++ ){
 			if ( localStorage.getItem( '' + i ) !== null ) {
 				next_ls_key = i + 1; // remember highest occupied key + 1
@@ -139,6 +139,7 @@ $(document).ready( function() {
 						.clone()
 						.removeClass( 'template' )
 						.addClass( 'live' ); // so we don't attach listeners to hidden markup
+					// DUPE-KILLER
 					remembered_ids.push( remembered_car_obj.styleID );
 					new_li.attr( 'data-styleID', remembered_car_obj.styleID );
 					new_li.find( '.car_name_rem' ).html( remembered_car_obj.carName );
@@ -151,6 +152,7 @@ $(document).ready( function() {
 						$( this ).attr( 'disabled', 'disabled' );
 						// the real action
 						var styleID_to_get = $(this).parent().attr( 'data-styleID' );
+						var trim_to_display = $(this).parent().find( '.trim_level_rem' ).html();
 						//console.log( styleID_to_get );
 						$.getJSON(
 							'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
@@ -168,7 +170,7 @@ $(document).ready( function() {
 								var newcar_index = cars.length - 1; // what's array index of car just added
 								addCarData( cars[ newcar_index ].styleObject, newcar_index );
 								// Add car to UI
-								addCarToUI( newcar_index, remembered_car_obj.trimName );
+								addCarToUI( newcar_index, trim_to_display );
 								// store newcar_index as data-newcar_index in new_li
 								new_li.attr( 'data-newcar_index', newcar_index );
 								// hide loading gif
@@ -776,7 +778,7 @@ function addCarToUI( newcar_index, trim_name )
 	new_section.find( '.car_name' )
 		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
 	new_section
-		.find( '.edmunds_link' ) // note: despite class name, no longer a link
+		.find( '.edmunds_link' ) // note: despite class name, no longer a link (see below, no href)
 		.html( trim_name ); 
 	// Build and add EDMUNDS LINK --  sample url: http://www.edmunds.com/bmw/1-series-m/2011/features-specs.html?style=101351633
 	// commented link out b/c it doesn't serve any purpose and might send people to wrong place.

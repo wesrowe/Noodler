@@ -224,6 +224,28 @@ var connector_highlight_settings =
 					"attributes": "MAX_CARGO_CAPACITY"
 				},
 				"parent": "Cargo"
+			},
+			"TOWING_CAPACITY": {
+				"label": "Towing Capacity",
+				"minvalue": "500",
+				"maxvalue": "16000",
+				"units": "lbs",
+				"dataKeys": {
+					"attributeGroup": "SPECIFICATIONS",
+					"attributes": "TOWING_CAPACITY"
+				},
+				"parent": "Performance"
+			},
+			"PAYLOAD": {
+				"label": "Payload",
+				"minvalue": "0",
+				"maxvalue": "3500",
+				"units": "lbs",
+				"dataKeys": {
+					"attributeGroup": "SPECIFICATIONS",
+					"attributes": "PAYLOAD"
+				},
+				"parent": "Performance"
 			}
 		} ,
 		"Safety": {
@@ -493,28 +515,6 @@ var connector_highlight_settings =
 				"dataKeys": {
 					"attributeGroup": "SPECIFICATIONS",
 					"attributes": "MANUFACTURER_0_60MPH_ACCELERATION_TIME_(SECONDS)"
-				},
-				"parent": "Performance"
-			},
-			"TOWING_CAPACITY": {
-				"label": "Towing Capacity",
-				"minvalue": "500",
-				"maxvalue": "16000",
-				"units": "lbs",
-				"dataKeys": {
-					"attributeGroup": "SPECIFICATIONS",
-					"attributes": "TOWING_CAPACITY"
-				},
-				"parent": "Performance"
-			},
-			"PAYLOAD": {
-				"label": "Payload",
-				"minvalue": "0",
-				"maxvalue": "3500",
-				"units": "lbs",
-				"dataKeys": {
-					"attributeGroup": "SPECIFICATIONS",
-					"attributes": "PAYLOAD"
 				},
 				"parent": "Performance"
 			}
