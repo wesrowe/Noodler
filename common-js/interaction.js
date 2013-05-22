@@ -742,8 +742,7 @@ function addCarToUI( newcar_index, trim_name )
 		.addClass( 'live' ) // so we don't attach listeners to hidden markup, test for .live when attaching listeners
 		.attr( 'data-carindex', newcar_index) // store index in cars[] for reference, removal.
 		.on(/* 'touchstart */ 'click', function(event){
-			//event.stopPropagation(); NOTE: stopProp breaks any links inside of this li. If you must restore this touchstart thing, apply click event to text that fills most of li box, rather than box itself.
-			//event.preventDefault();
+			//event.stopPropagation(); 
 			//if (event.handled !== true) {
 			if ( !cars[ newcar_index ].is_selected ) { // it's not already selected
 				cars[ newcar_index ].is_selected = true;
@@ -775,7 +774,11 @@ function addCarToUI( newcar_index, trim_name )
 			}
 		)
 	}
-		
+	// related to addtoUI: 
+	new_section.find( '.edmunds_link' ).click( function(event) { 
+		console.log('event prop/stop');
+		event.stopPropagation(); 
+	});	
 	// add car name and trim name
 	new_section.find( '.car_name' )
 		.html( /* newCar.styleObject.makeName + ' ' + */ newCar.styleObject.modelName + " '" + newCar.styleObject.year.toString().slice(-2) );
@@ -829,6 +832,8 @@ function addCarToUI( newcar_index, trim_name )
 	// emailer
 	updateMailtoURL();
 }
+
+			
 /* DEMOS */
 function loadDemoCar( demoStyleObject ) 
 {
