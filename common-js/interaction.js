@@ -600,12 +600,13 @@ $(document).ready( function() {
 					if  ( msrp_safe ) {
 						opt_txt += ' - from $' + delimitNumbers( new_style_object[ i ].price.baseMSRP );
 					}
-					$('#trim_select').append(
-					
-						$('<option></option>')
-							.val( i )
-							.html( opt_txt )
-					);
+					$('#trim_select')
+						.append(
+							$('<option></option>')
+								.val( i )
+								.html( opt_txt )
+								.attr( 'data-id', new_style_object[ i ].id )
+							);
 				}
 				// remove 'disabled' attr for Add Car button
 				$( '#dynamic_picker .loading_mask' ).hide();
@@ -619,6 +620,10 @@ $(document).ready( function() {
 	});
 	// ADD CAR button
 	$( '#add_car_btn' ).click( function() {
+		var styleID_to_get = $( '#trim_select option:selected' ).attr( 'data-id' );
+		loadCarByStyleID ( styleID_to_get, true ) // DO add to local storage
+		/* 
+		
 		var chosen_trim_index = $( '#trim_select option:selected' ).val(); // index of chosen style within styleHolder[] array.
 		// Create object to hold chosen style object and color, and add to cars[]
 		var newCar = {};
@@ -635,7 +640,7 @@ $(document).ready( function() {
 			
 		// LOCAL STORAGE - add carName and trimName to car_to_storage, and store to local storage
 		saveCarToLocStorage( newcar_index );
-		
+		 */
 		// PICKER RESET -- do this at end, so can capture info from pickers first
 		$( '#add_car_btn' ).attr( 'disabled', 'disabled' ); // 
 		pickerInit();

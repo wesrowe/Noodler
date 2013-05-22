@@ -169,8 +169,8 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			?></h1>
 			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
 			<ul id="tabs">
-				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', '0', false]); console.log('clicked discover');">POPULAR</li>
-				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked hints');">HINTS</li>
+				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', '0', false]); ">POPULAR</li>
+				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); ">HINTS</li>
 			</ul>
 			<div id="demo_announcement">
 				<h1>A Demo has loaded for you.</h1>
@@ -198,7 +198,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 		
 			<div id="dynamic_picker">
 				<!-- <p class="close_handle">&lt; &lt; &lt; CLOSE &lt; &lt; &lt;</p> --> 
-				<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'AddCar', '0', true]); console.log('opened/closed');">
+				<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'AddCar', '0', true]); ">
 					<span class="picker_close_arrows"></span>
 					<span class="title_span">Add a Vehicle</span>
 					<!-- <span class="picker_x">X</span> -->
@@ -206,7 +206,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				</div>
 				<div id="options_list">
 					<select id="make_select" name="make">
-						<option  onclick="console.log('make dropdown');" value>Select Make</option>  <!-- empty "value" required for one-choice select lists -->
+						<option value>Select Make</option>  <!-- empty "value" required for one-choice select lists -->
 					</select>
 					<select disabled="disabled" id="model_select" name="model" disabled="disabled">
 						<option value>Select Model</option> 
@@ -295,7 +295,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 					<div class="paper" ></div>
 					
 					<div class="button_area">
-						<p class="expander" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Expander', 'Clicked', '0', false]); console.log('clicked expander');"><span class="expand_indicator">+</span>&nbsp;&nbsp;<span class="section_title"></span></p>
+						<p class="expander" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Expander', 'Clicked', '0', false]);"><span class="expand_indicator">+</span>&nbsp;&nbsp;<span class="section_title"></span></p>
 							
 					</div>
 				
