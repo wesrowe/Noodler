@@ -380,7 +380,7 @@ var connector_highlight_settings =
 			
 		}, // next section
 		"MPG": {
-			"CURB_WEIGHT": {
+			/* "CURB_WEIGHT": {
 				"label": "Curb Weight",
 				"minvalue": "7000",
 				"maxvalue": "800",
@@ -390,7 +390,7 @@ var connector_highlight_settings =
 					"attributes": "CURB_WEIGHT"
 				},
 				"parent": "Eco"
-			},"EPA_CITY_MPG": {
+			}, */"EPA_CITY_MPG": {
 				"label": "MPG City",
 				"minvalue": "5",
 				"maxvalue": "50",
@@ -457,7 +457,17 @@ var connector_highlight_settings =
 			}
 		},
 		"Performance": {
-			"TORQUE": {
+			"CURB_WEIGHT": {
+				"label": "Curb Weight",
+				"minvalue": "7000",
+				"maxvalue": "800",
+				"units": "lbs",
+				"dataKeys": {
+					"attributeGroup": "SPECIFICATIONS",
+					"attributes": "CURB_WEIGHT"
+				},
+				"parent": "Performance"
+			},"TORQUE": {
 				"label": "Torque",
 				"minvalue": "0",
 				"maxvalue": "450",
@@ -846,21 +856,20 @@ var connector_highlight_settings =
 				var car_obj_copy = car_obj; // don't mess with car_obj
 				
 				// check for exceptions
-				if ( current_axis.irreg  !== undefined && current_axis.irreg == 'standardEquipment' ) {
+				if ( current_axis.irreg !== undefined && current_axis.irreg == 'standardEquipment' ) {
 					var irreg_object_arr = car_obj.standardEquipment;
-					var engine_index = 0;
+					var engine_index = -1;
 					// seek ENGINE
-					for ( var n in irreg_object_arr ) { //= 0; n < irreg_object_arr.length; n++ ) {
+					for ( var n in irreg_object_arr ) { 
 						if ( irreg_object_arr[ n ].equipmentClass == "ENGINE" ) {
 							engine_index = n;
 							break;
 						}
 					}
-					var car_obj_copy = irreg_object_arr[ engine_index ];
-					
+					if ( engine_index !== -1 ) { // keep us out of trouble
+						var car_obj_copy = irreg_object_arr[ engine_index ];
+					}
 				}
-				
-				
 				
 				// DOTS
 				if ( car_obj_copy.attributeGroups[ group_key ] == undefined ) { // if whold att group is missing

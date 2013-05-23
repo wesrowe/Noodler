@@ -1,6 +1,7 @@
 // Set-up parameters
 var HOME_URL = 'http://www.noodlercompare.com/app.html';
 var json_level = 'full_json'; // full_json or json
+var style_id_url = 'http://www.edmunds.com/api/vehicle/style/'; // + styleID_to_get, etc.
 
 $(document).ready( function() {
 	
@@ -156,9 +157,7 @@ $(document).ready( function() {
 						var trim_to_display = $(this).parent().find( '.trim_level_rem' ).html();
 						//console.log( styleID_to_get );
 						$.getJSON(
-							'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
-							styleID_to_get +
-							'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+							style_id_url + styleID_to_get + '?fmt=' + json_level, 
 							function ( data ) {  // callback: populate trim_select
 								//console.log( new_style_object );
 								// Create object to hold chosen style object and color, and add to cars[]
@@ -650,25 +649,7 @@ $(document).ready( function() {
 			$( '#section0_toggle' ).click();
 		}
 	});
-	
-	
-	/*
-	$( '.add_stored_car_btn' ).click( function() {
-		// retrieve style object from API by ID#
-		var edmunds_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
-		local_storage.car.id +
-		'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json';
-		
-		// request style object from api and do stuff with it
-		$.getJSON( edmunds_url, function( retrieved_style_obj ) {
-			// add styleHolder object to cars[]
-			// call addCarData() to display data
-			// create and populate Car Info Box (reuse code from add_car_btn.click() above)
-			
-		}
-	} 
-	*/
-	
+
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
@@ -677,10 +658,9 @@ function loadCarByStyleID ( styleID_to_get, remember_in_ls )
 {
 	// sample url for engine-included data: http://www.edmunds.com/api/vehicle/style/100003100?fmt=full_json
 	console.log( "retrieving style id: " + styleID_to_get );
-	var style_url = /* 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' + */
-		'http://www.edmunds.com/api/vehicle/style/' +
-		styleID_to_get + '?fmt=' +
-		/* '&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=' + */ json_level /* + '&callback=?' */
+	var style_url = // 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' + 
+		style_id_url + styleID_to_get + '?fmt=' + json_level;
+			//'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=' +  + '&callback=?' 
 	console.log( style_url );
 	// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar(); however, it has scope issues that can't be resolved without setting up a callback function of some sort.
 	// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
@@ -705,7 +685,6 @@ function loadCarByStyleID ( styleID_to_get, remember_in_ls )
 		}
 	)
 }
-
 
 function saveCarToLocStorage( newcar_index )
 {
