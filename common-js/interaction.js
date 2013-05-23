@@ -1,5 +1,6 @@
 // Set-up parameters
 var HOME_URL = 'http://www.noodlercompare.com/app.html';
+var json_level = 'full_json'; // full_json or json
 
 $(document).ready( function() {
 	
@@ -16,7 +17,7 @@ $(document).ready( function() {
 		return  ( !!('ontouchstart' in window) || !!('msmaxtouchpoints' in window.navigator) );
 	}
 	IS_TOUCH_DEVICE = detect_touch_device(); // global var!
-	console.log( "touch device? : " + IS_TOUCH_DEVICE );
+	//console.log( "touch device? : " + IS_TOUCH_DEVICE );
 	
 	/* fixed-scroll action for key */
 	var keyScrollTop = $('#lower_left_bar').offset().top;
@@ -621,9 +622,8 @@ $(document).ready( function() {
 	// ADD CAR button
 	$( '#add_car_btn' ).click( function() {
 		var styleID_to_get = $( '#trim_select option:selected' ).attr( 'data-id' );
-		loadCarByStyleID ( styleID_to_get, true ) // DO add to local storage
-		/* 
-		
+		loadCarByStyleID( styleID_to_get, true ) // DO add to local storage
+		/* old way of doing things: (admittedly faster, but no engine stuff)
 		var chosen_trim_index = $( '#trim_select option:selected' ).val(); // index of chosen style within styleHolder[] array.
 		// Create object to hold chosen style object and color, and add to cars[]
 		var newCar = {};
@@ -675,14 +675,17 @@ $(document).ready( function() {
 
 function loadCarByStyleID ( styleID_to_get, remember_in_ls ) 
 {
+	// sample url for engine-included data: http://www.edmunds.com/api/vehicle/style/100003100?fmt=full_json
 	console.log( "retrieving style id: " + styleID_to_get );
+	var style_url = /* 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' + */
+		'http://www.edmunds.com/api/vehicle/style/' +
+		styleID_to_get + '?fmt=' +
+		/* '&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=' + */ json_level /* + '&callback=?' */
+	console.log( style_url );
+	// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar(); however, it has scope issues that can't be resolved without setting up a callback function of some sort.
+	// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
 	$.getJSON(
-		// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar(); however, it has scope issues that can't be resolved without setting up a callback function of some sort.
-		// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
-		'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' +
-		styleID_to_get +
-		'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-		function ( data ) {  
+		style_url, function ( data ) {  
 			//console.log( new_style_object );
 			// Create object to hold chosen style object and color, and add to cars[]
 			var newCar = {};
@@ -918,7 +921,7 @@ function updateMailtoURL()
 	if ( cars !== undefined ) {
 		for ( var i = 0; i < cars.length; i++ ) {
 			email_array.push( cars[ i ].styleObject.id );
-			console.log( email_array[i] )
+			//console.log( email_array[i] )
 		}
 	}
 	for (var j = 0; j < email_array.length; j++ ) {
@@ -929,7 +932,6 @@ function updateMailtoURL()
 	}
 	var body_str = 'mailto:?body=Check out this car comparison I did on Noodler Compare. Add a car or two you like and send it back to me!%0A%0AThe cars I picked will load automatically:%0A'+ mailto_url + '%0A%0Ac/o www.noodlercompare.com';
 	body_str.replace( ' ', '%20' );
-	console.log( body_str );
 	$( '#emailer' ).attr( 'href', body_str );
 }
 
@@ -979,7 +981,6 @@ function setEasyloadHandlers()
 {
 	$( '#discover_area select.easy_loader' ).change( function() {
 		var styleID_to_get = $( this ).find( 'option:selected' ).val();
-		console.log ( styleID_to_get );
 		$( this ).attr( 'disabled', 'disabled' );
 		var original_color = $( this ).css( 'color' ); // preserve for below
 		var that = $( this );

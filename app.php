@@ -222,7 +222,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				</div>
 			</div>
 			<div id="remembered_cars_container">
-					<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'RememberedCars', '0', true]); console.log('opened/closed');">
+					<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'RememberedCars', '0', true]);">
 						<span class="picker_close_arrows"></span>
 						<span class="title_span">My Rides</span>
 					</div>

@@ -21,37 +21,8 @@
 // other js-based styles
 var keytile_highlight = '#222';	
 
-var colors =
-	[
-		'#1F78B4',
-		'#FF7F00',
-		'#E31A1C',
-		'#33A02C',
-		'#A6CEE3',
-		'#B2DF8A',
-		'#CA88D6',
-		'#FDBF6F',
-		'blue',
-		'#33ffff',
-		'#ff44ff',
-		'#FB9A99',
-		'orange',
-		'green',
-		'#1F78B4',
-		'#FF7F00',
-		'#E31A1C',
-		'#33A02C',
-		'#A6CEE3',
-		'#B2DF8A',
-		'#CA88D6',
-		'#FDBF6F',
-		'blue',
-		'#33ffff',
-		'#ff44ff',
-		'#FB9A99',
-		'orange',
-		'green',
-	]
+var colors = [ '#1F78B4', '#FF7F00', '#E31A1C', '#33A02C', '#A6CEE3', '#B2DF8A', '#CA88D6', '#FDBF6F', 'blue', '#33ffff', '#ff44ff', '#FB9A99', 'orange', 'green', '#1F78B4', '#FF7F00', '#E31A1C', '#33A02C', '#A6CEE3', '#B2DF8A', '#CA88D6', '#FDBF6F', 'blue', '#33ffff', '#ff44ff', '#FB9A99', 'orange', 'green', 
+]
 		
 var next_color_index = 0; // initialize, and increment every time color is requested
 
@@ -235,7 +206,7 @@ var connector_highlight_settings =
 					"attributeGroup": "SPECIFICATIONS",
 					"attributes": "TOWING_CAPACITY"
 				},
-				"parent": "Performance"
+				"parent": "Cargo"
 			},
 			"PAYLOAD": {
 				"label": "Payload",
@@ -246,7 +217,7 @@ var connector_highlight_settings =
 					"attributeGroup": "SPECIFICATIONS",
 					"attributes": "PAYLOAD"
 				},
-				"parent": "Performance"
+				"parent": "Cargo"
 			}
 		} ,
 		"Safety": {
@@ -486,11 +457,12 @@ var connector_highlight_settings =
 			}
 		},
 		"Performance": {
-			/* "TORQUE": {
+			"TORQUE": {
 				"label": "Torque",
 				"minvalue": "0",
-				"maxvalue": "300",
+				"maxvalue": "450",
 				"units": "ft-lb",
+				"irreg": "standardEquipment",
 				"dataKeys": {
 					"attributeGroup": "ENGINE",
 					"attributes": "TORQUE"
@@ -502,12 +474,13 @@ var connector_highlight_settings =
 				"minvalue": "0",
 				"maxvalue": "400",
 				"units": "HP",
+				"irreg": "standardEquipment",
 				"dataKeys": {
 					"attributeGroup": "ENGINE",
 					"attributes": "HORSEPOWER"
 				},
 				"parent": "Performance"
-			}, */
+			},
 			"MANUFACTURER_0_60MPH_ACCELERATION_TIME_(SECONDS)": {
 				"label": "Acceleration 0-60",
 				"minvalue": "20",
@@ -554,6 +527,7 @@ var connector_highlight_settings =
 		if ( typeof( axis_data ) == 'string' ) {
 			var is_aggregate_axis = true;
 		}
+		if ( axis_data.irreg !== undefined ) { this.irreg = axis_data.irreg; }
 		this.paper = paper;
 		this.index_in_sect = index_within_paper; // starts at 1
 		this.anchor_x = axes_margin_left + axis_margin_left; // axIs_mar_lft = 0 until dynamic axis placement
@@ -857,7 +831,7 @@ var connector_highlight_settings =
 			/* EXCEPTIONS for certain areas of Edmunds object */
 			if ( axesAll[i][1].attributeGroup_key == 'CRASH_TEST_RATINGS' ) { // in Safety?
 				in_safety_section = true;
-				console.log( 'in_safety_section' );
+				//console.log( 'in_safety_section' );
 			} else { 
 				in_safety_section = false;
 			}
@@ -869,29 +843,51 @@ var connector_highlight_settings =
 				var current_axis = axesAll[i][j];
 				var group_key = current_axis.attributeGroup_key;
 				var att_key = current_axis.attributes_key;
+				var car_obj_copy = car_obj; // don't mess with car_obj
+				
+				// check for exceptions
+				if ( current_axis.irreg  !== undefined && current_axis.irreg == 'standardEquipment' ) {
+					var irreg_object_arr = car_obj.standardEquipment;
+					var engine_index = 0;
+					// seek ENGINE
+					for ( var n in irreg_object_arr ) { //= 0; n < irreg_object_arr.length; n++ ) {
+						if ( irreg_object_arr[ n ].equipmentClass == "ENGINE" ) {
+							engine_index = n;
+							break;
+						}
+					}
+					var car_obj_copy = irreg_object_arr[ engine_index ];
+					
+				}
+				
+				
 				
 				// DOTS
-				if ( car_obj.attributeGroups[ group_key ] == undefined ) { // if whold att group is missing
+				if ( car_obj_copy.attributeGroups[ group_key ] == undefined ) { // if whold att group is missing
 					current_axis.data.push( "NUTS" );
 					current_axis.dots.push( "NUTS" );
 					// flag aggregate-dot creator below NOT to create dot for this section's aggregate:
 					no_data_to_aggregate = true;
 				} else { // safe to look at attributes themselves now
 					
-					var att_obj = car_obj.attributeGroups[ group_key ].attributes[ att_key ];
+					var att_obj = car_obj_copy.attributeGroups[ group_key ].attributes[ att_key ];
 					
 					// test for second version of MAX_CARGO_CAPACITY, such as in Mazda5 minivan case.
 					if ( att_obj == undefined && 
 						group_key == "CARGO_DIMENSIONS" &&
-						car_obj.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ] !== undefined ) 
+						car_obj_copy.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ] !== undefined ) 
 					{
-							att_obj = car_obj.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ]; // switches to alternative attribute.
+							att_obj = car_obj_copy.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ]; // switches to alternative attribute.
 					} 
 					if ( att_obj == undefined ) { // if attribute is still missing after fixes...
 						current_axis.data.push( "NUTS" );
 						current_axis.dots.push( "NUTS" );
 					} else { // there is definitely a value to display.
 						var value = att_obj.value;
+						if ( att_obj.value == 'TORQUE' ) {
+							console.log( 'TORQUE' );
+						}
+						
 						current_axis.data.push( value );
 						/* DOT CALC DIFFERS FOR NON-QUANTITATIVE RATINGS */
 						// SAFETY section
