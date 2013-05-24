@@ -132,6 +132,12 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<![if IE]>
+	<script>var ie_user = true;</script>
+	<![endif]>
+	<![if !IE]>
+	<script>var ie_user = false;</script>
+	<![endif]>
 	<meta name="description" content="Noodler Compare lets you see the key differences YOU care about, between the <?php 
 		if ( $list_string_pretty != "" ) { 
 			echo $list_string_pretty; 
@@ -244,7 +250,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 						</p>
 						<p class="tile_button_row">
 							<!--<img class="add_trims_btn" src="images/plus_btn_32.png"/>-->
-							<a class="edmunds_link" target="_blank"><img class="edmunds_btn" title="View car at Edmunds.com" src="images/Edmunds_link_logo_74x24.png"/></a>
+							<a class="edmunds_link" target="_blank" onclick="_gaq.push(['_trackEvent', 'OutBound', 'Edm_referral', 'more_info', '1', false]);"><img class="edmunds_btn" title="View car at Edmunds.com" src="images/Edmunds_link_logo_74x24.png"/></a>
 						</p>
 						<div class="delete_btn">X</div>
 					</li>

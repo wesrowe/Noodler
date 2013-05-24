@@ -109,8 +109,8 @@ var connector_highlight_settings =
 			},
 			"1ST_ROW_LEG_ROOM": {
 				"label": "Legroom (front)",
-				"minvalue": "40",
-				"maxvalue": "44",
+				"minvalue": "39",
+				"maxvalue": "46",
 				"units": "inches",
 				"dataKeys": {
 					"attributeGroup": "INTERIOR_DIMENSIONS",
@@ -957,9 +957,9 @@ var connector_highlight_settings =
 						// add HOVER handlers
 						new_dot.hover( 
 							function( event ) {
-								this.toFront();
-								showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- pass in section index (start at 1), true means include data in tooltip, and pass in Axis dot lives in.
-								highlightCar( cars_index ); 
+								//this.toFront();
+								showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- true means include data in tooltip, and pass in Axis dot lives in.
+								highlightCar( cars_index, this ); 
 							}, function() {
 								hideTooltip();
 								// don't unhighlight if it's already selected/highlighted
@@ -993,12 +993,25 @@ var connector_highlight_settings =
 					.attr( dot_common_settings )
 					.attr( {"fill": cars[ cars_index ]['color'] } );
 				// Separate HOVER treatment
-				agg_dot.hover( 
+				//agg_dot.node.id = 'agg_dot_' + i + '_' + cars_index;
+				//$( '#agg_dot_' + i + '_' + cars_index )
+				/* agg_dot.hover( function() {
+					console.log("mouseover");
+					if ( !cars[ cars_index ].is_selected ) {
+						agg_dot.animate( dot_highlight_attrs, 200 ); 
+					}
+				}, function() {
+					console.log("mouseover");
+					if ( !cars[ cars_index ].is_selected ) {
+						agg_dot.animate( dot_common_settings, 200 ); 
+					}
+				}); */
+				agg_dot.hover(
 					function( event ) {
-						this.toFront();
+						//this.toFront();
 						showTooltip( cars[cars_index], false, null, null, event ); 
 						// don't highlight if it's already selected/highlighted
-						if ( !cars[ cars_index ].is_selected ) highlightCar( cars_index );  
+						if ( !cars[ cars_index ].is_selected ) highlightCar( cars_index, this );  
 					}, 
 					function() {
 						hideTooltip();
@@ -1048,20 +1061,20 @@ var connector_highlight_settings =
 				new_connector.attr( { 'opacity': 0 } );
 			}
 			// add HOVER handlers
-			if ( !IS_TOUCH_DEVICE ) {
+			/* if ( !IS_TOUCH_DEVICE ) {
 				new_connector.hover( 
 					function( event ) {
 						showTooltip( cars[cars_index], false, null, null, event ); 
 						// don't highlight or toFront() if it's already selected/highlighted
-						this.toFront();
-						highlightCar( cars_index );
+						//this.toFront();
+						highlightCar( cars_index, this );
 					}, function() {
 						hideTooltip();
-						// don't highlight if it's already selected/highlighted
+						// don't highlight if it's selected
 						if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
 					}
 				); 
-			}
+			} */
 			// store it to axesAll (NOT cars[])
 			//cars[ cars_index ].connectors[i].push( new_connector );
 			axesAll[i][j].connectors.push( new_connector ); // NEW CODE FRI NIGHT
@@ -1071,26 +1084,35 @@ var connector_highlight_settings =
 			return "NUTS";
 		}
 	}
-	function highlightCar( cars_index ) 
+	function highlightCar( cars_index, object_not_to_toFront ) 
 	{  // index "should" correspond to spot in axes' .dots[] arrays
 		for ( var i = 0; i < axesAll.length; i++ ) { // loop thru sections
 			if ( isExpanded[ i ] ) {
-				for ( var j = 1; j < axesAll[i].length; j++ ) {
+				for ( var j = 1; j < axesAll[i].length; j++ ) { // thru axes in sect
 					// connectors
-					if ( ( axesAll[i][j].connectors[ cars_index ] ) && ( axesAll[i][j].connectors[ cars_index ] != 'NUTS' ) ) {
-						axesAll[i][j].connectors[ cars_index ]
-							.animate( connector_highlight_settings, 200 )
-							.toFront(); 
+					var ax = axesAll[i][j];
+					if ( ( ax.connectors[ cars_index ] ) && ( ax.connectors[ cars_index ] != 'NUTS' ) ) {
+						ax.connectors[ cars_index ]
+							.animate( connector_highlight_settings, 200 );
+						// IE patch
+						if ( ax.connectors[ cars_index ] !== object_not_to_toFront ) {
+							ax.connectors[ cars_index ].toFront(); 
+						}
 					}
+					
 					// dots
-					if ( ( axesAll[i][j].dots[ cars_index ] ) && ( axesAll[i][j].dots[ cars_index ] != 'NUTS' ) ) {
-						axesAll[i][j].dots[ cars_index ].animate( dot_highlight_attrs, 200 );
-						// axesAll[i][j].dots[ cars_index ].toFront(); //next path will still fall in front, so front dots at end of section
+					if ( ( ax.dots[ cars_index ] ) && ( ax.dots[ cars_index ] != 'NUTS' ) ) {
+						ax.dots[ cars_index ].animate( dot_highlight_attrs, 200 );
+						// IE patch
+						if ( ax.dots[ cars_index ] !== object_not_to_toFront ) {
+							ax.dots[ cars_index ].toFront(); //next path will still fall in front, so front dots at end of section
+						}
 					}
 					// front all dots in one go at end of section
 					if ( j == ( axesAll[i].length - 1 ) ) {
 						for ( var k = 1; k < axesAll[i].length; k++ ) {
-							if ( axesAll[i][k].dots[ cars_index ] !== 'NUTS' ) {
+							// IE patch
+							if ( ( ax.dots[ cars_index ] !== 'NUTS' ) && ( axesAll[i][k].dots[ cars_index ] !== object_not_to_toFront ) ) {
 								axesAll[i][k].dots[ cars_index ].toFront();
 							}
 						}
@@ -1100,7 +1122,10 @@ var connector_highlight_settings =
 			// always highlight aggregate dots
 			if ( axesAll[ i ][ 0 ].dots[ cars_index ] != 'NUTS' ) {
 				axesAll[ i ][ 0 ].dots[ cars_index ].animate( dot_highlight_attrs, 200 )
-				.toFront();
+				// IE patch
+				if ( axesAll[ i ][ 0 ].dots[ cars_index ] !== object_not_to_toFront ) {
+					axesAll[ i ][ 0 ].dots[ cars_index ].toFront();
+				}
 			}
 			// highlight UI key
 			$( '#dynamic_car_display' ).find( "[data-carindex='" + cars_index + "']" )
@@ -1109,6 +1134,7 @@ var connector_highlight_settings =
 	}
 	function unHighlightCar( cars_index ) 
 	{
+		hideTooltip();
 		for ( var i = 0; i < axesAll.length; i++ ) {
 			if ( isExpanded[ i ] ) { 
 				for ( var j = 1; j < axesAll[i].length; j++ ) {
