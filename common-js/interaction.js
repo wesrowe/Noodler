@@ -1,8 +1,7 @@
 // Set-up parameters
 var HOME_URL = 'http://www.noodlercompare.com/app.html';
-var json_level = 'full_json'; // full_json or json
-var style_id_url = 'http://www.edmunds.com/api/vehicle/style/'; // + styleID_to_get, etc.
-
+var ie_user = false;
+	
 $(document).ready( function() {
 	
 	// primitive FB share button
@@ -653,20 +652,25 @@ $(document).ready( function() {
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
+	var json_level = 'full_json'; // full_json or json
+	var style_id_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=';
 
 function loadCarByStyleID ( styleID_to_get, remember_in_ls ) 
 {
-	// sample url for engine-included data: http://www.edmunds.com/api/vehicle/style/100003100?fmt=full_json
 	console.log( "retrieving style id: " + styleID_to_get );
+	/* 
+	// sample url for engine-included data: http://www.edmunds.com/api/vehicle/style/100003100?fmt=full_json
 	var style_url = // 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' + 
 		style_id_url + styleID_to_get + '?fmt=' + json_level;
-			//'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=' +  + '&callback=?' 
+			//'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=' +  + '&callback=?'  
+	*/
+	var style_url = style_id_url + styleID_to_get + '&fmt=' + json_level + '&api_key=sbzh2xtvh99h73pzr398c2fc' + '&callback=?';
 	console.log( style_url );
 	// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar(); however, it has scope issues that can't be resolved without setting up a callback function of some sort.
 	// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
 	$.getJSON(
 		style_url, function ( data ) {  
-			//console.log( new_style_object );
+			console.log( data );
 			// Create object to hold chosen style object and color, and add to cars[]
 			var newCar = {};
 			newCar['styleObject'] = data.styleHolder[0];
