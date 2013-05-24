@@ -457,6 +457,17 @@ var connector_highlight_settings =
 			}
 		},
 		"Performance": {
+			"CURB_WEIGHT": {
+				"label": "Curb Weight",
+				"minvalue": "7000",
+				"maxvalue": "800",
+				"units": "lbs",
+				"dataKeys": {
+					"attributeGroup": "SPECIFICATIONS",
+					"attributes": "CURB_WEIGHT"
+				},
+				"parent": "Performance"
+			},
 			"TORQUE": {
 				"label": "Torque",
 				"minvalue": "0",
@@ -466,17 +477,6 @@ var connector_highlight_settings =
 				"dataKeys": {
 					"attributeGroup": "ENGINE",
 					"attributes": "TORQUE"
-				},
-				"parent": "Performance"
-			},
-			"CURB_WEIGHT": {
-				"label": "Curb Weight",
-				"minvalue": "7000",
-				"maxvalue": "800",
-				"units": "lbs",
-				"dataKeys": {
-					"attributeGroup": "SPECIFICATIONS",
-					"attributes": "CURB_WEIGHT"
 				},
 				"parent": "Performance"
 			},
@@ -833,7 +833,7 @@ var connector_highlight_settings =
 		//console.log("DID YOU FORGET TO DEFINE A PIXEL_RATIO FOR AGGREGATE AXES?"); No, just decided position was good enough
 		for ( var i=0 ; i<axesAll.length ; i++ ) { // loops thru sections (array math, starting zero)
 			// Need a flag in case, like Ferrari, a whole section is data-less
-			var no_data_to_aggregate = false;
+			var no_data_to_aggregate = true;
 			// cache data as we move thru axes in this section
 			var x_values_of_data = [];
 			// cache which raph paper this section is working in, picked [0] at random
@@ -877,7 +877,6 @@ var connector_highlight_settings =
 					current_axis.data.push( "NUTS" );
 					current_axis.dots.push( "NUTS" );
 					// flag aggregate-dot creator below NOT to create dot for this section's aggregate:
-					no_data_to_aggregate = true;
 				} else { // safe to look at attributes themselves now
 					
 					var att_obj = car_obj_copy.attributeGroups[ group_key ].attributes[ att_key ];
@@ -889,10 +888,11 @@ var connector_highlight_settings =
 					{
 							att_obj = car_obj_copy.attributeGroups[ group_key ].attributes[ 'CARGO_CAPACITY,_REAR_SEAT_DOWN_OR_REMOVED' ]; // switches to alternative attribute.
 					} 
-					if ( att_obj == undefined ) { // if attribute is still missing after fixes...
+					if ( att_obj == undefined ) { // if data is still missing after fixes...
 						current_axis.data.push( "NUTS" );
 						current_axis.dots.push( "NUTS" );
 					} else { // there is definitely a value to display.
+						no_data_to_aggregate = false;
 						var value = att_obj.value;
 						if ( att_obj.value == 'TORQUE' ) {
 							console.log( 'TORQUE' );
@@ -984,6 +984,9 @@ var connector_highlight_settings =
 			
 			// AGGREGATE AXIS creator:
 			// after end of inside loop j is where to generate aggregate axis .data[] for new car, for section corresponding to [i]
+			if ( i == 6 ){
+				console.log ('breakpoint');
+			}
 			if ( !no_data_to_aggregate && x_values_of_data.length > 0 ) { // attGroup exists, and indeed we drew some dots in it
 				var sum = 0;
 				for ( var k in x_values_of_data ) {
