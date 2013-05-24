@@ -1,5 +1,5 @@
 /* stylesheet for Wes's Car Viz Project */
-
+img { border: none; }
 body {
 	position: relative;
 	color: #888;
@@ -315,10 +315,10 @@ ul#dynamic_car_display {
 		border: 5px solid #000;
 		/* cursor: move; */ /* for draggable functionality later */
 		background-color: #000;
-		transition: background-color 300ms linear;
-		-moz-transition: background-color 300ms linear; /* Firefox 4 */
-		-webkit-transition: background-color 300ms linear; /* Safari and Chrome */
-		-o-transition: background-color 300ms linear; /* Opera */
+		transition: background-color 100ms linear;
+		-moz-transition: background-color 100ms linear; /* Firefox 4 */
+		-webkit-transition: background-color 100ms linear; /* Safari and Chrome */
+		-o-transition: background-color 100ms linear; /* Opera */
 	}
 		.car_info_box:hover { background-color: #111; cursor: pointer; }
 	.car_info_box  h3 {

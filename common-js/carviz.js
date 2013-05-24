@@ -32,7 +32,7 @@ var paper_collapsed_height = 40;
 var connector_path_settings = 
 	{
 	"stroke-width": 7,
-	"opacity": .5, 
+	"opacity": .5 
 	//"stroke": "#fff" // debug setting
 	}
 var connector_path_opacity = .5; // match to opacity in object immed. above
@@ -610,7 +610,7 @@ var connector_highlight_settings =
 		"2": "label_svg",
 		"3": "minlabel_svg",
 		"4": "maxlabel_svg",
-		"5": "unitslabel_svg",
+		"5": "unitslabel_svg"
 	}
 	function changeSpread( sect_index, new_spread_percent, timing, isCollapse ) 
 	{   // isCollapse indicates special case for paper sizing: makes paper height only 40px high instead of usual.
@@ -957,9 +957,10 @@ var connector_highlight_settings =
 						// add HOVER handlers
 						new_dot.hover( 
 							function( event ) {
-								//this.toFront();
+								if ( !ie_user ) this.toFront();
 								showTooltip( cars[cars_index], true, this.data( 'myAxis' ), cars_index, event ); // -- true means include data in tooltip, and pass in Axis dot lives in.
-								highlightCar( cars_index, this ); 
+								if ( ie_user ) { highlightCar( cars_index, this ); 
+								} else { highlightCar( cars_index, null); } 
 							}, function() {
 								hideTooltip();
 								// don't unhighlight if it's already selected/highlighted
@@ -992,26 +993,16 @@ var connector_highlight_settings =
 				var agg_dot = current_paper.circle( agg_x, axesAll[i][0].anchor_y, big_dot_radius )
 					.attr( dot_common_settings )
 					.attr( {"fill": cars[ cars_index ]['color'] } );
-				// Separate HOVER treatment
-				//agg_dot.node.id = 'agg_dot_' + i + '_' + cars_index;
-				//$( '#agg_dot_' + i + '_' + cars_index )
-				/* agg_dot.hover( function() {
-					console.log("mouseover");
-					if ( !cars[ cars_index ].is_selected ) {
-						agg_dot.animate( dot_highlight_attrs, 200 ); 
-					}
-				}, function() {
-					console.log("mouseover");
-					if ( !cars[ cars_index ].is_selected ) {
-						agg_dot.animate( dot_common_settings, 200 ); 
-					}
-				}); */
+				// HOVER
 				agg_dot.hover(
 					function( event ) {
-						//this.toFront();
+						if ( !ie_user ) this.toFront();
 						showTooltip( cars[cars_index], false, null, null, event ); 
 						// don't highlight if it's already selected/highlighted
-						if ( !cars[ cars_index ].is_selected ) highlightCar( cars_index, this );  
+						if ( !cars[ cars_index ].is_selected ) {
+							if ( ie_user ) { highlightCar( cars_index, this ); 
+							} else { highlightCar( cars_index, null); }
+						}
 					}, 
 					function() {
 						hideTooltip();
@@ -1060,24 +1051,23 @@ var connector_highlight_settings =
 			if ( !isExpanded[i] ) {
 				new_connector.attr( { 'opacity': 0 } );
 			}
-			// add HOVER handlers
-			/* if ( !IS_TOUCH_DEVICE ) {
+			if ( !IS_TOUCH_DEVICE && !ie_user ) {
 				new_connector.hover( 
 					function( event ) {
 						showTooltip( cars[cars_index], false, null, null, event ); 
 						// don't highlight or toFront() if it's already selected/highlighted
-						//this.toFront();
-						highlightCar( cars_index, this );
+						if ( !ie_user ) this.toFront();
+						if ( ie_user ) { highlightCar( cars_index, this ); 
+						} else { highlightCar( cars_index, null); }
 					}, function() {
 						hideTooltip();
 						// don't highlight if it's selected
 						if ( !cars[ cars_index ].is_selected ) unHighlightCar ( cars_index );
 					}
 				); 
-			} */
-			// store it to axesAll (NOT cars[])
-			//cars[ cars_index ].connectors[i].push( new_connector );
-			axesAll[i][j].connectors.push( new_connector ); // NEW CODE FRI NIGHT
+			}
+			// store it
+			axesAll[i][j].connectors.push( new_connector );
 			return ( new_connector );
 		} else {
 			axesAll[i][j].connectors.push( "NUTS" );
@@ -1110,12 +1100,13 @@ var connector_highlight_settings =
 					}
 					// front all dots in one go at end of section
 					if ( j == ( axesAll[i].length - 1 ) ) {
-						for ( var k = 1; k < axesAll[i].length; k++ ) {
-							// IE patch
-							if ( ( ax.dots[ cars_index ] !== 'NUTS' ) && ( axesAll[i][k].dots[ cars_index ] !== object_not_to_toFront ) ) {
-								axesAll[i][k].dots[ cars_index ].toFront();
-							}
-						}
+						
+					}
+				}
+				for ( var k = 1; k < axesAll[i].length; k++ ) {
+					// IE patch
+					if ( ( axesAll[i][k].dots[ cars_index ] !== 'NUTS' ) && ( axesAll[i][k].dots[ cars_index ] !== object_not_to_toFront ) ) {
+						axesAll[i][k].dots[ cars_index ].toFront();
 					}
 				}
 			}
@@ -1171,7 +1162,7 @@ var connector_highlight_settings =
 		if ( $( '#tooltip' ).length > 0 ) {  //test for currently displayed
 			$( '#tooltip' ).css( {
 				top: (/* vscroll + */ event.clientY)+'px', // used fixed pos. instead
-				left: (event.clientX + 20)+'px',
+				left: (event.clientX + 20)+'px'
 			});
 		} 
 		else { 
@@ -1182,7 +1173,7 @@ var connector_highlight_settings =
 			$( '<div id="tooltip"></div>' ).css( {
 				border: '2px solid ' + current_car.color,
 				top: event.clientY + 'px', 
-				left: (event.clientX + 20) + 'px',
+				left: (event.clientX + 20) + 'px'
 			})
 			.html( tt_text )
 			.appendTo("body").fadeIn(100);

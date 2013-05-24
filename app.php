@@ -128,16 +128,14 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
           content="Noodler makes car comparison easy! See similarities and differences at a glance. Data from Edmunds.com."/>
 	
 	<meta charset="utf-8">
-	
+	<script>var ie_user = false; </script>
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<![if IE]>
+	<!--[if IE]>
 	<script>var ie_user = true;</script>
-	<![endif]>
-	<![if !IE]>
-	<script>var ie_user = false;</script>
-	<![endif]>
+	<![endif]-->
+	
 	<meta name="description" content="Noodler Compare lets you see the key differences YOU care about, between the <?php 
 		if ( $list_string_pretty != "" ) { 
 			echo $list_string_pretty; 
