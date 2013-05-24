@@ -4,11 +4,12 @@ var HOME_URL = 'http://www.noodlercompare.com/app.html';
 // API parameters
 var json_level = 'full_json'; // full_json or json
 var style_id_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=';
-	
-$(document).ready( function() {
-	if ( $( 'html' ).hasClass( 'not_ie' ) ) { var ie_user = false;
-		} else { var ie_user = true; }
+
+if ( $( 'html' ).hasClass( 'ie_user' ) ) { var ie_user = true;
+		} else { var ie_user = false; }
 	console.log( ie_user );
+		
+$(document).ready( function() {
 	
 	// primitive FB share button
 	$( '#fb_icon' ).click( function () {

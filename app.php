@@ -107,7 +107,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 /* Okay, now output the markup */
 ?>
 <!doctype html>
-<html lang="en" class="not_ie">
+<html lang="en">
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
                   website: http://ogp.me/ns/website#">
@@ -139,8 +139,8 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 		}
 	?>. Specs and pricing data by Edmunds.com.">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<!--[if !IE]><!--><script>if(/*@cc_on!@*/false){$('html').removeClass('not_ie');}</script><!--<![endif]-->	
-	
+	<!--[if !IE]><!--><script>if(/*@cc_on!@*/false){$('html').addClass('ie_user');}</script><!--<![endif]-->	
+	<!--[if IE]><script>$('html').addClass('ie_user');</script><!--<![endif]-->
 	<script src="common-js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
 	
 	<!-- <script type="text/javascript" src="chooser_objects/easyload_menu_object.js"></script> -->
