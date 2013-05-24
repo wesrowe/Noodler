@@ -984,9 +984,6 @@ var connector_highlight_settings =
 			
 			// AGGREGATE AXIS creator:
 			// after end of inside loop j is where to generate aggregate axis .data[] for new car, for section corresponding to [i]
-			if ( i == 6 ){
-				console.log ('breakpoint');
-			}
 			if ( !no_data_to_aggregate && x_values_of_data.length > 0 ) { // attGroup exists, and indeed we drew some dots in it
 				var sum = 0;
 				for ( var k in x_values_of_data ) {
