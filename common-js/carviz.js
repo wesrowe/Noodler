@@ -457,17 +457,7 @@ var connector_highlight_settings =
 			}
 		},
 		"Performance": {
-			"CURB_WEIGHT": {
-				"label": "Curb Weight",
-				"minvalue": "7000",
-				"maxvalue": "800",
-				"units": "lbs",
-				"dataKeys": {
-					"attributeGroup": "SPECIFICATIONS",
-					"attributes": "CURB_WEIGHT"
-				},
-				"parent": "Performance"
-			},"TORQUE": {
+			"TORQUE": {
 				"label": "Torque",
 				"minvalue": "0",
 				"maxvalue": "450",
@@ -476,6 +466,17 @@ var connector_highlight_settings =
 				"dataKeys": {
 					"attributeGroup": "ENGINE",
 					"attributes": "TORQUE"
+				},
+				"parent": "Performance"
+			},
+			"CURB_WEIGHT": {
+				"label": "Curb Weight",
+				"minvalue": "7000",
+				"maxvalue": "800",
+				"units": "lbs",
+				"dataKeys": {
+					"attributeGroup": "SPECIFICATIONS",
+					"attributes": "CURB_WEIGHT"
 				},
 				"parent": "Performance"
 			},

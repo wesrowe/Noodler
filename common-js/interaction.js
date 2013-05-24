@@ -1,6 +1,9 @@
 // Set-up parameters
 var HOME_URL = 'http://www.noodlercompare.com/app.html';
 var ie_user = false;
+// API parameters
+var json_level = 'full_json'; // full_json or json
+var style_id_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=';
 	
 $(document).ready( function() {
 	
@@ -155,9 +158,9 @@ $(document).ready( function() {
 						var styleID_to_get = $(this).parent().attr( 'data-styleID' );
 						var trim_to_display = $(this).parent().find( '.trim_level_rem' ).html();
 						//console.log( styleID_to_get );
-						$.getJSON(
-							style_id_url + styleID_to_get + '?fmt=' + json_level, 
-							function ( data ) {  // callback: populate trim_select
+						var style_url = style_id_url + styleID_to_get + '&fmt=' + json_level + '&api_key=sbzh2xtvh99h73pzr398c2fc' + '&callback=?';
+						console.log( style_url );
+						$.getJSON( style_url, function ( data ) {  // callback: populate trim_select
 								//console.log( new_style_object );
 								// Create object to hold chosen style object and color, and add to cars[]
 								var newCar = {};
@@ -652,8 +655,6 @@ $(document).ready( function() {
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
-	var json_level = 'full_json'; // full_json or json
-	var style_id_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=';
 
 function loadCarByStyleID ( styleID_to_get, remember_in_ls ) 
 {
