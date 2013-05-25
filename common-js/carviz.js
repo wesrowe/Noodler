@@ -11,6 +11,7 @@
 	agg_axis_margin_top = 30;
 	axis_spread = 75; // constant for now
 	dot_radius = 6;
+	if ( ie_user ) { dot_radius = 7; }
 	big_dot_radius = 9; // agg axes
 	
 	spread_max = 80 // all axis spreads set in proportion to this. Picked 80 so picker can keep us out of fractional pixels
@@ -35,6 +36,7 @@ var connector_path_settings =
 	"opacity": .5 
 	//"stroke": "#fff" // debug setting
 	}
+	if ( ie_user ) { connector_path_settings['stroke-width'] = 5; }
 var connector_path_opacity = .5; // match to opacity in object immed. above
 
 var axis_path_settings = 

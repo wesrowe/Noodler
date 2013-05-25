@@ -211,6 +211,10 @@ $(document).ready( function() {
 			// load demo (function defined in page-specific js
 			// loadPageSpecificDemo();
 			
+		} else if ( IS_TOUCH_DEVICE ) {
+			setTimeout( function() {
+				$( '#hints_btn' ).click();
+			}, 500);
 		} else { // default if they've been here before
 			// display local storage cars
 			setTimeout( function() {
