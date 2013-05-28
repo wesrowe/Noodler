@@ -161,7 +161,22 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 	
 </head>
 <body>
-		
+	<!-- GA -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+	  _gaq.push(['_setAccount', 'UA-38228914-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>		
 		<section id="header">
 			<h1 id="versus_title"><?php 
 				$vs_string_pretty .= " ...<span class='vs_txt'>vs.</span> <span id='anything'>Anything</span>";
@@ -169,8 +184,8 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			?></h1>
 			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
 			<ul id="tabs">
-				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', '0', false]); ">POPULAR</li>
-				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); ">HINTS</li>
+				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', 0, false]); ">POPULAR</li>
+				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', 0, false]); ">HINTS</li>
 			</ul>
 			<div id="demo_announcement">
 				<h1>A Demo has loaded for you.</h1>
@@ -198,7 +213,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 		
 			<div id="dynamic_picker">
 				<!-- <p class="close_handle">&lt; &lt; &lt; CLOSE &lt; &lt; &lt;</p> --> 
-				<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'AddCar', '0', true]); ">
+				<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'AddCar', 0, true]); ">
 					<span class="picker_close_arrows"></span>
 					<span class="title_span">Add a Vehicle</span>
 					<!-- <span class="picker_x">X</span> -->
@@ -222,13 +237,13 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				</div>
 			</div>
 			<div id="remembered_cars_container">
-					<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'RememberedCars', '0', true]);">
+					<div class="picker_title" onclick="_gaq.push(['_trackEvent', 'Interaction', 'SliderMenuTitle', 'RememberedCars', 0, true]);">
 						<span class="picker_close_arrows"></span>
 						<span class="title_span">My Rides</span>
 					</div>
 					<ul id="remembered_cars_list">
 						<li class="template remembered_car" style="display:none">
-							<button class="add_remembered_car_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Remembered car', 'Added', '1', false]);">Add to Compare</button>
+							<button class="add_remembered_car_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Remembered car', 'Added', 1, false]);">Add to Compare</button>
 							<span class="car_name_rem"></span><br/><span class="trim_level_rem"></span>
 						</li>
 					</ul>
@@ -238,13 +253,13 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			<div id="low_left_mask"></div>
 			<div id="lower_left_bar">
 				<ul id="dynamic_car_display">
-					<li class="template car_info_box" style="display:none" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', '0', false]); console.log('clicked key tile');">
+					<li class="template car_info_box" style="display:none" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', 0, false]); console.log('clicked key tile');">
 						<h3 class="car_name key_clickable"></h3>
 						<p class="trim_level key_clickable trim_text" >
 						</p>
 						<p class="tile_button_row">
 							<!--<img class="add_trims_btn" src="images/plus_btn_32.png"/>-->
-							<a class="edmunds_link" target="_blank" onclick="_gaq.push(['_trackEvent', 'OutBound', 'Edm_referral', 'more_info', '1', false]);"><img class="edmunds_btn" title="View car at Edmunds.com" src="images/Edmunds_link_logo_74x24.png"/></a>
+							<a class="edmunds_link" target="_blank" onclick="_gaq.push(['_trackEvent', 'OutBound', 'Edm_referral', 'more_info', 1, false]);"><img class="edmunds_btn" title="View car at Edmunds.com" src="images/Edmunds_link_logo_74x24.png"/></a>
 						</p>
 						<div class="delete_btn">X</div>
 					</li>
@@ -295,7 +310,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 					<div class="paper" ></div>
 					
 					<div class="button_area">
-						<p class="expander" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Expander', 'Clicked', '0', false]);"><span class="expand_indicator">+</span>&nbsp;&nbsp;<span class="section_title"></span></p>
+						<p class="expander" onclick="_gaq.push(['_trackEvent', 'Interaction', 'Expander', 'Clicked', 0, false]);"><span class="expand_indicator">+</span>&nbsp;&nbsp;<span class="section_title"></span></p>
 							
 					</div>
 				
@@ -313,7 +328,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				
 				<div class="clear"></div>
 			</div>	<!-- /main_paper_container -->
-			<a href="http://www.edmunds.com/" target="_new"><img id="edmunds_credit" src="images/edmunds_api150x30vb.png" title="Data provided by Edmunds.com" alt="Data via the Edmunds API" onclick="_gaq.push(['_trackEvent', 'OutboundLink', 'EdmundsCredit', 'Clicked', '0', false]);"></a>
+			<a href="http://www.edmunds.com/" target="_new"><img id="edmunds_credit" src="images/edmunds_api150x30vb.png" title="Data provided by Edmunds.com" alt="Data via the Edmunds API" onclick="_gaq.push(['_trackEvent', 'OutboundLink', 'EdmundsCredit', 'Clicked', 0, false]);"></a>
 			<p class="copyright">Code and design <br/>&copy;2013 Wesley Rowe</p>
 			<div id="privacy_policy">
 				<div><span id="pp_bright_text">Privacy Policy:</span> This website's server does not store information of any kind regarding you or your vehicle interests. Noodler does utilize your computer's hard drive, if your browser allows it, to remember a few facts about cars you've compared so that you can find them again easily. Your use of this web application confirms that you are okay with that.</div>
@@ -323,22 +338,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 			
 		<div class="clear"></div>
 
-<!-- GA -->
-<script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-  _gaq.push(['_setAccount', 'UA-38228914-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>	
 </body>
 </html>		
 		
