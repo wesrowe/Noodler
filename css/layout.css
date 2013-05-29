@@ -28,9 +28,9 @@ img, object, embed, video {
 */
 
 /* Mobile Layout: 480px and below. */
-body { 
+body {
 	background-color: #cf9;
-	box-shadow: inset 0px 0px 100px 0px #000;
+	/* box-shadow: inset 0px 0px 100px 0px #000; */
 }
 .gridContainer {
 	margin-left: auto;
@@ -113,10 +113,10 @@ body {
 	display: block;
 }
 #right_img img {
-	-moz-box-shadow: 1px 3px 10px 2px #000;
+	/* -moz-box-shadow: 1px 3px 10px 2px #000;
 	-webkit-box-shadow: 1px 3px 10px 2px #000;
 	box-shadow: 1px 3px 10px 2px #000;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000')";
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000')"; */
 }
 #main_graphic {
 	clear: both;
@@ -139,31 +139,31 @@ body {
 	padding-left:20px;
 }
 #arithmetic {
-	background: url(images/outlier2.png) center top  scroll no-repeat;
+	background: url(../images/outlier2.png) center top  scroll no-repeat;
 	padding-top: 190px;
 }
 #save_time {
-	background: url(images/Ford_truck_length_composite.png) center top scroll no-repeat;
+	background: url(../images/Ford_truck_length_composite.png) center top scroll no-repeat;
 	padding-top: 100px;
 }
 #compare_more {
-	background:url(images/so_many_at_once.png) center top  scroll no-repeat;
+	background:url(../images/so_many_at_once.png) center top  scroll no-repeat;
 	padding-top: 240px;
 }
 #drill_down {
-	background:url(images/collapsed+expanded_large.png) center top scroll no-repeat;
+	background:url(../images/collapsed+expanded_large.png) center top scroll no-repeat;
 	padding-top: 300px;
 }
 #car_you_know {
-	background:url(images/familiar_car.png) center top scroll no-repeat;
+	background:url(../images/familiar_car.png) center top scroll no-repeat;
 	padding-top: 140px;
 }
 #take_with {
-	background:url(images/mobile_noodle_300w.png) center top scroll no-repeat;
+	background:url(../images/mobile_noodle_300w.png) center top scroll no-repeat;
 	padding-top: 130px;
 }
 #explore {
-	background:url(images/pulldowns.png) center top scroll no-repeat;
+	background:url(../images/pulldowns.png) center top scroll no-repeat;
 	padding-top: 110px;
 }
 footer { 
