@@ -37,67 +37,107 @@ Do the following if you're using your customized build of modernizr (http://www.
 <body>
 <div class="gridContainer clearfix">
 	<div class="container">
-		<div id="header"><img src="images/NoodlerLogo_vehicles_landingpage.png" alt="Noodler logo"> </div>
+		<div id="header"><img src="images/NoodlerLogo_wNoodles_red
+		.png" alt="Noodler logo"> </div>
 	</div>
 	<div id="title">
-		<h1 align="center">The best way to compare cars.</h1>
+		<h1 align="center">The <i><strong>fastest</i></strong> way to compare cars, new or used.</h1>
 		<!-- <h2 align="center">Now you can <u>see</u> the difference.  Finally!</h2> -->
 	</div>
-	<div id="left_img"> <img src="images/bad-grid-comp-annotated_250w.png"> </div>
-	<div id="good_bad_img"> <img src="images/good-bad_250w.png" alt="Noodler.  The noo way to discover and compare cars."> </div>
-	<div id="right_img"> <img src="images/NoodlerClose-up_250w.png" alt="Noodler.  The noo way to discover and compare cars."> </div>
-	
-	<div class="demos" id="demos_row_1"> 
-		<h3>Pick a DEMO:</h3>
-		<a href="app.php?demo=minivans" id="minivans_btn">compare new<br/><span class="demo_name">minivans</span></a> 
-		<a href="app.php?demo=crossovers" id="crossovers_btn">compare new<br/><span class="demo_name">crossovers</span></a> 
+	<div id="old_vs_new" class="color_bar">
+		<div class="width_container">
+			<div id="left_img"> <img src="images/bad-grid-comp-annotated_250w.png"> </div>
+			<div id="good_bad_img"> <img src="images/good-bad_250w.png" alt="Noodler.  The noo way to discover and compare cars."> </div>
+			<div id="right_img"> <img src="images/NoodlerClose-up_250w.png" alt="Noodler.  The noo way to discover and compare cars."> </div>
+		</div>
+	</div>
+	<div class="color_bar" id="demos_bar" style="background-color:#FFE080;">
+		<div class="demos width_container" id="demos_row_1"> 
+			<h3>Take it for a spin:</h3>
+			<a href="app.php?demo=minivans" id="minivans_btn">compare new<br/><span class="demo_name">minivans</span></a> 
+			<a href="app.php?demo=crossovers" id="crossovers_btn">compare new<br/><span class="demo_name">crossovers</span></a> 
+			
+			<a href="app.php?demo=hatchbacks" id="hatchbacks_btn">compare new<br/><span class="demo_name">hatchbacks</span></a>
+		</div>
+		<div class="demos" id="demos_row_2">
+			<a href="app.php" class="demo_name wide">Hand-pick your noodles</a>
+		</div>
+	</div>
+	<div class="color_bar" id="demos_bar" style="background-color:#42B489;">
+		<h2 id="features_title">Reasons you'll never go back</h2>
+	</div>
 		
-		<a href="app.php?demo=hatchbacks" id="hatchbacks_btn">compare new<br/><span class="demo_name">hatchbacks</span></a>
-	</div>
-	<div class="demos" id="demos_row_2">
-		<a href="app.php" class="demo_name wide">No demo, thanks, take me straight there</a>
-	</div>
-		<!--<a href="suvs/index.html" id="suvs_btn">compare new<br/><span class="demo_name">SUVs</span></a> <div class="demos" id="demos_row_2"> 
-	</div>
-		<a href="sedans/index.html" id="sedans_btn">compare new<br/><span class="demo_name">sedans</span></a> 
-		<a href="hybrids/index.html/" id="hybrids_btn">compare new<br/><span class="demo_name">hybrids</span></a> 
-		<a href="trucks/index.html" id="trucks_btn">compare new<br/><span class="demo_name">trucks</span></a> 
-		<a href="wagons/index.html" id="wagons_btn">compare new<br/><span class="demo_name">wagons</span></a> --> 
-	
 	<article id="article">
-		<section id="arithmetic" class="feature text_right">
-			<h2>Use Your Eyes, Not Your Ari+hmetic</h2>
-			<p>Humans are slow at arithmetic, yet that's exactly what comparison tables full of numbers require.  There are between 200 and 1000 numbers on a grid-based car comparison.  "In your head" is out the window.</p>
-			<p>Noodler draws your eye to the <i><strong>outliers</strong></i> among a group of cars.  You don't have to waste your time reading all the numbers.  Your eyes will immediately recognize the "S" shape of a tradeoff, too, where a car is good in one spec and bad in another.</p>
-		</section>
-		<section id="save_time" class="feature text_left">
-			<h2>Save Time by Narrowing Your Options</h2>
-			<p>See at a glance if a car has a deal-breaker spec, like not fitting in your garage. Before you waste a Saturday at a dealership.  Before you throw away hours reading reviews.  Save yourself the hassle and energy &ndash; Noodle it before you do anything else.</p>
-		</section>
-		<section id="compare_more" class="feature text_right">
-			<h2>Compare More Vehicles</h2>
-			<p>Grid-based research websites max out at 4 or 5 cars at a time.  Not that you could read it anyway.</p>
-			<p>Noodler lays one car over another.  Interactive highlighting tames the crowding.</p>
-			<p>You can also remove a car from the picture, and it will be waiting for you under "My Cars" when you want another look.</p>
-		</section>
-		<section id="drill_down" class="feature text_left">
-			<h2>Get the Overview...</h2>
-			<p>See how cars compare overall for a type of spec in collapsed view. This also helps hide things you don't care as much about.</p>
-			<h2>...and then Drill Down</h2>
-			<p>Expand areas you care about to see individual components of a spec area.  Noodler will even give you the numbers themselves, just hover or tap on a dot to get the spec itself.</p>
-		</section>
-		<section id="car_you_know" class="feature text_right">
-			<h2>It's All Relative, so add a car you know well</h2>
-			<p>Car specs are meaningless on their own.  So add a car you know well to see at a glance how a new car compares to your current ride.  Or, you could compare your first car to a Ferrari.  Just an idea.</p>
-		</section>
-		<section id="take_with" class="feature text_left">
-			<h2>Take it with you.</h2>
-			<p>There is no other car research tool that fits so comfortably in a pocket.  If the car salesman tells you something you don't think is right, whip out a Noodle.  You certainly can't whip out a laptop.</p>
-		</section>
-		<section id="explore" class="feature text_right">
-			<h2>Discover Something</h2>
-			<p>Easily grab any popular new car from a dropdown and see at a glance if it's worth exploring.  Maybe you'll discover something new!  Or maybe you'll be the first to answer the age-old question, "Is there any difference between an SUV and a crossover?"</p>
-		</section>
+		<div class="color_bar text_left_color" style="background-color:#42B489;">
+			<div class="width_container">
+				<section id="arithmetic" class="feature text_left">
+					<h2>Use your eyes, not your calculator</h2>
+					<p>Regular comparisons just give you numbers. Noodler shows you what they mean.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_right_color" style="background-color:#A0B97A;">
+			<div class="width_container">
+				<section id="save_work" class="feature text_right">
+					<h2>Save and share your work</h2>
+					<p>You can email your work to yourself, or kick it back and forth with a friend.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_left_color" style="background-color:#79A7D1;">
+			<div class="width_container">
+				<section id="take_with" class="feature text_left">
+					<h2>Take it with you</h2>
+					<p>No other car research tool is so mobile.  Just email it to your mobile device.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_right_color" style="background-color:#F06161;">
+			<div class="width_container">
+				<section id="drill_down" class="feature text_right">
+					<h2>See only what matters to you</h2>
+					<p>See how cars compare overall for a type of spec in collapsed view.  Expand areas you care about.  Follow the Edmunds link to see the car's full page at Edmunds.com.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_left_color" style="background-color:#A05E49;">
+			<div class="width_container">
+				<section id="car_you_know" class="feature text_left">
+					<h2>It's all relative</h2>
+					<p>Add a car you know well to see at a glance how a new car compares to your current ride.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_right_color" style="background-color:#E29117;">
+			<div class="width_container">
+				<section id="save_time" class="feature text_right">
+					<h2>Avoid wasting time</h2>
+					<p>See at a glance if a car has a spec you can't live with, like not fitting in your garage.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_left_color" style="background-color:#A0B97A;">
+			<div class="width_container">
+				<section id="explore" class="feature text_left">
+					<h2>Discover something</h2>
+					<p>Easily grab any popular new car from a dropdown and see at a glance if it's worth exploring.</p>
+				</section>
+			</div>
+		</div>
+		<div class="color_bar text_right_color" style="background-color:#79d1b0;">
+			<div class="width_container">
+				<section id="compare_more" class="feature text_right">
+					<h2>Compare them all at once</h2>
+					<p>Other comparisons can only fit 4 cars on your screen.  Interactive highlighting tames the crowding.</p>
+				</section>
+			</div>
+		</div>
+				
+		
+	
+		
+		
+	
 	</article>
 	<footer>
 		&copy;2013 Wesley Rowe

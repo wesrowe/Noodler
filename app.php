@@ -114,8 +114,8 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 
 	<title><?php 
 		$s = ( $vs_string_pretty !== "" ) ? $vs_string_pretty : "Compare Cars Visually";
-		echo $s .= "&ndash; Noodler Compare" ;
-	?> &ndash; Noodler Compare</title>
+		echo $s .= "&ndash; Noodler" ;
+	?></title>
 	
 	<meta property="fb:admins" content="1034261419" />
 	<meta property="og:title" content="Compare Cars with Noodler"/>
@@ -182,7 +182,7 @@ $list_string_pretty = str_replace ( "-", " ", $list_string );
 				$vs_string_pretty .= " ...<span class='vs_txt'>vs.</span> <span id='anything'>Anything</span>";
 				echo $vs_string_pretty 
 			?></h1>
-			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_new-black.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
+			<a href="http://www.noodlercompare.com/index.html" alt="Noodler Compare Home" title="Noodler Compare logo"><img id="main_logo" src="images/NoodlerLogo_wNoodles_209x100blk.png" alt="Noodler Compares Cars" Title="Noodler Compare Home"></a>
 			<ul id="tabs">
 				<li id="discover_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'DiscoverTab', 'Clicked', 0, false]); ">POPULAR</li>
 				<li id="hints_btn" onclick="_gaq.push(['_trackEvent', 'Interaction', 'KeyTiles', 'Clicked', 0, false]); ">HINTS</li>

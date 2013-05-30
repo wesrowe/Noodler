@@ -33,7 +33,7 @@ body {
 	/* box-shadow: inset 0px 0px 100px 0px #000; */
 }
 .gridContainer {
-	margin-left: auto;
+	/* margin-left: auto;
 	margin-right: auto;
 	width: 98%;
 	padding-left: 0.9749%;
@@ -41,9 +41,18 @@ body {
 	background-color: #540000;
 	-moz-box-shadow: 0px 0px 30px 0px #000000;
 	-webkit-box-shadow: 0px 0px 30px 0px #000000;
-	box-shadow: 0px 0px 30px 0px #000000;
+	box-shadow: 0px 0px 30px 0px #000000; */
 	text-align: center;
 
+}
+.color_bar {
+	width: 100%;
+	padding: 15px 0px;
+}
+.width_container {
+	max-width: 800px;
+	margin: auto;
+	width: 96%;
 }
 #container { }
 #header {
@@ -61,7 +70,7 @@ body {
 	margin-left: 0;
 	width: 100%;
 	display: block;
-	margin-top: 30px;
+	/* margin-top: 30px; */
 }
 #footer {
 	clear: both;
@@ -113,10 +122,7 @@ body {
 	display: block;
 }
 #right_img img {
-	/* -moz-box-shadow: 1px 3px 10px 2px #000;
-	-webkit-box-shadow: 1px 3px 10px 2px #000;
-	box-shadow: 1px 3px 10px 2px #000;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000')"; */
+	
 }
 #main_graphic {
 	clear: both;
@@ -132,38 +138,46 @@ body {
 .text_right {
 	padding-left: 20px;
 	padding-right: 20px;
-	
 }
 .text_left {
 	padding-right:20px;
 	padding-left:20px;
 }
+.text_left, .text_right {
+	background-position: center top !important;
+}
 #arithmetic {
-	background: url(../images/outlier2.png) center top  scroll no-repeat;
+	background: url(../images/outlier2.png) scroll no-repeat;
 	padding-top: 190px;
 }
 #save_time {
-	background: url(../images/Ford_truck_length_composite.png) center top scroll no-repeat;
+	background: url(../images/Ford_truck_length_composite.png) scroll no-repeat;
 	padding-top: 100px;
 }
+#save_work {
+	background:url(../images/noodler_sharing_mashup250x200.png) scroll no-repeat;
+	padding-top: 240px;
+	min-height: 230px;
+}
 #compare_more {
-	background:url(../images/so_many_at_once.png) center top  scroll no-repeat;
+	background:url(../images/so_many_at_once.png) scroll no-repeat;
 	padding-top: 240px;
 }
 #drill_down {
-	background:url(../images/collapsed+expanded_large.png) center top scroll no-repeat;
+	background:url(../images/collapsed+expanded_large.png) scroll no-repeat;
 	padding-top: 300px;
 }
 #car_you_know {
-	background:url(../images/familiar_car.png) center top scroll no-repeat;
+	background:url(../images/familiar_car.png) scroll no-repeat;
 	padding-top: 140px;
 }
 #take_with {
-	background:url(../images/mobile_noodle_300w.png) center top scroll no-repeat;
+	background:url(../images/mobile_noodle_300w.png) scroll no-repeat;
 	padding-top: 130px;
+	min-height: 145px;
 }
 #explore {
-	background:url(../images/pulldowns.png) center top scroll no-repeat;
+	background:url(../images/pulldowns.png) scroll no-repeat;
 	padding-top: 110px;
 }
 footer { 
@@ -173,24 +187,23 @@ footer {
 	width: 100%;
 	margin: 30px;
 }
-
+#demos_bar { text-align: center; }
 .demos {
 	text-align: center;
 	padding: 10px 0px;
+	max-width: 800px;
+	margin: 10px;
 }
 .demos a {
 	text-decoration: none;
-	width: 25%;
+	width: 75%;
 	padding: 5px 1%;
-	margin: 0 1%;
-	display: inline-block;
+	margin: 15px auto;
+	display: block;
 }
 #demos_row_2.demos a { width: auto; }
 #demos_row_1, #demos_row_2 {
 	clear: both;
-	float: left;
-	margin-left: 0;
-	width: 100%;
 	display: block;
 }
 
@@ -200,9 +213,9 @@ footer {
 
 @media only screen and (min-width: 481px) {
 .gridContainer {
-	width: 97%;
+	/* width: 97%;
 	padding-left: 0.6227%;
-	padding-right: 0.6227%;
+	padding-right: 0.6227%; */
 }
 #header {
 	clear: both;
@@ -276,58 +289,59 @@ footer {
 }
 .text_right {
 	padding-left: 320px;
-	padding-right: 0px;
+	padding-right: 10px;
 	
 }
 .text_left {
 	padding-right:320px;
-	padding-left:0px;
+	padding-left:10px;
 }
-.feature {
-	
-}
-
+.text_left { background-position: right center !important; }
+.text_right { background-position: left center !important; }
 
 #arithmetic {
-	background-position: left center;
 	padding-top: 10px;
 }
 #save_time {
-	background-position: right center;
 	padding-top: 10px;
-}#compare_more {
-	background-position: left center;
+}
+#save_work {
+	padding-top: 10px;
+}
+#compare_more {
 	padding-top: 10px;
 }
 #drill_down {
-	background-position: right center;
 	padding-top: 10px;
 }
 #car_you_know {
-	background-position: left center;
 	padding-top: 10px;
 }
 #take_with {
-	background-position: right center;
 	padding-top: 10px;
 }
 #explore {
-	background-position: left center;
 	padding-top: 10px;
+}
+.demos { margin: auto; }
+.demos a { 
+	display: inline-block; 
+	width: 25%;
+	padding: 5px 1%;
+	margin: 0 1%;
 }
 
 
+} /* end 481px-min-width
 
-} /* end 768px-max-width
-
-/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+/* Desktop Layout: 769px+.  Inherits styles from: Mobile Layout and Tablet Layout. */
 
 @media only screen and (min-width: 769px) {
 .gridContainer {
-	width: 89.1964%;
-	max-width: 900px;
-	padding-left: 0.4017%;
-	padding-right: 0.4017%;
+	width: 100%;
+	/* max-width: 900px; */
+	/* padding-left: 0.4017%;
+	padding-right: 0.4017%; */
 	margin: auto;
 }
 #LayoutDiv1 {
@@ -346,9 +360,9 @@ footer {
 }
 #article {
 	clear: both;
-	float: left;
+	/* float: left;
 	margin-left: 9.1803%;
-	width: 81.6393%;
+	width: 81.6393%; */
 	display: block;
 }
 #good-vs-bad {
@@ -411,7 +425,7 @@ footer {
 	padding-left:10px;
 }
 .feature {
-	
+	max-width: 800px;
 }
 
 
