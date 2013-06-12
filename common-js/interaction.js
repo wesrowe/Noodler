@@ -2,14 +2,14 @@
 var HOME_URL = 'http://www.noodlercompare.com/app.html';
 var use_heroku = false;
 /* var ie_user = false; */
-// API parameters
+/* // API parameters
 var json_level = 'full_json'; // full_json or json
-var style_id_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=';
+var style_id_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id='; */
 
 if ( $( 'html' ).hasClass( 'ie_user' ) ) { var ie_user = true;
 		} else { var ie_user = false; }
-	console.log( ie_user );
-		
+	console.log( "IE user?: " + ie_user );
+console.log( "heroku?:  " + use_heroku );
 $(document).ready( function() {
 	
 	// primitive FB share button
@@ -157,15 +157,18 @@ $(document).ready( function() {
 					new_li.find( '.add_remembered_car_btn' ).click( function () {
 						// loading gif over UI
 						$( '#remembered_cars_container .loading_mask' ).show();
+						setTimeout( function() {
+							$( '#remembered_cars_container .loading_mask' ).hide();
+						}, 1000 );
 						// prevent reloading same car
 						$( this ).attr( 'disabled', 'disabled' );
 						// the real action
 						var styleID_to_get = $(this).parent().attr( 'data-styleID' );
-						var trim_to_display = $(this).parent().find( '.trim_level_rem' ).html();
+						//var trim_to_display = $(this).parent().find( '.trim_level_rem' ).html();
 						//console.log( styleID_to_get );
-						var style_url = style_id_url + styleID_to_get + '&fmt=' + json_level + '&api_key=sbzh2xtvh99h73pzr398c2fc' + '&callback=?';
-						console.log( style_url );
-						$.getJSON( style_url, function ( data ) {  // callback: populate trim_select
+						//var style_url = style_id_url + styleID_to_get + '&fmt=' + json_level + '&api_key=sbzh2xtvh99h73pzr398c2fc' + '&callback=?';
+						loadCarByStyleID ( styleID_to_get, false ) // don't need to remember, it's already in Local Storage
+						/* **$.getJSON( style_url, function ( data ) {  // callback: populate trim_select
 								//console.log( new_style_object );
 								// Create object to hold chosen style object and color, and add to cars[]
 								var newCar = {};
@@ -183,7 +186,7 @@ $(document).ready( function() {
 								// hide loading gif
 								$( '#remembered_cars_container .loading_mask' ).hide();
 							} // end getJSON callback
-						);
+						); *** */
 					}); // end .click()
 					// add listing plus buttons to Rememberd Cars List
 					new_li
@@ -466,6 +469,7 @@ $(document).ready( function() {
 	var chosen_make = null; // will hold niceName of make
 	var chosen_model = null; // will hold niceName of model
 	var chosen_year = null;
+	
 	$( '#make_select' ).change( function() {
 		$( '#dynamic_picker .loading_mask' ).show(); // cover picker with loading mask
 		make_index = $( '#make_select option:selected' ).val();  // holds array location of make for later
@@ -479,12 +483,22 @@ $(document).ready( function() {
 		// THE NICE-NAME ISSUE means I have to make an API call here to get model niceNames.
 		chosen_make = $( '#make_select option:selected' ).val(); //this is a niceName for Make
 		// make API request for models
-		$.getJSON( 
-			'http://api.edmunds.com/v1/api/vehicle/modelrepository/findmodelsbymake?make=' + chosen_make + '&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-			function( models ) {
-				 
+		if ( use_heroku ) {
+			var models_url = 'http://noodler.herokuapp.com/models/';
+		} else { 
+			var models_url = 'http://api.edmunds.com/v1/api/vehicle/modelrepository/' 
+		}
+		models_url +='findmodelsbymake?make=' + chosen_make +
+			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json';
+		// make CORS request here; on success, do the function below
+		if ( use_heroku ) {
+			var xhr = createCORSRequest('GET', models_url);
+			if (!xhr) { alert('CORS not supported'); return; }
+			// Main response handler
+			xhr.onload = function() {
+				var models = $.parseJSON( xhr.responseText );
+				// populate trim_select
 				model_object_global = models.modelHolder; // store model object for access later (declared earlier)
-				
 				// SORT -- model_object_global is an array of objects
 				// call sort function I got from SO (above)
 				sort( 'name', model_object_global );
@@ -500,8 +514,36 @@ $(document).ready( function() {
 				// enable model_select
 				$( '#dynamic_picker .loading_mask' ).hide();
 				$( '#model_select' ).removeAttr( 'disabled' );
-			}
-		);
+			};
+			xhr.onerror = function() { alert('Whoops, there was an error making the request.'); }
+			xhr.onprogress = function() {}; // I know this looks stupid! But IE9 will abort the request without it!
+			xhr.send(); // request actually happens
+		} else { // non-heroku
+			models_url += '&callback=?'; 
+			$.getJSON( 
+				'http://api.edmunds.com/v1/api/vehicle/modelrepository/findmodelsbymake?make=' + chosen_make + '&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
+				function( models ) {
+					 
+					model_object_global = models.modelHolder; // store model object for access later (declared earlier)
+					
+					// SORT -- model_object_global is an array of objects
+					// call sort function I got from SO (above)
+					sort( 'name', model_object_global );
+					
+					// Populate dropdown select
+					for ( var i in model_object_global ) { //array, each i corresponds to single model
+						$( '#model_select' ).append(
+							$('<option></option>')
+								.val( i /* model_object_global[ i ].niceName */ ) // array position helps lookup when retrieving years
+								.html( model_object_global[ i ].name )
+						);
+					}
+					// enable model_select
+					$( '#dynamic_picker .loading_mask' ).hide();
+					$( '#model_select' ).removeAttr( 'disabled' );
+				}
+			);
+		}
 	});
 	function resetMake() { // instead of removing options, just change selected to first option "select make"
 		//remove all options that may have been previously generated
@@ -579,17 +621,24 @@ $(document).ready( function() {
 		// reset downstream pickers
 		resetTrim();
 		// request style object from api
-		$.getJSON( 
-			'http://api.edmunds.com/v1/api/vehicle/stylerepository/findstylesbymakemodelyear?make=' + 
-				chosen_make + 
-				'&model=' + 
-				chosen_model +
-				'&year=' +
-				chosen_year +
-				'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?', 
-			function ( styles ) {  // callback: populate trim_select
+		if ( use_heroku ) {
+			var trims_url = 'http://noodler.herokuapp.com/trims/';
+		} else { 
+			var trims_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/' 
+		}
+		trims_url += 'findstylesbymakemodelyear?make=' + chosen_make + 
+			'&model=' + chosen_model + 
+			'&year=' + chosen_year +
+			'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json';
+		if ( use_heroku ) {
+			// make CORS request here; on success, do the function below
+			var xhr = createCORSRequest('GET', trims_url);
+			if (!xhr) { alert('CORS not supported'); return; }
+			// Response handlers.
+			xhr.onload = function() {
+				var styles = $.parseJSON( xhr.responseText );
+				// populate trim_select
 				new_style_object = styles.styleHolder;
-				//console.log( new_style_object );
 				// SORT trims using SO function, as I did with models -- test for baseMSRP listing, and then sort by it if it exists:
 				// test all style objects for msrp, not just [0].
 				var msrp_safe = true;
@@ -611,20 +660,71 @@ $(document).ready( function() {
 					if  ( msrp_safe ) {
 						opt_txt += ' - from $' + delimitNumbers( new_style_object[ i ].price.baseMSRP );
 					}
+					console.log(opt_txt);
 					$('#trim_select')
 						.append(
 							$('<option></option>')
 								.val( i )
 								.html( opt_txt )
 								.attr( 'data-id', new_style_object[ i ].id )
-							);
+						);
 				}
 				// remove 'disabled' attr for Add Car button
 				$( '#dynamic_picker .loading_mask' ).hide();
 				$( '#trim_select' ).removeAttr( 'disabled' );
-			}
-		);
-	
+			};
+			xhr.onerror = function() { alert('Whoops, there was an error making the request.'); }
+			xhr.onprogress = function() {}; // I know this looks stupid! But IE9 will abort the request without it!
+			xhr.send(); // where it actually happens
+		} else { // non-heroku
+			trims_url += '&callback=?';
+			$.getJSON( 
+				 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findstylesbymakemodelyear?make=' + 
+					chosen_make + 
+					'&model=' + 
+					chosen_model +
+					'&year=' +
+					chosen_year +
+					'&api_key=sbzh2xtvh99h73pzr398c2fc&fmt=json&callback=?',
+				function ( styles ) {  
+					// callback: populate trim_select
+					new_style_object = styles.styleHolder;
+					//console.log( new_style_object );
+					// SORT trims using SO function, as I did with models -- test for baseMSRP listing, and then sort by it if it exists:
+					// test all style objects for msrp, not just [0].
+					var msrp_safe = true;
+					for ( var z in new_style_object ) {
+						if ( new_style_object[z].price == null ) {
+							msrp_safe = false;
+						} else if ( new_style_object[z].price.baseMSRP == null ) { 
+							msrp_safe = false; 
+						}
+					}
+					if ( msrp_safe ) {
+						sort( 'price.baseMSRP', new_style_object );
+					} else {
+						sort( 'name', new_style_object );
+					}
+					for ( var i in new_style_object ) {  // counting thru array
+						//console.log("inside trim loop");
+						var opt_txt = new_style_object[ i ].name;
+						if  ( msrp_safe ) {
+							opt_txt += ' - from $' + delimitNumbers( new_style_object[ i ].price.baseMSRP );
+						}
+						$('#trim_select')
+							.append(
+								$('<option></option>')
+									.val( i )
+									.html( opt_txt )
+									.attr( 'data-id', new_style_object[ i ].id )
+								);
+					}
+					// remove 'disabled' attr for Add Car button
+					$( '#dynamic_picker .loading_mask' ).hide();
+					$( '#trim_select' ).removeAttr( 'disabled' ); 
+				}
+			);
+		}
 	});
 	$( '#trim_select' ).change( function () {
 		if ( $(this).val() >= 0 ) { $( '#add_car_btn' ).removeAttr( 'disabled' ); }
@@ -664,24 +764,46 @@ $(document).ready( function() {
 }); // end doc.ready()
 
 /* FUNCTIONS NEEDED FOR DEMO SCOPE */
-function turnJsonToCar ( data, remember_in_ls ) 
-{  
-			console.log( data );
-			// Create object to hold chosen style object and color, and add to cars[]
-			var newCar = {};
-			newCar['styleObject'] = data.styleHolder[0];
-			newCar['color'] = getNextColor();
-			newCar['is_selected'] = false;
-			cars.push( newCar );
-			// call addCarData(car_object, car_counter_index)
-			var newcar_index = cars.length - 1; // array index of added car
-			addCarData( newCar.styleObject, newcar_index );
-			// Add car to UI
-			addCarToUI( newcar_index, newCar.styleObject.name );
-			// add car to local storage
-			if ( remember_in_ls ) {
-				saveCarToLocStorage( newcar_index ); // add to local storage
-			}
+/* 
+ * XHR CORS REQUEST WORK 6/3, courtesy of N Zakas and HTML5 rocks
+ */
+// Create the XHR object. Helper function.
+function createCORSRequest(method, url) 
+{
+	var xhr = new XMLHttpRequest();
+	if ("withCredentials" in xhr) {
+		// XHR for Chrome/Firefox/Opera/Safari.
+		xhr.open(method, url, true);
+	} else if (typeof XDomainRequest != "undefined") {
+		// XDomainRequest for IE.
+		xhr = new XDomainRequest();
+		xhr.open(method, url);
+		console.log( "IE part of createCORSRequest" );
+	} else {
+		// CORS not supported.
+		xhr = null;
+	}
+	return xhr;
+}
+// Make the actual CORS request.
+function makeStyleCorsRequest( url ) 
+{
+	var xhr = createCORSRequest('GET', url);
+	if (!xhr) {
+		alert('CORS not supported');
+		return;
+	}
+	// Response handlers.
+	xhr.onload = function() {
+		var text = xhr.responseText;
+		//alert('Response from CORS request to ' + url + ': ' + text );
+		turnJsonToCar( text, true );
+	};
+	xhr.onerror = function() {
+		alert('Whoops, there was an error making the request.');
+	};
+	xhr.onprogress = function() {}; // I know this looks stupid! But IE9 will abort the request without it!
+	xhr.send(); // where it actually happens
 }
 function loadCarByStyleID ( styleID_to_get, remember_in_ls ) 
 {
@@ -696,19 +818,43 @@ function loadCarByStyleID ( styleID_to_get, remember_in_ls )
 	if ( use_heroku ) {
 		var style_url = 'http://noodler.herokuapp.com/fullstyleapi/' + styleID_to_get;
 	} else {
-		var style_url = style_id_url + styleID_to_get + '&fmt=' + json_level + '&api_key=sbzh2xtvh99h73pzr398c2fc'/*  + '&callback=?' */; // don't need callback=? param since using .ajax with jsonp datatype.
+		var style_url = 'http://api.edmunds.com/v1/api/vehicle/stylerepository/findbyid?id=' + styleID_to_get + '&fmt=full_json&api_key=sbzh2xtvh99h73pzr398c2fc'/*  + '&callback=?' */; // don't need callback=? param since using .ajax with jsonp datatype.
 	}
 	console.log( style_url );
 	// THIS CODE DUPLICATE OF CODE IN loadLocalStorageCar(); however, it has scope issues that can't be resolved without setting up a callback function of some sort.
 	// CALLBACK IDEA: return TRUE from loadCarByStyleID. Have a setInterval() loop running back where loadCarByStyleID was called, and when this TRUE is returned it executes some "callback" code and then exits the setInterval.
-	
-	$.ajax({
-		url: style_url,
-		type: "GET",
-		dataType: 'json', //$.getJSON( //style_url, 
-		success: turnJsonToCar
-		}
-	); 
+	// AJAX CORS VERSION (works with Heroku 6/1)
+	if ( use_heroku ) {
+		makeStyleCorsRequest( style_url );
+	} else {
+		$.ajax({
+			url: style_url,
+			type: 'GET',
+			dataType: 'jsonp', 
+			success: turnJsonToCar
+		});
+	}
+	// XHR CORS VERSION ( 6/3 zakas etc. attempt )
+}
+function turnJsonToCar ( data, remember_in_ls ) 
+{  
+			console.log( data );
+			// Create object to hold chosen style object and color, and add to cars[]
+			var newCar = {};
+			if ( use_heroku ) { data = $.parseJSON( data ) } // heroku returns json string
+			newCar['styleObject'] = data['styleHolder'][0];
+			newCar['color'] = getNextColor();
+			newCar['is_selected'] = false;
+			cars.push( newCar );
+			// call addCarData(car_object, car_counter_index)
+			var newcar_index = cars.length - 1; // array index of added car
+			addCarData( newCar.styleObject, newcar_index );
+			// Add car to UI
+			addCarToUI( newcar_index, newCar.styleObject.name );
+			// add car to local storage
+			if ( remember_in_ls ) {
+				saveCarToLocStorage( newcar_index ); // add to local storage
+			}
 }
 
 function saveCarToLocStorage( newcar_index )
@@ -860,14 +1006,13 @@ function loadDemoCar( demoStyleObject )
 	addCarData( cars[ newcar_index ].styleObject, newcar_index );
 	// Add car to UI
 	addCarToUI( newcar_index, newCar.styleObject.name );
-
 }
 function loadPageSpecificDemo()
 {
 	for ( var i = 0; i < demo_array.length; i++ ) {
 		loadDemoCar( demo_array[ i ].styleHolder[0] ); // demo_array[] defined in page-specific js
 	}
-	// display car picker briefly
+	/* // display car picker briefly
 	setTimeout( function() {
 		$( '#dynamic_picker .picker_title' ).click(); 
 	}, 3500); 
@@ -894,6 +1039,7 @@ function loadPageSpecificDemo()
 	setTimeout( function() {
 		$( '#demo_announcement' ).fadeOut( 'slow' ); 
 	}, 3000); 
+	 */
 	
 	// Expand a section for DEMO
 	setTimeout( function() {
@@ -1018,6 +1164,24 @@ $(window).bind("load", function() {
 			FastClick.attach(document.body);
 		});
 	});
+	// tracking Google Search keywords and serp position via GA and the referrer method of the document object:
+	if (document.referrer.match(/google\.com/gi) && document.referrer.match(/cd/gi)) {
+	  console.log("google referral");
+	  var myString = document.referrer;
+	  var r        = myString.match(/cd=(.*?)&/);
+	  var rank     = parseInt(r[1]);
+	  var kw       = myString.match(/q=(.*?)&/);
+	  
+	  if (kw[1].length > 0) {
+		var keyWord  = decodeURI(kw[1]);
+	  } else {
+		keyWord = "(not provided)";
+	  }
+	  console.log("google referral, rank: " + rank + "-- keyword: " + keyWord );
+	  
+	  var p        = document.location.pathname;
+	  _gaq.push(['_trackEvent', 'RankTracker', keyWord, p, rank, true]);
+	}
 	// $.getScript( 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-519a904f584c0b14#async=1' ); // NOTE: addthis uses cookies to track my users, and it will slow the site.
 });
 
