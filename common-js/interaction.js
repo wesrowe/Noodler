@@ -515,7 +515,7 @@ $(document).ready( function() {
 				$( '#dynamic_picker .loading_mask' ).hide();
 				$( '#model_select' ).removeAttr( 'disabled' );
 			};
-			xhr.onerror = function() { alert('Whoops, there was an error making the request.'); }
+			xhr.onerror = function() { alert('Whoops, there was an error making the request.'); use_heroku = false; }
 			xhr.onprogress = function() {}; // I know this looks stupid! But IE9 will abort the request without it!
 			xhr.send(); // request actually happens
 		} else { // non-heroku
@@ -674,6 +674,7 @@ $(document).ready( function() {
 				$( '#trim_select' ).removeAttr( 'disabled' );
 			};
 			xhr.onerror = function() { alert('Whoops, there was an error making the request.'); }
+			xhr.onerror = function() { alert('Whoops, there was an error making the request.'); use_heroku = false; }
 			xhr.onprogress = function() {}; // I know this looks stupid! But IE9 will abort the request without it!
 			xhr.send(); // where it actually happens
 		} else { // non-heroku
@@ -801,6 +802,7 @@ function makeStyleCorsRequest( url )
 	};
 	xhr.onerror = function() {
 		alert('Whoops, there was an error making the request.');
+		use_heroku = false; // return to data-hungry jsonp mode
 	};
 	xhr.onprogress = function() {}; // I know this looks stupid! But IE9 will abort the request without it!
 	xhr.send(); // where it actually happens
